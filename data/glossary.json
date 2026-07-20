@@ -1,0 +1,1340 @@
+{
+  "terms": [
+    {
+      "id": "cpu",
+      "term": "CPU",
+      "aliases": [
+        "central processing unit",
+        "processor"
+      ],
+      "definition": "The chip that actually carries out a program's instructions — fetching one, figuring out what it means, doing it, and repeating, billions of times per second. It's the part of the computer that thinks.",
+      "technical_term": "Central Processing Unit (CPU)",
+      "tier_introduced": "novice",
+      "topic_id": "cpu_basics"
+    },
+    {
+      "id": "core",
+      "term": "core",
+      "aliases": [
+        "cores",
+        "multi-core"
+      ],
+      "definition": "One independent worker inside a CPU chip that can run its own stream of instructions. Modern CPUs bundle several of these together so multiple things can genuinely happen at the exact same instant, not just take turns quickly.",
+      "technical_term": "CPU core",
+      "tier_introduced": "novice",
+      "topic_id": "cpu_basics"
+    },
+    {
+      "id": "clock_speed",
+      "term": "clock speed",
+      "aliases": [
+        "GHz",
+        "gigahertz"
+      ],
+      "definition": "How many timing 'ticks' per second a CPU's internal clock generates — measured in GHz (billions of ticks per second). More ticks generally means more work done per second, but a chip's internal design matters too, so clock speed alone doesn't decide performance.",
+      "technical_term": "Clock speed",
+      "tier_introduced": "novice",
+      "topic_id": "cpu_basics"
+    },
+    {
+      "id": "cache",
+      "term": "cache",
+      "aliases": [
+        "L1 cache",
+        "L2 cache",
+        "L3 cache",
+        "cache hit",
+        "cache miss"
+      ],
+      "definition": "A small pocket of extremely fast memory built right onto the CPU chip, holding data the CPU recently used or expects to need again soon — so it doesn't have to wait on much slower main memory (RAM) for everything.",
+      "technical_term": "CPU cache",
+      "tier_introduced": "novice",
+      "topic_id": "cpu_basics"
+    },
+    {
+      "id": "ram",
+      "term": "RAM",
+      "aliases": [
+        "random access memory"
+      ],
+      "definition": "The computer's fast, temporary working memory — it holds whatever is actively being used right now, but its contents vanish the instant power is lost. That fragility is the tradeoff for its speed.",
+      "technical_term": "Random Access Memory (RAM)",
+      "tier_introduced": "novice",
+      "topic_id": "ram_vs_storage"
+    },
+    {
+      "id": "storage",
+      "term": "storage",
+      "aliases": [
+        "SSD",
+        "HDD",
+        "solid state drive",
+        "hard disk drive"
+      ],
+      "definition": "A drive (SSD or HDD) that keeps data even with no power at all — that's why your files are still there after a shutdown — in exchange for being much slower to access than RAM.",
+      "technical_term": "Storage (SSD/HDD)",
+      "tier_introduced": "novice",
+      "topic_id": "ram_vs_storage"
+    },
+    {
+      "id": "volatile_memory",
+      "term": "volatile memory",
+      "aliases": [
+        "non-volatile memory",
+        "volatile",
+        "non-volatile"
+      ],
+      "definition": "Memory is 'volatile' if it needs continuous power to hold its contents (like RAM) and 'non-volatile' if it keeps data with no power at all (like an SSD or HDD). This is a precise technical distinction, not a loose figure of speech.",
+      "technical_term": "Volatile vs. non-volatile memory",
+      "tier_introduced": "novice",
+      "topic_id": "ram_vs_storage"
+    },
+    {
+      "id": "motherboard",
+      "term": "motherboard",
+      "aliases": [],
+      "definition": "The main circuit board that every other core part — CPU, RAM, storage, GPU — physically plugs into, and which carries every signal between them. Without it, those parts are just isolated chips with no way to talk to each other.",
+      "technical_term": "Motherboard",
+      "tier_introduced": "novice",
+      "topic_id": "motherboard"
+    },
+    {
+      "id": "bus",
+      "term": "bus",
+      "aliases": [
+        "memory bus",
+        "PCIe"
+      ],
+      "definition": "A physical set of electrical pathways on the motherboard that carries data and control signals between components — different buses (like the memory bus or PCIe) handle different jobs at different speeds.",
+      "technical_term": "Bus",
+      "tier_introduced": "novice",
+      "topic_id": "motherboard"
+    },
+    {
+      "id": "chipset",
+      "term": "chipset",
+      "aliases": [],
+      "definition": "A set of supporting chips on the motherboard that manages traffic between the CPU and the rest of the system, so the CPU isn't stuck personally handling every peripheral interaction.",
+      "technical_term": "Chipset",
+      "tier_introduced": "novice",
+      "topic_id": "motherboard"
+    },
+    {
+      "id": "gpu",
+      "term": "GPU",
+      "aliases": [
+        "graphics processing unit"
+      ],
+      "definition": "A chip built with thousands of simple cores that all run the same operation on different pieces of data at once — great for graphics rendering and, it turns out, the exact math behind training AI models.",
+      "technical_term": "Graphics Processing Unit (GPU)",
+      "tier_introduced": "novice",
+      "topic_id": "gpu_basics"
+    },
+    {
+      "id": "parallel_processing",
+      "term": "parallel processing",
+      "aliases": [
+        "SIMD",
+        "single instruction multiple data"
+      ],
+      "definition": "Running the same simple calculation on many pieces of data at the exact same time, rather than working through them one at a time. This only pays off when a task can be broken into many independent, identical steps.",
+      "technical_term": "Parallel processing (SIMD)",
+      "tier_introduced": "novice",
+      "topic_id": "gpu_basics"
+    },
+    {
+      "id": "transistor",
+      "term": "transistor",
+      "aliases": [],
+      "definition": "A solid-state electronic switch with no moving parts — it's either ON (letting current through) or OFF (blocking it), controlled by a small voltage. It's the single physical building block every digital computation ultimately rests on.",
+      "technical_term": "Transistor",
+      "tier_introduced": "novice",
+      "topic_id": "transistors_logic_gates"
+    },
+    {
+      "id": "logic_gate",
+      "term": "logic gate",
+      "aliases": [
+        "AND gate",
+        "OR gate",
+        "NOT gate",
+        "NAND",
+        "NOR gate",
+        "XOR"
+      ],
+      "definition": "A small circuit built from a handful of transistors that takes binary inputs (1s and 0s) and produces one output according to a fixed rule — AND, OR, and NOT are the three basic types, and everything else is built by combining them.",
+      "technical_term": "Logic gate",
+      "tier_introduced": "novice",
+      "topic_id": "transistors_logic_gates"
+    },
+    {
+      "id": "binary",
+      "term": "binary",
+      "aliases": [
+        "bits"
+      ],
+      "definition": "A number system with only two digits, 0 and 1, instead of decimal's ten. Computers use it because a transistor only reliably has two distinguishable states — current flowing or not.",
+      "technical_term": "Binary",
+      "tier_introduced": "novice",
+      "topic_id": "binary_basics"
+    },
+    {
+      "id": "bit",
+      "term": "bit",
+      "aliases": [
+        "byte"
+      ],
+      "definition": "The smallest unit of information a computer can store — a single binary digit, 0 or 1. Every file, program, and piece of data you'll ever touch is, underneath, a long precise sequence of these.",
+      "technical_term": "Bit (binary digit)",
+      "tier_introduced": "novice",
+      "topic_id": "binary_basics"
+    },
+    {
+      "id": "character_encoding",
+      "term": "character encoding",
+      "aliases": [
+        "ASCII",
+        "Unicode",
+        "UTF-8"
+      ],
+      "definition": "An agreed-upon scheme for turning binary numbers into readable text — ASCII is an older, smaller standard; Unicode/UTF-8 is the modern standard covering nearly every writing system and symbol, including emoji.",
+      "technical_term": "Character encoding (ASCII / Unicode / UTF-8)",
+      "tier_introduced": "novice",
+      "topic_id": "binary_basics"
+    },
+    {
+      "id": "voltage",
+      "term": "voltage",
+      "aliases": [],
+      "definition": "The electrical 'pressure' pushing electrons to flow between two points — like water pressure in a pipe. A binary 1 or 0 is really just a high or low voltage measured at a specific instant.",
+      "technical_term": "Voltage",
+      "tier_introduced": "novice",
+      "topic_id": "electricity_basics"
+    },
+    {
+      "id": "current",
+      "term": "electric current",
+      "aliases": [
+        "current"
+      ],
+      "definition": "The actual rate electrons are flowing past a point in a circuit — like the volume of water moving through a pipe, as opposed to voltage, which is the pressure pushing it.",
+      "technical_term": "Electric current",
+      "tier_introduced": "novice",
+      "topic_id": "electricity_basics"
+    },
+    {
+      "id": "firmware",
+      "term": "firmware",
+      "aliases": [],
+      "definition": "Software that's permanently paired with one specific piece of hardware, stored on a small chip built into it, handling that hardware's most basic startup behavior before any operating system exists.",
+      "technical_term": "Firmware",
+      "tier_introduced": "novice",
+      "topic_id": "firmware_vs_software_hardware"
+    },
+    {
+      "id": "bios_uefi",
+      "term": "BIOS/UEFI",
+      "aliases": [
+        "BIOS",
+        "UEFI"
+      ],
+      "definition": "The firmware built into the motherboard that runs the instant you hit the power button, before anything else — it checks that core hardware works, then hands off to the operating system. UEFI is the modern, faster, more secure replacement for the older BIOS.",
+      "technical_term": "BIOS (Basic Input/Output System) / UEFI (Unified Extensible Firmware Interface)",
+      "tier_introduced": "novice",
+      "topic_id": "bios_uefi"
+    },
+    {
+      "id": "post",
+      "term": "POST",
+      "aliases": [
+        "power-on self-test"
+      ],
+      "definition": "A fixed sequence of hardware checks that BIOS/UEFI runs the instant you power on, confirming the CPU, RAM, and other essentials are present and working before anything else happens.",
+      "technical_term": "Power-On Self-Test (POST)",
+      "tier_introduced": "novice",
+      "topic_id": "bios_uefi"
+    },
+    {
+      "id": "secure_boot",
+      "term": "Secure Boot",
+      "aliases": [],
+      "definition": "A UEFI feature that cryptographically checks the bootloader hasn't been tampered with before letting it run — a real defense against malware that tries to infect the startup process itself.",
+      "technical_term": "Secure Boot",
+      "tier_introduced": "novice",
+      "topic_id": "bios_uefi"
+    },
+    {
+      "id": "bootloader",
+      "term": "bootloader",
+      "aliases": [],
+      "definition": "A small program, loaded by the firmware, whose only job is finding and loading the much larger operating system kernel into RAM.",
+      "technical_term": "Bootloader",
+      "tier_introduced": "novice",
+      "topic_id": "boot_process"
+    },
+    {
+      "id": "kernel",
+      "term": "kernel",
+      "aliases": [],
+      "definition": "The core part of an operating system that directly manages hardware resources, memory, and running processes — everything else the OS does builds on top of it.",
+      "technical_term": "Kernel",
+      "tier_introduced": "novice",
+      "topic_id": "boot_process"
+    },
+    {
+      "id": "device_driver",
+      "term": "device driver",
+      "aliases": [
+        "driver",
+        "drivers"
+      ],
+      "definition": "A small piece of software written to let the OS communicate with one specific type of hardware, like a disk controller or network adapter.",
+      "technical_term": "Device driver",
+      "tier_introduced": "novice",
+      "topic_id": "boot_process"
+    },
+    {
+      "id": "booting",
+      "term": "booting",
+      "aliases": [
+        "boot process",
+        "boot"
+      ],
+      "definition": "The fixed, ordered sequence a computer follows getting from fully off to a usable desktop — firmware runs, hardware is checked, a bootloader loads the kernel, drivers and services start, and finally the desktop appears.",
+      "technical_term": "Boot process",
+      "tier_introduced": "novice",
+      "topic_id": "boot_process"
+    },
+    {
+      "id": "operating_system",
+      "term": "operating system",
+      "aliases": [
+        "OS"
+      ],
+      "definition": "The software layer between raw hardware and every application, hiding hardware's messy details behind a consistent interface apps can rely on — like a hotel manager handling the building's plumbing so guests don't have to.",
+      "technical_term": "Operating System (OS)",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_an_os"
+    },
+    {
+      "id": "process",
+      "term": "process",
+      "aliases": [],
+      "definition": "A running instance of a program with its own private, isolated chunk of memory that other processes can't directly read or write — that isolation is what stops one crashing app from corrupting another.",
+      "technical_term": "Process",
+      "tier_introduced": "novice",
+      "topic_id": "processes_threads"
+    },
+    {
+      "id": "thread",
+      "term": "thread",
+      "aliases": [],
+      "definition": "A sequence of instructions running inside a process. Multiple threads in the same process share that process's memory, which makes them fast to coordinate but risks two threads stepping on the same data at once.",
+      "technical_term": "Thread",
+      "tier_introduced": "novice",
+      "topic_id": "processes_threads"
+    },
+    {
+      "id": "race_condition",
+      "term": "race condition",
+      "aliases": [],
+      "definition": "A bug where two threads sharing the same memory corrupt each other's data because they weren't carefully coordinated about who touches it and when.",
+      "technical_term": "Race condition",
+      "tier_introduced": "novice",
+      "topic_id": "processes_threads"
+    },
+    {
+      "id": "context_switching",
+      "term": "context switching",
+      "aliases": [],
+      "definition": "The OS rapidly saving one thread's current state, loading another thread's state onto a core, and resuming it — done so fast, many times a second, that programs appear to run simultaneously even on limited cores.",
+      "technical_term": "Context switching",
+      "tier_introduced": "novice",
+      "topic_id": "processes_threads"
+    },
+    {
+      "id": "memory_management",
+      "term": "memory management",
+      "aliases": [
+        "virtual memory"
+      ],
+      "definition": "The OS's job of deciding what data occupies RAM at any moment, since RAM is limited and shared. When demand outgrows RAM, the OS borrows storage space as overflow — virtual memory — which is much slower.",
+      "technical_term": "Memory management (virtual memory)",
+      "tier_introduced": "novice",
+      "topic_id": "memory_management"
+    },
+    {
+      "id": "page_file",
+      "term": "page file",
+      "aliases": [
+        "swap file",
+        "swap"
+      ],
+      "definition": "The area of a storage drive the OS uses as overflow memory when RAM fills up — called a page file on Windows, a swap file/partition on Mac/Linux.",
+      "technical_term": "Page file / swap file",
+      "tier_introduced": "novice",
+      "topic_id": "memory_management"
+    },
+    {
+      "id": "file_system",
+      "term": "file system",
+      "aliases": [
+        "NTFS",
+        "APFS",
+        "ext4"
+      ],
+      "definition": "The organizational scheme (like NTFS, APFS, or ext4) an OS uses to track every file's name, size, location, and permissions on a drive — like a library's card catalog for raw data.",
+      "technical_term": "File system",
+      "tier_introduced": "novice",
+      "topic_id": "file_systems"
+    },
+    {
+      "id": "metadata",
+      "term": "metadata",
+      "aliases": [],
+      "definition": "Information about a file — its name, size, timestamps, permissions — that the file system tracks separately from the file's actual content.",
+      "technical_term": "Metadata",
+      "tier_introduced": "novice",
+      "topic_id": "file_systems"
+    },
+    {
+      "id": "directory",
+      "term": "directory",
+      "aliases": [
+        "folder"
+      ],
+      "definition": "Not a physical container — just an entry in the file system that groups references to other files and folders together for organization and lookup.",
+      "technical_term": "Directory (folder)",
+      "tier_introduced": "novice",
+      "topic_id": "file_systems"
+    },
+    {
+      "id": "file_path",
+      "term": "file path",
+      "aliases": [
+        "absolute path",
+        "relative path"
+      ],
+      "definition": "The address of a file within a file system. An absolute path spells out the full route from the drive's root; a relative path is measured from wherever you currently are, which makes it shorter but only meaningful relative to a starting point.",
+      "technical_term": "File path (absolute vs. relative)",
+      "tier_introduced": "novice",
+      "topic_id": "file_paths"
+    },
+    {
+      "id": "working_directory",
+      "term": "working directory",
+      "aliases": [
+        "current directory"
+      ],
+      "definition": "The folder a terminal session or program is currently 'standing in' — every relative path you type is interpreted starting from here.",
+      "technical_term": "Working directory",
+      "tier_introduced": "novice",
+      "topic_id": "file_paths"
+    },
+    {
+      "id": "terminal",
+      "term": "terminal",
+      "aliases": [
+        "command line",
+        "CLI",
+        "command-line interface"
+      ],
+      "definition": "A text-based way of controlling a computer — type an instruction, press enter, it runs. It came first historically, before graphics were practical, and never disappeared because it's fast, scriptable, and often the only interface a server has.",
+      "technical_term": "Terminal / Command-Line Interface (CLI)",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_terminal"
+    },
+    {
+      "id": "gui",
+      "term": "GUI",
+      "aliases": [
+        "graphical user interface"
+      ],
+      "definition": "The icons, windows, and pointer-driven interaction most people associate with using a computer — became standard once displays and processing power made rendering graphics affordable.",
+      "technical_term": "Graphical User Interface (GUI)",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_terminal"
+    },
+    {
+      "id": "script",
+      "term": "script",
+      "aliases": [],
+      "definition": "A saved sequence of terminal commands that can be run all at once, automatically, with no further human input needed.",
+      "technical_term": "Script",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_terminal"
+    },
+    {
+      "id": "shell",
+      "term": "shell",
+      "aliases": [
+        "PowerShell",
+        "Bash",
+        "Zsh"
+      ],
+      "definition": "The actual program that reads what you type into a terminal, figures out what command it means, and carries it out. The terminal is the window; the shell is the program doing the real work inside it.",
+      "technical_term": "Shell (PowerShell, Bash, Zsh)",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_a_shell"
+    },
+    {
+      "id": "internet",
+      "term": "internet",
+      "aliases": [],
+      "definition": "A real, physical network of independently owned networks — fiber cables, wireless links, satellites — all agreeing to communicate using shared protocols. No single company or computer runs the whole thing.",
+      "technical_term": "Internet",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_internet"
+    },
+    {
+      "id": "protocol",
+      "term": "protocol",
+      "aliases": [],
+      "definition": "A precisely defined, standardized set of rules for how data is formatted, addressed, and exchanged between devices — so any two devices following the same protocol can understand each other, regardless of who made them.",
+      "technical_term": "Protocol",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_internet"
+    },
+    {
+      "id": "tcp_ip",
+      "term": "TCP/IP",
+      "aliases": [],
+      "definition": "The internet's foundational set of protocols, defining how data gets broken into pieces, addressed, routed, and reassembled correctly at its destination.",
+      "technical_term": "Transmission Control Protocol / Internet Protocol (TCP/IP)",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_internet"
+    },
+    {
+      "id": "ip_address",
+      "term": "IP address",
+      "aliases": [
+        "IPv4",
+        "IPv6"
+      ],
+      "definition": "A numerical identifier assigned to a device on a network, so data knows exactly which machine it's meant for — like a mailing address on an envelope. IPv6 exists because IPv4 was running out of unique addresses.",
+      "technical_term": "IP Address (IPv4 / IPv6)",
+      "tier_introduced": "novice",
+      "topic_id": "ip_addresses"
+    },
+    {
+      "id": "client",
+      "term": "client",
+      "aliases": [],
+      "definition": "Whatever initiates a request for data or a service — your browser asking for a webpage, an app asking for updated data. It sends a request and waits for a response.",
+      "technical_term": "Client",
+      "tier_introduced": "novice",
+      "topic_id": "server_vs_client"
+    },
+    {
+      "id": "server",
+      "term": "server",
+      "aliases": [],
+      "definition": "Software (usually running on a dedicated machine) that listens for incoming requests and responds to them — like a kitchen preparing what a waiter (the client) asked for.",
+      "technical_term": "Server",
+      "tier_introduced": "novice",
+      "topic_id": "server_vs_client"
+    },
+    {
+      "id": "data_center",
+      "term": "data center",
+      "aliases": [],
+      "definition": "A large, specialized facility built to house huge numbers of servers with reliable power, cooling, and network connectivity.",
+      "technical_term": "Data center",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_the_cloud"
+    },
+    {
+      "id": "cloud_computing",
+      "term": "the cloud",
+      "aliases": [
+        "cloud computing"
+      ],
+      "definition": "Despite the weightless-sounding name, just servers in a data center you access remotely over the internet instead of running the equivalent hardware yourself — 'someone else's computer,' rented.",
+      "technical_term": "Cloud computing",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_the_cloud"
+    },
+    {
+      "id": "dns",
+      "term": "DNS",
+      "aliases": [
+        "domain name system"
+      ],
+      "definition": "The system that translates human-readable names like google.com into the numerical IP addresses computers actually need to find each other — like a phone book.",
+      "technical_term": "Domain Name System (DNS)",
+      "tier_introduced": "novice",
+      "topic_id": "dns"
+    },
+    {
+      "id": "domain_name",
+      "term": "domain name",
+      "aliases": [],
+      "definition": "The human-readable name (like google.com) that DNS translates into the actual numerical IP address needed to make a connection.",
+      "technical_term": "Domain name",
+      "tier_introduced": "novice",
+      "topic_id": "dns"
+    },
+    {
+      "id": "source_code",
+      "term": "source code",
+      "aliases": [],
+      "definition": "A program as a human programmer writes and reads it — structured, at least somewhat readable logic. A CPU can't run this directly; it has to first become machine code.",
+      "technical_term": "Source code",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_a_program"
+    },
+    {
+      "id": "machine_code",
+      "term": "machine code",
+      "aliases": [],
+      "definition": "The low-level, binary format a CPU can actually execute directly — sequences of numbers corresponding to primitive operations the hardware physically knows how to do.",
+      "technical_term": "Machine code",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_a_program"
+    },
+    {
+      "id": "compilation",
+      "term": "compilation",
+      "aliases": [
+        "compiler",
+        "interpretation",
+        "interpreter"
+      ],
+      "definition": "The process of turning source code into machine code — either all at once ahead of time (compilation) or one instruction at a time as the program runs (interpretation).",
+      "technical_term": "Compilation / Interpretation",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_a_program"
+    },
+    {
+      "id": "http",
+      "term": "HTTP",
+      "aliases": [
+        "hypertext transfer protocol"
+      ],
+      "definition": "The standardized rules governing how a browser's request and a server's response must be formatted, so any browser can talk to any web server correctly.",
+      "technical_term": "HyperText Transfer Protocol (HTTP)",
+      "tier_introduced": "novice",
+      "topic_id": "browser_vs_app"
+    },
+    {
+      "id": "native_app",
+      "term": "native app",
+      "aliases": [
+        "installed app"
+      ],
+      "definition": "Software built to run directly on a specific operating system, using its own interfaces to interact with hardware — often more efficient than something running inside a browser.",
+      "technical_term": "Native app",
+      "tier_introduced": "novice",
+      "topic_id": "browser_vs_app"
+    },
+    {
+      "id": "web_app",
+      "term": "web app",
+      "aliases": [],
+      "definition": "Software that looks and feels like a native app but actually runs inside a browser tab, built with web technologies and constantly talking to a server in the background.",
+      "technical_term": "Web app",
+      "tier_introduced": "novice",
+      "topic_id": "browser_vs_app"
+    },
+    {
+      "id": "patch",
+      "term": "patch",
+      "aliases": [
+        "update"
+      ],
+      "definition": "A newer version of a program's code, released to fix bugs, close security holes, or add new features — installing one replaces some or all of the previously installed files.",
+      "technical_term": "Update / Patch",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_an_update"
+    },
+    {
+      "id": "vulnerability",
+      "term": "vulnerability",
+      "aliases": [
+        "security patch"
+      ],
+      "definition": "A specific flaw in a program's code that an attacker could exploit to do something the program was never meant to allow — patching a known one is usually treated as urgent.",
+      "technical_term": "Vulnerability",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_an_update"
+    },
+    {
+      "id": "punch_card",
+      "term": "punch card",
+      "aliases": [
+        "punch cards"
+      ],
+      "definition": "A stiff paper card with a pattern of holes representing instructions or data, used to program and feed data into early computers before keyboards and screens existed.",
+      "technical_term": "Punch card",
+      "tier_introduced": "novice",
+      "topic_id": "punch_cards_to_keyboards"
+    },
+    {
+      "id": "vacuum_tube",
+      "term": "vacuum tube",
+      "aliases": [],
+      "definition": "A sealed glass tube used as the earliest electronic on/off switch in computing, before transistors — bulky, fragile, power-hungry, and prone to burning out.",
+      "technical_term": "Vacuum tube",
+      "tier_introduced": "novice",
+      "topic_id": "vacuum_tubes_to_ics"
+    },
+    {
+      "id": "integrated_circuit",
+      "term": "integrated circuit",
+      "aliases": [
+        "IC"
+      ],
+      "definition": "Many transistors, already wired together, fabricated directly onto a single piece of silicon — the direct ancestor of every modern CPU, letting transistor counts scale with manufacturing precision instead of hand-wiring.",
+      "technical_term": "Integrated Circuit (IC)",
+      "tier_introduced": "novice",
+      "topic_id": "vacuum_tubes_to_ics"
+    },
+    {
+      "id": "batch_processing",
+      "term": "batch processing",
+      "aliases": [
+        "interactive computing"
+      ],
+      "definition": "Submitting a complete, fixed set of instructions and waiting for results with no way to interact partway through — the old punch-card model, replaced by interactive computing (type something, see an immediate response) once keyboards and monitors arrived.",
+      "technical_term": "Batch processing vs. interactive computing",
+      "tier_introduced": "novice",
+      "topic_id": "punch_cards_to_keyboards"
+    },
+    {
+      "id": "packet_switching",
+      "term": "packet switching",
+      "aliases": [
+        "packet"
+      ],
+      "definition": "Breaking data into small, independently addressed chunks (packets) that can each travel by whatever path is available and be reassembled at the destination — if one path fails, packets just reroute instead of the whole communication failing.",
+      "technical_term": "Packet switching",
+      "tier_introduced": "novice",
+      "topic_id": "arpanet_to_internet"
+    },
+    {
+      "id": "world_wide_web",
+      "term": "World Wide Web",
+      "aliases": [
+        "the web",
+        "WWW"
+      ],
+      "definition": "Web pages, hyperlinks, and browsers, built by Tim Berners-Lee on top of the internet's already-existing infrastructure — the furniture built on top of the internet's plumbing, not the plumbing itself.",
+      "technical_term": "World Wide Web",
+      "tier_introduced": "novice",
+      "topic_id": "arpanet_to_internet"
+    },
+    {
+      "id": "neural_network",
+      "term": "neural network",
+      "aliases": [],
+      "definition": "A machine learning technique loosely modeled on how biological neurons connect, organized into layers that progressively transform input data into an output prediction — the dominant approach behind modern AI.",
+      "technical_term": "Neural network",
+      "tier_introduced": "novice",
+      "topic_id": "brief_ai_history"
+    },
+    {
+      "id": "machine_learning",
+      "term": "machine learning",
+      "aliases": [],
+      "definition": "Rather than a human hand-writing rules, a program is given a lot of example data and works out patterns on its own — a fundamentally different approach than the hand-coded rule-based AI of earlier decades.",
+      "technical_term": "Machine learning",
+      "tier_introduced": "novice",
+      "topic_id": "brief_ai_history"
+    },
+    {
+      "id": "llm",
+      "term": "LLM",
+      "aliases": [
+        "large language model"
+      ],
+      "definition": "A very large-scale neural network trained on enormous amounts of text, learning to predict and generate coherent language — the technology behind systems like GPT and Claude.",
+      "technical_term": "Large Language Model (LLM)",
+      "tier_introduced": "novice",
+      "topic_id": "brief_ai_history"
+    },
+    {
+      "id": "semiconductor",
+      "term": "semiconductor",
+      "aliases": [
+        "conductor",
+        "insulator"
+      ],
+      "definition": "A material (like silicon) whose ability to conduct electricity sits between a conductor (lets current flow freely) and an insulator (blocks it almost entirely) — and, crucially, can be controlled on demand, which is exactly what a switch needs.",
+      "technical_term": "Semiconductor",
+      "tier_introduced": "novice",
+      "topic_id": "silicon_semiconductors"
+    },
+    {
+      "id": "doping",
+      "term": "doping",
+      "aliases": [
+        "n-type silicon",
+        "p-type silicon",
+        "p-n junction"
+      ],
+      "definition": "Deliberately introducing tiny amounts of other elements into silicon to precisely change how it conducts electricity, creating n-type or p-type regions. Joining these forms a p-n junction, whose current flow can be switched on or off by voltage — the physical mechanism behind a transistor.",
+      "technical_term": "Doping (n-type / p-type silicon)",
+      "tier_introduced": "novice",
+      "topic_id": "doping"
+    },
+    {
+      "id": "electron",
+      "term": "electron",
+      "aliases": [],
+      "definition": "A negatively charged subatomic particle — its movement through a conductive material is what electricity physically is.",
+      "technical_term": "Electron",
+      "tier_introduced": "novice",
+      "topic_id": "electricity_basics"
+    },
+    {
+      "id": "circuit",
+      "term": "circuit",
+      "aliases": [],
+      "definition": "A complete, closed loop that electric current can flow through. Break the loop anywhere — with a switch or a transistor — and current stops flowing entirely.",
+      "technical_term": "Circuit",
+      "tier_introduced": "novice",
+      "topic_id": "electricity_basics"
+    },
+    {
+      "id": "analog_signal",
+      "term": "analog signal",
+      "aliases": [],
+      "definition": "A signal that can take on any value across a smooth, continuous range, with no fixed steps — like a dimmer switch that can be set anywhere along its slider.",
+      "technical_term": "Analog signal",
+      "tier_introduced": "novice",
+      "topic_id": "signals_analog_digital"
+    },
+    {
+      "id": "digital_signal",
+      "term": "digital signal",
+      "aliases": [
+        "analog-to-digital converter",
+        "sampling"
+      ],
+      "definition": "A signal that only takes on a fixed, limited set of distinct values — in computing, almost always just 1 and 0. Real-world analog signals like sound get converted into digital form by sampling: measuring the value at many fixed instants per second.",
+      "technical_term": "Digital signal",
+      "tier_introduced": "novice",
+      "topic_id": "signals_analog_digital"
+    },
+    {
+      "id": "frequency",
+      "term": "frequency",
+      "aliases": [
+        "Hertz",
+        "Hz"
+      ],
+      "definition": "How many complete cycles of a repeating wave happen in one second, measured in Hertz (Hz) — a CPU's clock speed, in GHz, is just frequency measured in billions of cycles per second.",
+      "technical_term": "Frequency (Hertz)",
+      "tier_introduced": "novice",
+      "topic_id": "waves_frequency_clock_speed"
+    },
+    {
+      "id": "mosfet",
+      "term": "MOSFET",
+      "aliases": [
+        "gate",
+        "source",
+        "drain"
+      ],
+      "definition": "The type of transistor used in most modern chips, with three terminals — source, drain, and gate. Voltage on the gate creates an electric field that opens or closes a conductive channel between source and drain, with zero moving parts.",
+      "technical_term": "Metal-Oxide-Semiconductor Field-Effect Transistor (MOSFET)",
+      "tier_introduced": "novice",
+      "topic_id": "transistor_switching"
+    },
+    {
+      "id": "moores_law",
+      "term": "Moore's Law",
+      "aliases": [],
+      "definition": "Gordon Moore's 1965 observation that the number of transistors fitting on a chip of a given size would roughly double every two years — held true for decades and is why CPUs kept getting dramatically more capable.",
+      "technical_term": "Moore's Law",
+      "tier_introduced": "novice",
+      "topic_id": "cpu_from_transistors"
+    },
+    {
+      "id": "fab",
+      "term": "fab",
+      "aliases": [
+        "fabrication plant",
+        "wafer",
+        "photolithography"
+      ],
+      "definition": "An extraordinarily precise, extremely expensive facility where chips are physically manufactured — silicon is sliced into wafers, then patterned with photolithography (projecting light through a stencil-like mask) to define where transistors form.",
+      "technical_term": "Semiconductor fabrication plant (fab)",
+      "tier_introduced": "novice",
+      "topic_id": "chip_manufacturing"
+    },
+    {
+      "id": "rom_firmware",
+      "term": "ROM",
+      "aliases": [
+        "Read-Only Memory"
+      ],
+      "definition": "A memory chip built to hold data reliably without needing constant power, and without being casually overwritten the way a regular file can be. Firmware lives in a chip like this. (A separate, older use of the same abbreviation shows up for old game cartridges — see 'ROM dump'.)",
+      "technical_term": "Read-Only Memory (ROM)",
+      "tier_introduced": "novice",
+      "topic_id": "firmware_vs_software_hardware"
+    },
+    {
+      "id": "gpt_mbr",
+      "term": "GPT",
+      "aliases": [
+        "GUID Partition Table",
+        "MBR",
+        "Master Boot Record"
+      ],
+      "definition": "Two competing schemes for organizing a drive's partitions. GPT is the modern one UEFI uses, supporting drives over 2TB and more partitions; MBR is the older, more limited scheme classic BIOS used.",
+      "technical_term": "GUID Partition Table (GPT) / Master Boot Record (MBR)",
+      "tier_introduced": "novice",
+      "topic_id": "bios_uefi"
+    },
+    {
+      "id": "safe_mode",
+      "term": "Safe Mode",
+      "aliases": [
+        "cold boot",
+        "reboot"
+      ],
+      "definition": "A special startup mode where the OS deliberately loads only a minimal set of essential drivers and skips most startup programs — useful for diagnosing a problem caused by something that normally loads automatically.",
+      "technical_term": "Safe Mode",
+      "tier_introduced": "novice",
+      "topic_id": "boot_process"
+    },
+    {
+      "id": "file_extension",
+      "term": "file extension",
+      "aliases": [
+        "file format",
+        "file type"
+      ],
+      "definition": "The short suffix at the end of a filename (like .jpg or .docx) hinting at what's inside. It's mostly a trusted convention, not a technical guarantee — the OS doesn't inspect the actual bytes every time you double-click a file.",
+      "technical_term": "File extension / file format",
+      "tier_introduced": "novice",
+      "topic_id": "file_types_extensions"
+    },
+    {
+      "id": "magic_number",
+      "term": "magic number",
+      "aliases": [
+        "file signature"
+      ],
+      "definition": "A short sequence of bytes at the very start of a file that identifies its real format, regardless of whatever extension is attached to the filename — how tools can detect a deliberately mislabeled file.",
+      "technical_term": "File signature (magic number)",
+      "tier_introduced": "novice",
+      "topic_id": "file_types_extensions"
+    },
+    {
+      "id": "container_format",
+      "term": "container format",
+      "aliases": [
+        "media container"
+      ],
+      "definition": "A file structure (like .mp4 or .mkv) that bundles video, audio, subtitles, and metadata together into one file. The container is the box; it says nothing on its own about what codec is inside.",
+      "technical_term": "Container format",
+      "tier_introduced": "novice",
+      "topic_id": "container_formats_codecs"
+    },
+    {
+      "id": "codec",
+      "term": "codec",
+      "aliases": [
+        "coder-decoder",
+        "H.264",
+        "AAC"
+      ],
+      "definition": "The specific algorithm used to compress raw video or audio down to a much smaller size, and decompress it back for playback. Two files in the same container can use completely different codecs.",
+      "technical_term": "Codec (coder-decoder)",
+      "tier_introduced": "novice",
+      "topic_id": "container_formats_codecs"
+    },
+    {
+      "id": "archive_file",
+      "term": "archive",
+      "aliases": [
+        "zip",
+        ".zip",
+        ".7z"
+      ],
+      "definition": "A single file that bundles multiple files and folders together while preserving their individual identities, usually paired with compression to shrink the result.",
+      "technical_term": "Archive",
+      "tier_introduced": "novice",
+      "topic_id": "archives_compression"
+    },
+    {
+      "id": "lossless_lossy_compression",
+      "term": "lossless compression",
+      "aliases": [
+        "lossy compression"
+      ],
+      "definition": "Lossless compression shrinks data with zero information lost — every original byte can be reconstructed exactly. Lossy compression (used by most video/audio codecs) permanently discards some data for a much bigger size reduction.",
+      "technical_term": "Lossless vs. lossy compression",
+      "tier_introduced": "novice",
+      "topic_id": "archives_compression"
+    },
+    {
+      "id": "disk_image",
+      "term": "disk image",
+      "aliases": [
+        "ISO",
+        ".iso"
+      ],
+      "definition": "An exact, byte-for-byte digital copy of everything on a physical disc, packed into a single file — can be mounted or burned to recreate the original disc's contents and structure.",
+      "technical_term": "Disk image",
+      "tier_introduced": "novice",
+      "topic_id": "disk_images_iso"
+    },
+    {
+      "id": "rom_dump",
+      "term": "ROM dump",
+      "aliases": [
+        "ROM (game)",
+        "emulator"
+      ],
+      "definition": "A digital file capturing a game cartridge's memory chip contents byte by byte, played back by an emulator — a program that simulates the original hardware well enough to run it on completely different hardware.",
+      "technical_term": "ROM dump / emulator",
+      "tier_introduced": "novice",
+      "topic_id": "roms_emulation"
+    },
+    {
+      "id": "router",
+      "term": "router",
+      "aliases": [],
+      "definition": "A device that examines an incoming packet's destination address and forwards it toward the next network hop on its journey — sitting at nearly every junction point across the internet.",
+      "technical_term": "Router",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_internet"
+    },
+    {
+      "id": "isp",
+      "term": "ISP",
+      "aliases": [
+        "internet service provider"
+      ],
+      "definition": "A company that operates the physical infrastructure connecting homes and businesses to the wider internet, and connects in turn to other ISPs and larger backbone providers.",
+      "technical_term": "Internet Service Provider (ISP)",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_internet"
+    },
+    {
+      "id": "nat",
+      "term": "NAT",
+      "aliases": [
+        "network address translation"
+      ],
+      "definition": "The process a home router uses to translate between many private IP addresses inside a house and the single public IP address representing that household to the outside internet.",
+      "technical_term": "Network Address Translation (NAT)",
+      "tier_introduced": "novice",
+      "topic_id": "ip_addresses"
+    },
+    {
+      "id": "dhcp",
+      "term": "DHCP",
+      "aliases": [
+        "dynamic host configuration protocol"
+      ],
+      "definition": "A service, usually built into a home router, that automatically hands out private IP addresses to devices the instant they join a network — no manual configuration required.",
+      "technical_term": "Dynamic Host Configuration Protocol (DHCP)",
+      "tier_introduced": "novice",
+      "topic_id": "ip_addresses"
+    },
+    {
+      "id": "wifi",
+      "term": "WiFi",
+      "aliases": [
+        "802.11",
+        "WiFi 5",
+        "WiFi 6"
+      ],
+      "definition": "A wireless networking technology that lets devices connect to a local network using radio waves instead of physical cables, governed by the 802.11 technical standard.",
+      "technical_term": "WiFi (802.11)",
+      "tier_introduced": "novice",
+      "topic_id": "wifi_basics"
+    },
+    {
+      "id": "wpa",
+      "term": "WPA",
+      "aliases": [
+        "WPA2",
+        "WPA3",
+        "WiFi Protected Access"
+      ],
+      "definition": "The encryption standard that scrambles data traveling between a device and a router so anyone else nearby, without the password, can't meaningfully read the traffic.",
+      "technical_term": "WiFi Protected Access (WPA)",
+      "tier_introduced": "novice",
+      "topic_id": "wifi_basics"
+    },
+    {
+      "id": "bluetooth",
+      "term": "Bluetooth",
+      "aliases": [
+        "BLE",
+        "Bluetooth Low Energy",
+        "pairing"
+      ],
+      "definition": "A short-range wireless technology for direct, one-to-one connections between nearby devices, with no router involved — optimized for low power rather than network connectivity. BLE is a variant built for devices that only send small amounts of data occasionally.",
+      "technical_term": "Bluetooth / Bluetooth Low Energy (BLE)",
+      "tier_introduced": "novice",
+      "topic_id": "bluetooth_basics"
+    },
+    {
+      "id": "port",
+      "term": "port",
+      "aliases": [
+        "port 80",
+        "port 443",
+        "well-known port",
+        "port forwarding"
+      ],
+      "definition": "A numbered communication channel layered on top of an IP address, identifying a specific program on a device — letting one IP address host many simultaneous conversations at once.",
+      "technical_term": "Network port",
+      "tier_introduced": "novice",
+      "topic_id": "ports_networking"
+    },
+    {
+      "id": "tcp_udp",
+      "term": "TCP",
+      "aliases": [
+        "UDP",
+        "Transmission Control Protocol",
+        "User Datagram Protocol"
+      ],
+      "definition": "TCP is a reliable, ordered protocol that guarantees every packet arrives and resends any that don't. UDP skips that overhead for speed, with no guarantee a packet arrives at all — the tradeoff between correctness and speed.",
+      "technical_term": "TCP vs. UDP",
+      "tier_introduced": "novice",
+      "topic_id": "tcp_vs_udp"
+    },
+    {
+      "id": "mac_address",
+      "term": "MAC address",
+      "aliases": [
+        "media access control address",
+        "ARP"
+      ],
+      "definition": "A unique identifier permanently burned into a specific piece of network hardware, unlike an IP address which changes as a device moves between networks. ARP is the process a device uses to look up which MAC address matches a given IP address on its local network.",
+      "technical_term": "Media Access Control (MAC) address",
+      "tier_introduced": "novice",
+      "topic_id": "mac_vs_ip_address"
+    },
+    {
+      "id": "cellular_generation",
+      "term": "cellular generation",
+      "aliases": [
+        "3G",
+        "4G",
+        "5G",
+        "LTE"
+      ],
+      "definition": "A generational leap in cellular network technology — new radio equipment, new licensed spectrum, and new phone hardware — each one substantially increasing speed and reducing latency over the last.",
+      "technical_term": "Cellular generation (3G/4G/5G)",
+      "tier_introduced": "novice",
+      "topic_id": "cellular_generations"
+    },
+    {
+      "id": "osi_model",
+      "term": "OSI model",
+      "aliases": [
+        "TCP/IP model",
+        "network layers"
+      ],
+      "definition": "A layered model organizing the whole journey data takes across a network — physical, link, network, transport, and application layers — each one handling a different piece of getting data to the right place.",
+      "technical_term": "OSI model / TCP/IP model",
+      "tier_introduced": "novice",
+      "topic_id": "osi_tcpip_layers"
+    },
+    {
+      "id": "pwa",
+      "term": "PWA",
+      "aliases": [
+        "progressive web app"
+      ],
+      "definition": "A website specifically built to feel and behave more like a native app — installable to a home screen, capable of some offline functionality — while still fundamentally running through a browser's rendering engine.",
+      "technical_term": "Progressive Web App (PWA)",
+      "tier_introduced": "novice",
+      "topic_id": "browser_vs_app"
+    },
+    {
+      "id": "analytical_engine",
+      "term": "Analytical Engine",
+      "aliases": [
+        "mechanical calculator",
+        "Charles Babbage"
+      ],
+      "definition": "Charles Babbage's 1830s design for a general-purpose mechanical computer — a 'mill' for arithmetic, a 'store' for memory, and punched cards for changeable instructions — never actually built at the time due to manufacturing limits.",
+      "technical_term": "Analytical Engine",
+      "tier_introduced": "novice",
+      "topic_id": "mechanical_calculators"
+    },
+    {
+      "id": "open_architecture",
+      "term": "open architecture",
+      "aliases": [
+        "IBM PC compatible"
+      ],
+      "definition": "A hardware design whose technical specifications are published rather than kept secret, letting other manufacturers build compatible machines — the approach IBM took with the 1981 IBM PC.",
+      "technical_term": "Open architecture",
+      "tier_introduced": "novice",
+      "topic_id": "pc_boom"
+    },
+    {
+      "id": "smartphone",
+      "term": "smartphone",
+      "aliases": [
+        "app store"
+      ],
+      "definition": "A mobile phone that evolved into a genuinely full, general-purpose computer — running a real OS, real installed apps, and constant internet connectivity — distributed through a centralized app store.",
+      "technical_term": "Smartphone",
+      "tier_introduced": "novice",
+      "topic_id": "mobile_era"
+    },
+    {
+      "id": "ohms_law",
+      "term": "Ohm's Law",
+      "aliases": [
+        "resistance",
+        "ohms"
+      ],
+      "definition": "The equation V = I × R relating voltage, current, and resistance — the precise mathematical version of 'more voltage pushes more current through a fixed resistance.'",
+      "technical_term": "Ohm's Law",
+      "tier_introduced": "novice",
+      "topic_id": "electricity_basics"
+    },
+    {
+      "id": "wavelength",
+      "term": "wavelength",
+      "aliases": [],
+      "definition": "The physical distance a wave travels over one complete cycle. For waves traveling at a fixed speed, wavelength and frequency are inversely related — higher frequency means shorter wavelength.",
+      "technical_term": "Wavelength",
+      "tier_introduced": "novice",
+      "topic_id": "waves_frequency_clock_speed"
+    },
+    {
+      "id": "cmos",
+      "term": "CMOS",
+      "aliases": [
+        "NMOS",
+        "PMOS"
+      ],
+      "definition": "A transistor design pairing NMOS and PMOS transistors together so current only flows briefly during switching, not continuously while idle — the dominant, power-efficient design used throughout the chip industry.",
+      "technical_term": "CMOS (Complementary Metal-Oxide-Semiconductor)",
+      "tier_introduced": "novice",
+      "topic_id": "transistor_switching"
+    },
+    {
+      "id": "computing_loop",
+      "term": "input/processing/output/storage loop",
+      "aliases": [
+        "four-stage loop"
+      ],
+      "definition": "The one repeating cycle every computer is built around, at every scale — input comes in, processing transforms it, output goes back out, and storage lets some of that data outlive the moment it was created.",
+      "technical_term": "Input/processing/output/storage loop",
+      "tier_introduced": "novice",
+      "topic_id": "what_is_a_computer"
+    },
+    {
+      "id": "heat_dissipation",
+      "term": "heat dissipation",
+      "aliases": [
+        "power consumption"
+      ],
+      "definition": "The unavoidable energy wasted as heat every time a transistor switches state. With billions of switches happening every second, that tiny per-switch waste adds up to real heat output — exactly why CPUs and GPUs need active cooling.",
+      "technical_term": "Heat dissipation (power consumption)",
+      "tier_introduced": "novice",
+      "topic_id": "binary_to_electricity"
+    },
+    {
+      "id": "flash_memory",
+      "term": "flash memory",
+      "aliases": [],
+      "definition": "A non-volatile, electrically-based memory technology that stores each bit by trapping or releasing an electrical charge inside a specially built transistor cell, with no moving parts. It's the underlying technology an SSD is built from.",
+      "technical_term": "Flash memory",
+      "tier_introduced": "novice",
+      "topic_id": "storage_hardware_ssd_hdd"
+    },
+    {
+      "id": "wear_leveling",
+      "term": "wear leveling",
+      "aliases": [],
+      "definition": "Logic built into SSD firmware that deliberately spreads writes evenly across all of a drive's flash memory cells, rather than repeatedly hammering the same location — extending the drive's usable lifespan, since each cell can only be written to a finite number of times.",
+      "technical_term": "Wear leveling",
+      "tier_introduced": "novice",
+      "topic_id": "storage_hardware_ssd_hdd"
+    },
+    {
+      "id": "usb",
+      "term": "USB",
+      "aliases": [
+        "USB-A",
+        "USB-C",
+        "Universal Serial Bus"
+      ],
+      "definition": "A standardized physical connector and communication protocol that lets wildly different devices — keyboards, mice, drives, chargers — all connect through one shared port and cable design.",
+      "technical_term": "Universal Serial Bus (USB)",
+      "tier_introduced": "novice",
+      "topic_id": "io_devices_usb"
+    },
+    {
+      "id": "io_device",
+      "term": "I/O device",
+      "aliases": [
+        "input device",
+        "output device"
+      ],
+      "definition": "Any hardware that lets a computer exchange data with the outside world — a keyboard and mouse send data in, a monitor and speakers send data back out, and some devices (a touchscreen) do both.",
+      "technical_term": "Input/output (I/O) device",
+      "tier_introduced": "novice",
+      "topic_id": "io_devices_usb"
+    },
+    {
+      "id": "hot_swapping",
+      "term": "hot-swapping",
+      "aliases": [],
+      "definition": "The ability to connect or disconnect a device while the computer is fully powered on and running, with the OS detecting the change immediately rather than requiring a restart — something USB was deliberately designed around.",
+      "technical_term": "Hot-swapping",
+      "tier_introduced": "novice",
+      "topic_id": "io_devices_usb"
+    },
+    {
+      "id": "pixel",
+      "term": "pixel",
+      "aliases": [
+        "picture element"
+      ],
+      "definition": "The smallest individually controllable unit of a display, capable of showing one specific color at any instant by combining red, green, and blue light in different proportions.",
+      "technical_term": "Pixel (picture element)",
+      "tier_introduced": "novice",
+      "topic_id": "displays_basics"
+    },
+    {
+      "id": "resolution",
+      "term": "resolution",
+      "aliases": [
+        "1920x1080"
+      ],
+      "definition": "The total count of pixels a display contains, expressed as width by height — more pixels means more spatial detail a still image can contain at any single instant.",
+      "technical_term": "Display resolution",
+      "tier_introduced": "novice",
+      "topic_id": "displays_basics"
+    },
+    {
+      "id": "refresh_rate",
+      "term": "refresh rate",
+      "aliases": [
+        "FPS",
+        "frames per second",
+        "144Hz"
+      ],
+      "definition": "How many times per second a display redraws its entire image from scratch, measured in Hertz. It's a hard ceiling on how much of a GPU's rendered output can actually be shown, no matter how many frames per second the GPU produces.",
+      "technical_term": "Refresh rate",
+      "tier_introduced": "novice",
+      "topic_id": "displays_basics"
+    },
+    {
+      "id": "response_time",
+      "term": "response time",
+      "aliases": [],
+      "definition": "How quickly an individual pixel can finish physically changing from one color to another — a separate property from refresh rate; a high refresh rate on paper can still show visible blur if the panel's response time is slow.",
+      "technical_term": "Response time",
+      "tier_introduced": "novice",
+      "topic_id": "displays_basics"
+    }
+  ]
+}
