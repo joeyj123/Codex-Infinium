@@ -17,7 +17,7 @@ import Walkthrough from "@/components/Walkthrough";
 const WORKSHOP_INTRO_STEPS = [
   {
     title: "The Workshop",
-    body: "Two challenge types: Reorder scrambled code blocks into a working program, or Fix a broken one. Both are graded by actually running your code with real Python.",
+    body: "Four challenge types: Reorder scrambled code into a working program, Fix a broken one, Predict what a snippet prints, or Build code from a spec. All graded by actually running Python.",
   },
   {
     title: "Guided / Challenge / Gauntlet",
@@ -25,7 +25,7 @@ const WORKSHOP_INTRO_STEPS = [
   },
   {
     title: "Grading & XP",
-    body: "Your arrangement or fix actually executes in a sandboxed browser worker, and its real output is compared to the expected output — same engine The Forge's Python examples already use. XP scales with difficulty and how close your output matched.",
+    body: "Your code (or, for Predict, the real snippet) actually executes in a sandboxed browser worker, and real output is what gets compared — same engine The Forge's Python examples already use. XP scales with difficulty and how close your answer matched.",
   },
 ];
 
@@ -58,6 +58,8 @@ export default function WorkshopTopicClient() {
   const challenge = challenges[index];
   const isReorder = challenge?.type === "reorder";
   const isFix = challenge?.type === "fix";
+  const isOutput = challenge?.type === "output";
+  const isBuild = challenge?.type === "build";
 
   useEffect(() => {
     const alreadyDone = challenge ? hasCompletedWorkshopChallenge(challenge.id) : false;
@@ -65,7 +67,9 @@ export default function WorkshopTopicClient() {
     setSolutionRevealed(exposure === "guided" || alreadyDone);
     setReferenceOpen(exposure === "guided");
     setOrder(buildInitialOrder(challenge));
-    setCodeText(isFix ? challenge?.buggy_code || "" : "");
+    // codeText doubles as "code to execute" for fix/build and "typed
+    // prediction" for output — the two never overlap on the same challenge.
+    setCodeText(isFix ? challenge?.buggy_code || "" : isBuild ? challenge?.starter_code || "" : "");
     setGradeResult(null);
     setCodeOutput(null);
     setRunning(false);
@@ -120,19 +124,46 @@ export default function WorkshopTopicClient() {
     return codeText;
   }
 
+  // Not available for "output" challenges — there's no code of the user's
+  // own to run; their answer is a typed prediction, checked only on Submit.
   async function runCode() {
+    if (isOutput) return;
     setRunning(true);
     const execResult = await runPython(currentCode());
     setRunning(false);
     setCodeOutput(execResult);
   }
 
-  // Grading runs the user's actual arrangement/fix through Pyodide and
-  // compares real captured output against expected_output — the same
-  // engine as The Forge's Python examples (lib/gradeCode.js), reused as-is
-  // since there's nothing Workshop-specific about comparing output text.
+  // Grading always goes through real Pyodide execution and
+  // lib/gradeCode.js's gradeCodeOutput() — the same engine The Forge's
+  // Python examples use — but what gets executed and what gets compared
+  // differs by type:
+  //  - reorder/fix/build: run the user's own code, compare its real output
+  //    against the authored expected_output.
+  //  - output: run the (fixed, unmodified) snippet_code for real instead —
+  //    re-verifying it live rather than trusting the authored
+  //    expected_output alone — then compare the user's typed prediction
+  //    text against that real output, using the exact same comparison
+  //    function by wrapping the prediction in an { ok: true, output }
+  //    shape gradeCodeOutput already expects.
   async function submitAnswer() {
     setRunning(true);
+
+    if (isOutput) {
+      const snippetResult = await runPython(challenge.snippet_code);
+      setRunning(false);
+      setCodeOutput(snippetResult);
+      const actualOutput = snippetResult.ok ? snippetResult.output : challenge.expected_output;
+      const result = gradeCodeOutput({ ok: true, output: codeText, error: null }, actualOutput);
+      setGradeResult(result);
+      setSolutionRevealed(true);
+      if (!alreadyCompleted) {
+        const xp = forgeExampleXp(exposure, result.tier);
+        markWorkshopChallengeComplete(challenge.id, xp, tier.name);
+      }
+      return;
+    }
+
     const execResult = await runPython(currentCode());
     setRunning(false);
     setCodeOutput(execResult);
@@ -165,7 +196,8 @@ export default function WorkshopTopicClient() {
 
       <div className="card forge-example-card" style={{ marginTop: 18 }}>
         <p className="stat-line" style={{ marginBottom: 10 }}>
-          Challenge {index + 1} / {challenges.length} — {isReorder ? "🧩 Reorder" : "🛠️ Fix"}
+          Challenge {index + 1} / {challenges.length} —{" "}
+          {isReorder ? "🧩 Reorder" : isFix ? "🛠️ Fix" : isOutput ? "🔮 Predict Output" : "🏗️ Build to Spec"}
         </p>
 
         <p style={{ fontSize: 17, lineHeight: 1.6 }}>{challenge.prompt}</p>
@@ -195,8 +227,25 @@ export default function WorkshopTopicClient() {
         )}
 
         <div style={{ marginTop: 22 }}>
+          {isOutput && (
+            <>
+              <p className="section-tag" style={{ marginBottom: 8 }}>
+                The Code
+              </p>
+              <pre className="forge-terminal forge-code-box" style={{ marginBottom: 12 }}>
+                {challenge.snippet_code}
+              </pre>
+            </>
+          )}
+
           <p className="section-tag" style={{ marginBottom: 8 }}>
-            {isReorder ? "Reorder these blocks" : "Fix this code"}
+            {isReorder
+              ? "Reorder these blocks"
+              : isFix
+              ? "Fix this code"
+              : isOutput
+              ? "What will this print?"
+              : "Write your code"}
           </p>
 
           {isReorder ? (
@@ -219,18 +268,21 @@ export default function WorkshopTopicClient() {
             </div>
           ) : (
             <textarea
-              className="forge-answer-box forge-code-box"
-              rows={10}
+              className={isOutput ? "forge-answer-box" : "forge-answer-box forge-code-box"}
+              rows={isOutput ? 4 : 10}
               spellCheck={false}
               value={codeText}
               onChange={(e) => setCodeText(e.target.value)}
+              placeholder={isOutput ? "Type exactly what you think the code above prints…" : undefined}
             />
           )}
 
           <div className="btn-row" style={{ marginTop: 8 }}>
-            <button className="btn" disabled={running} onClick={runCode}>
-              {running ? "Running…" : "▶ Run"}
-            </button>
+            {!isOutput && (
+              <button className="btn" disabled={running} onClick={runCode}>
+                {running ? "Running…" : "▶ Run"}
+              </button>
+            )}
             <button className="btn" disabled={running} onClick={submitAnswer}>
               {running ? "Running…" : "Submit"}
             </button>
@@ -238,7 +290,7 @@ export default function WorkshopTopicClient() {
 
           <div style={{ marginTop: 12 }}>
             <p className="section-tag" style={{ marginBottom: 8 }}>
-              Output
+              {isOutput ? "Actual output (revealed after Submit)" : "Output"}
             </p>
             <pre className="forge-terminal">
               {running
@@ -247,6 +299,8 @@ export default function WorkshopTopicClient() {
                 ? [codeOutput.output, codeOutput.error ? `Error: ${codeOutput.error}` : ""]
                     .filter(Boolean)
                     .join("\n") || "(no output)"
+                : isOutput
+                ? "Submit your prediction to reveal the real output."
                 : "Click Run or Submit to execute your code."}
             </pre>
           </div>
