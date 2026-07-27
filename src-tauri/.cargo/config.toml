@@ -1,0 +1,7 @@
+# This machine has 12 logical cores but only ~15.6 GB RAM. Cargo's default
+# parallelism (one rustc process per core) was letting peak aggregate memory
+# across simultaneous compiles exceed available RAM, crashing with
+# "rustc-LLVM ERROR: out of memory". Capping concurrent jobs trades some wall
+# clock time for staying within the machine's actual memory budget.
+[build]
+jobs = 3

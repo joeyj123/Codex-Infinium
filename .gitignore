@@ -1,0 +1,27 @@
+node_modules/
+.next/
+.env*.local
+.DS_Store
+
+# Tauri desktop app build output and bundled toolchains — these are
+# downloaded fresh by each build session (see CHRONICLE_OF_INFINIUM.md,
+# steps 3-5) and are far too large for git (~950MB combined). Never commit.
+out/
+src-tauri/target/
+src-tauri/gen/schemas/
+src-tauri/mingw64/
+src-tauri/jdk/
+src-tauri/dotnet/
+
+# Updater signing key — NEVER commit this. Losing it just means generating
+# a new keypair (old installs stop auto-updating until they're manually
+# reinstalled); committing it lets anyone sign a malicious "update" that
+# every installed copy of the app would trust and silently install.
+src-tauri/updater-private.key
+src-tauri/*.key
+
+scratch/
+
+# Local installed-app copy (an actual installed instance of this app, not
+# source) — never a repo artifact.
+Codex App Download/

@@ -1,0 +1,54 @@
+{
+  "$schema": "../node_modules/@tauri-apps/cli/config.schema.json",
+  "productName": "Codex Infinium",
+  "version": "0.1.0",
+  "identifier": "com.codexinfinium.desktop",
+  "build": {
+    "frontendDist": "../out",
+    "devUrl": "http://localhost:3000",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Codex Infinium",
+        "width": 800,
+        "height": 600,
+        "resizable": true,
+        "fullscreen": false
+      }
+    ],
+    "security": {
+      "csp": null
+    }
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "createUpdaterArtifacts": true,
+    "resources": {
+      "mingw64": "mingw64",
+      "jdk": "jdk",
+      "dotnet": "dotnet"
+    },
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
+    ],
+    "android": {
+      "debugApplicationIdSuffix": ".debug"
+    }
+  },
+  "plugins": {
+    "updater": {
+      "pubkey": "dW50cnVzdGVkIGNvbW1lbnQ6IG1pbmlzaWduIHB1YmxpYyBrZXk6IDg2MjdBNEVGMjJFOEJGQTkKUldTcHYrZ2k3NlFuaHFBM2tzZThWZE9DUkdScXR1anJtN2tVL0Yrb3RlYkxMTXMvK2VzdWRUc0kK",
+      "endpoints": [
+        "https://raw.githubusercontent.com/joeyj123/Codex-Infinium/main/latest.json"
+      ]
+    }
+  }
+}
