@@ -11,18 +11,20 @@ import { gradeAnswer } from "@/lib/grading";
 import { runPython } from "@/lib/pyodideRunner";
 import { runJavaScript } from "@/lib/codeExec";
 import { runCpp, isTauriRuntime } from "@/lib/cppRunner";
+import { runJava } from "@/lib/javaRunner";
+import { runCsharp } from "@/lib/csharpRunner";
 import { forgeExampleXp } from "@/lib/forgeXp";
 import { getWorkshopTopic } from "@/lib/workshop";
 import ExposureSelector from "@/components/ExposureSelector";
 import ForgeReferencePane from "@/components/ForgeReferencePane";
 import Walkthrough from "@/components/Walkthrough";
 
-// Same split Forge B uses: Python/JS run for real in any browser; C++ only
-// runs for real inside the Tauri desktop shell (via the bundled g++). Java
-// and C# aren't part of the Workshop pilot yet, so they're deliberately
-// left out of both lists rather than wired up unused.
+// Same split Forge B uses: Python/JS run for real in any browser; C++,
+// Java, and C# only run for real inside the Tauri desktop shell (via their
+// respective bundled toolchains) — a plain browser tab has no
+// compiler/JDK/SDK to shell out to.
 const BROWSER_LIVE_LANGS = ["python", "javascript"];
-const TAURI_LIVE_LANGS = ["cpp"];
+const TAURI_LIVE_LANGS = ["cpp", "java", "csharp"];
 
 const WORKSHOP_INTRO_STEPS = [
   {
@@ -35,7 +37,7 @@ const WORKSHOP_INTRO_STEPS = [
   },
   {
     title: "Grading & XP",
-    body: "Python and JavaScript run for real everywhere; C++ runs for real too, but only inside the desktop app — on the web, C++ falls back to the same offline pattern-matching grading The Forge uses for prose. XP scales with difficulty and how close your answer matched.",
+    body: "Python and JavaScript run for real everywhere; C++, Java, and C# run for real too, but only inside the desktop app — on the web, those three fall back to the same offline pattern-matching grading The Forge uses for prose. XP scales with difficulty and how close your answer matched.",
   },
 ];
 
@@ -86,6 +88,8 @@ export default function WorkshopTopicClient() {
     if (lang === "python") return runPython(code);
     if (lang === "javascript") return runJavaScript(code);
     if (lang === "cpp") return runCpp(code);
+    if (lang === "java") return runJava(code);
+    if (lang === "csharp") return runCsharp(code);
     return runJavaScript(code);
   }
 
