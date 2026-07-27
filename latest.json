@@ -1,0 +1,11 @@
+{
+  "version": "0.1.1",
+  "notes": "Bundled C++/Java/C# compilers (steps 3-5) and the auto-updater itself (step 6).",
+  "pub_date": "2026-07-27T18:22:11Z",
+  "platforms": {
+    "windows-x86_64": {
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcHYrZ2k3NlFuaHZtUUJtNjVQVUZwandlYmVyL1dZN2xRZHRpejlVeS9qMnVpYTBZaDlvQ3ZhQlNSbFhkamtac2xySG4yR29UTDNxd0hwLytPczF6bTNYV2FweFZmUHdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1MTc0ODc1CWZpbGU6Q29kZXggSW5maW5pdW1fMC4xLjFfeDY0LXNldHVwLmV4ZQo2cFZSQThVbzRqZ05XU3d5UXlYVHcvN3g5OExIYmNLRVd3TEVNN1BuSVFIZFZnenNzN0F5MzAzVk1lTHBpaWpmYTdlRUIvSC9IZmhySHZobmpEY0ZBQT09Cg==",
+      "url": "https://github.com/joeyj123/Codex-Infinium/releases/download/v0.1.1/Codex-Infinium_0.1.1_x64-setup.exe"
+    }
+  }
+}

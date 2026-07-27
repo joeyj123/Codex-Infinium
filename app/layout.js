@@ -7,6 +7,7 @@ import { OnboardingProvider } from "@/lib/OnboardingContext";
 import { NotebookProvider } from "@/lib/NotebookContext";
 import Sidebar from "@/components/Sidebar";
 import UtilityDrawer from "@/components/UtilityDrawer";
+import UpdateBanner from "@/components/UpdateBanner";
 
 export const metadata = {
   title: "Codex Infinium",
@@ -24,7 +25,10 @@ export default function RootLayout({ children }) {
               <NotebookProvider>
                 <div className="layout">
                   <Sidebar kb={kbSummary} />
-                  <main className="main">{children}</main>
+                  <main className="main">
+                    <UpdateBanner />
+                    {children}
+                  </main>
                 </div>
                 <UtilityDrawer />
               </NotebookProvider>

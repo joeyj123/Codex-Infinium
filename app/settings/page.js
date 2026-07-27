@@ -1,9 +1,10 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useProgress } from "@/lib/ProgressContext";
 import { useAppearance } from "@/lib/AppearanceContext";
+import { isTauriRuntime, checkForUpdate, installUpdate } from "@/lib/updater";
 
 const FONT_OPTIONS = [
   { id: "serif", label: "Serif (Garamond)", sample: "The quick brown fox jumps over the lazy dog." },
@@ -23,8 +24,42 @@ export default function SettingsPage() {
   const [confirmOpen, setConfirmOpen] = useState(false);
   const [confirmText, setConfirmText] = useState("");
   const [justReset, setJustReset] = useState(false);
+  const [appVersion, setAppVersion] = useState(null);
+  const [updateStatus, setUpdateStatus] = useState("idle"); // idle | checking | none | available | installing | error
+  const [foundUpdate, setFoundUpdate] = useState(null);
+  const inTauri = isTauriRuntime();
+
+  useEffect(() => {
+    if (!inTauri) return;
+    import("@tauri-apps/api/app").then(({ getVersion }) => getVersion().then(setAppVersion));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   if (!progressLoaded || !settingsLoaded) return null;
+
+  async function handleCheckForUpdates() {
+    setUpdateStatus("checking");
+    try {
+      const result = await checkForUpdate();
+      if (result.available) {
+        setFoundUpdate(result);
+        setUpdateStatus("available");
+      } else {
+        setUpdateStatus("none");
+      }
+    } catch (err) {
+      setUpdateStatus("error");
+    }
+  }
+
+  async function handleInstallUpdate() {
+    setUpdateStatus("installing");
+    try {
+      await installUpdate(foundUpdate.update);
+    } catch (err) {
+      setUpdateStatus("error");
+    }
+  }
 
   function handleResetConfirmed() {
     resetProgress();
@@ -77,6 +112,34 @@ export default function SettingsPage() {
           <p style={{ margin: 0 }}>{FONT_OPTIONS.find((f) => f.id === settings.font).sample}</p>
         </div>
       </div>
+
+      {inTauri && (
+        <div className="stat-panel" style={{ marginTop: 20, padding: "18px 16px" }}>
+          <span className="stat-panel-label">Updates</span>
+          <p style={{ margin: "4px 0 12px" }}>
+            {appVersion ? `You're running version ${appVersion}.` : "Checking installed version…"}
+          </p>
+          <div className="btn-row">
+            <button className="btn" disabled={updateStatus === "checking" || updateStatus === "installing"} onClick={handleCheckForUpdates}>
+              {updateStatus === "checking" ? "Checking…" : "Check for Updates"}
+            </button>
+            {updateStatus === "available" && (
+              <button className="btn" disabled={updateStatus === "installing"} onClick={handleInstallUpdate}>
+                Install {foundUpdate?.version} & Restart
+              </button>
+            )}
+          </div>
+          {updateStatus === "none" && (
+            <p className="stat-line" style={{ marginTop: 8, color: "var(--muted)" }}>You're already on the latest version.</p>
+          )}
+          {updateStatus === "installing" && (
+            <p className="stat-line" style={{ marginTop: 8, color: "var(--muted)" }}>Downloading and installing — the app will restart automatically.</p>
+          )}
+          {updateStatus === "error" && (
+            <p className="stat-line" style={{ marginTop: 8, color: "var(--seal-red)" }}>Couldn't check for updates — check your connection and try again.</p>
+          )}
+        </div>
+      )}
 
       <div className="stat-panel" style={{ marginTop: 20, padding: "18px 16px", borderColor: "var(--seal-red)" }}>
         <span className="stat-panel-label" style={{ color: "var(--seal-red)" }}>Danger Zone</span>
