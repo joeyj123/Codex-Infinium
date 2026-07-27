@@ -1,23 +1,33 @@
 "use client";
 
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import kb from "@/data/knowledge_base.json";
 import { useForge, EXPOSURE_LEVELS } from "@/lib/ForgeContext";
 import { useOnboarding } from "@/lib/OnboardingContext";
 import { useProgress } from "@/lib/ProgressContext";
 import { gradeCodeOutput } from "@/lib/gradeCode";
+import { gradeAnswer } from "@/lib/grading";
 import { runPython } from "@/lib/pyodideRunner";
+import { runJavaScript } from "@/lib/codeExec";
+import { runCpp, isTauriRuntime } from "@/lib/cppRunner";
 import { forgeExampleXp } from "@/lib/forgeXp";
 import { getWorkshopTopic } from "@/lib/workshop";
 import ExposureSelector from "@/components/ExposureSelector";
 import ForgeReferencePane from "@/components/ForgeReferencePane";
 import Walkthrough from "@/components/Walkthrough";
 
+// Same split Forge B uses: Python/JS run for real in any browser; C++ only
+// runs for real inside the Tauri desktop shell (via the bundled g++). Java
+// and C# aren't part of the Workshop pilot yet, so they're deliberately
+// left out of both lists rather than wired up unused.
+const BROWSER_LIVE_LANGS = ["python", "javascript"];
+const TAURI_LIVE_LANGS = ["cpp"];
+
 const WORKSHOP_INTRO_STEPS = [
   {
     title: "The Workshop",
-    body: "Four challenge types: Reorder scrambled code into a working program, Fix a broken one, Predict what a snippet prints, or Build code from a spec. All graded by actually running Python.",
+    body: "Four challenge types: Reorder scrambled code into a working program, Fix a broken one, Predict what a snippet prints, or Build code from a spec.",
   },
   {
     title: "Guided / Challenge / Gauntlet",
@@ -25,7 +35,7 @@ const WORKSHOP_INTRO_STEPS = [
   },
   {
     title: "Grading & XP",
-    body: "Your code (or, for Predict, the real snippet) actually executes in a sandboxed browser worker, and real output is what gets compared — same engine The Forge's Python examples already use. XP scales with difficulty and how close your answer matched.",
+    body: "Python and JavaScript run for real everywhere; C++ runs for real too, but only inside the desktop app — on the web, C++ falls back to the same offline pattern-matching grading The Forge uses for prose. XP scales with difficulty and how close your answer matched.",
   },
 ];
 
@@ -36,13 +46,15 @@ function buildInitialOrder(challenge) {
 
 export default function WorkshopTopicClient() {
   const { topicId } = useParams();
+  const searchParams = useSearchParams();
+  const lang = searchParams.get("lang") || "python";
   const router = useRouter();
   const { exposure, loaded: forgeLoaded } = useForge();
   const { loaded: onboardingLoaded, hasSeenMode, markModeSeen } = useOnboarding();
   const { hasCompletedWorkshopChallenge, markWorkshopChallengeComplete } = useProgress();
 
   const tier = kb.tiers.find((t) => t.id === "expert");
-  const topic = getWorkshopTopic(kb, topicId);
+  const topic = getWorkshopTopic(kb, topicId, lang);
   const challenges = topic?.workshop_challenges || [];
 
   const [index, setIndex] = useState(0);
@@ -54,12 +66,28 @@ export default function WorkshopTopicClient() {
   const [gradeResult, setGradeResult] = useState(null);
   const [codeOutput, setCodeOutput] = useState(null);
   const [running, setRunning] = useState(false);
+  // Starts false to match the static-export/SSR render, then flips true
+  // post-mount if actually running inside the desktop shell — same pattern
+  // as ForgeTopicClient, avoiding a hydration mismatch from branching on
+  // `window` during the initial render.
+  const [tauriReady, setTauriReady] = useState(false);
+  useEffect(() => {
+    setTauriReady(isTauriRuntime());
+  }, []);
 
   const challenge = challenges[index];
   const isReorder = challenge?.type === "reorder";
   const isFix = challenge?.type === "fix";
   const isOutput = challenge?.type === "output";
   const isBuild = challenge?.type === "build";
+  const isLive = BROWSER_LIVE_LANGS.includes(lang) || (tauriReady && TAURI_LIVE_LANGS.includes(lang));
+
+  async function execute(code) {
+    if (lang === "python") return runPython(code);
+    if (lang === "javascript") return runJavaScript(code);
+    if (lang === "cpp") return runCpp(code);
+    return runJavaScript(code);
+  }
 
   useEffect(() => {
     const alreadyDone = challenge ? hasCompletedWorkshopChallenge(challenge.id) : false;
@@ -74,7 +102,7 @@ export default function WorkshopTopicClient() {
     setCodeOutput(null);
     setRunning(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [index, exposure, topicId]);
+  }, [index, exposure, topicId, lang]);
 
   if (!tier) return <p>Unknown tier.</p>;
   if (!topic) return <p>Unknown Workshop topic.</p>;
@@ -124,36 +152,43 @@ export default function WorkshopTopicClient() {
     return codeText;
   }
 
-  // Not available for "output" challenges — there's no code of the user's
-  // own to run; their answer is a typed prediction, checked only on Submit.
+  // Not available for "output" challenges (nothing of the learner's own to
+  // run) or when the current language isn't live right now (e.g. C++ in a
+  // plain browser tab) — Run is only ever a live-execution preview.
   async function runCode() {
-    if (isOutput) return;
+    if (isOutput || !isLive) return;
     setRunning(true);
-    const execResult = await runPython(currentCode());
+    const execResult = await execute(currentCode());
     setRunning(false);
     setCodeOutput(execResult);
   }
 
-  // Grading always goes through real Pyodide execution and
-  // lib/gradeCode.js's gradeCodeOutput() — the same engine The Forge's
-  // Python examples use — but what gets executed and what gets compared
-  // differs by type:
-  //  - reorder/fix/build: run the user's own code, compare its real output
-  //    against the authored expected_output.
-  //  - output: run the (fixed, unmodified) snippet_code for real instead —
-  //    re-verifying it live rather than trusting the authored
-  //    expected_output alone — then compare the user's typed prediction
-  //    text against that real output, using the exact same comparison
-  //    function by wrapping the prediction in an { ok: true, output }
-  //    shape gradeCodeOutput already expects.
+  // Grading dispatch has two axes: challenge type, and whether this
+  // language is currently live.
+  //  - reorder/fix/build, live: run the learner's own code for real via
+  //    execute(), compare against expected_output with gradeCodeOutput —
+  //    unchanged from Workshop A/B.
+  //  - reorder/fix/build, not live (C++ outside Tauri): can't execute
+  //    anything, so fall back to lib/grading.js's gradeAnswer() — the same
+  //    offline concept-coverage/answer-bank engine Forge A2 built and Forge
+  //    B already reuses for non-live Java/C#/C++ examples — applied to the
+  //    learner's code text instead of prose.
+  //  - output, live: execute the fixed snippet_code for real, compare the
+  //    typed prediction against that live result.
+  //  - output, not live: skip execution entirely and compare the typed
+  //    prediction directly against the authored expected_output — there's
+  //    nothing to run, so the authored value is the only "actual" output
+  //    available.
   async function submitAnswer() {
     setRunning(true);
 
     if (isOutput) {
-      const snippetResult = await runPython(challenge.snippet_code);
+      const actualResult = isLive
+        ? await execute(challenge.snippet_code)
+        : { ok: true, output: challenge.expected_output, error: null };
       setRunning(false);
-      setCodeOutput(snippetResult);
-      const actualOutput = snippetResult.ok ? snippetResult.output : challenge.expected_output;
+      setCodeOutput(actualResult);
+      const actualOutput = actualResult.ok ? actualResult.output : challenge.expected_output;
       const result = gradeCodeOutput({ ok: true, output: codeText, error: null }, actualOutput);
       setGradeResult(result);
       setSolutionRevealed(true);
@@ -164,10 +199,22 @@ export default function WorkshopTopicClient() {
       return;
     }
 
-    const execResult = await runPython(currentCode());
+    if (isLive) {
+      const execResult = await execute(currentCode());
+      setRunning(false);
+      setCodeOutput(execResult);
+      const result = gradeCodeOutput(execResult, challenge.expected_output);
+      setGradeResult(result);
+      setSolutionRevealed(true);
+      if (!alreadyCompleted) {
+        const xp = forgeExampleXp(exposure, result.tier);
+        markWorkshopChallengeComplete(challenge.id, xp, tier.name);
+      }
+      return;
+    }
+
     setRunning(false);
-    setCodeOutput(execResult);
-    const result = gradeCodeOutput(execResult, challenge.expected_output);
+    const result = gradeAnswer(currentCode(), challenge);
     setGradeResult(result);
     setSolutionRevealed(true);
     if (!alreadyCompleted) {
@@ -176,10 +223,22 @@ export default function WorkshopTopicClient() {
     }
   }
 
+  const outputPanelLabel = isOutput ? "Actual output (revealed after Submit)" : "Output";
+  const outputPanelText = running
+    ? "Running…"
+    : codeOutput
+    ? [codeOutput.output, codeOutput.error ? `Error: ${codeOutput.error}` : ""].filter(Boolean).join("\n") ||
+      "(no output)"
+    : isOutput
+    ? "Submit your prediction to reveal the real output."
+    : isLive
+    ? "Click Run or Submit to execute your code."
+    : `${tier.language_tracks[lang]?.name || "This language"} compiles for real, but only inside the Codex Infinium desktop app — on the web, Submit is graded offline instead of executed.`;
+
   return (
     <div>
       <div className="study-toolbar">
-        <button className="btn" onClick={() => router.push("/workshop")}>
+        <button className="btn" onClick={() => router.push(`/workshop?lang=${lang}`)}>
           ⬅️ Back
         </button>
         <h2 style={{ margin: 0, textAlign: "center" }}>{topic.title}</h2>
@@ -278,7 +337,7 @@ export default function WorkshopTopicClient() {
           )}
 
           <div className="btn-row" style={{ marginTop: 8 }}>
-            {!isOutput && (
+            {!isOutput && isLive && (
               <button className="btn" disabled={running} onClick={runCode}>
                 {running ? "Running…" : "▶ Run"}
               </button>
@@ -290,19 +349,9 @@ export default function WorkshopTopicClient() {
 
           <div style={{ marginTop: 12 }}>
             <p className="section-tag" style={{ marginBottom: 8 }}>
-              {isOutput ? "Actual output (revealed after Submit)" : "Output"}
+              {outputPanelLabel}
             </p>
-            <pre className="forge-terminal">
-              {running
-                ? "Running…"
-                : codeOutput
-                ? [codeOutput.output, codeOutput.error ? `Error: ${codeOutput.error}` : ""]
-                    .filter(Boolean)
-                    .join("\n") || "(no output)"
-                : isOutput
-                ? "Submit your prediction to reveal the real output."
-                : "Click Run or Submit to execute your code."}
-            </pre>
+            <pre className="forge-terminal">{outputPanelText}</pre>
           </div>
 
           {gradeResult && (
