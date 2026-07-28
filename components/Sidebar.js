@@ -60,8 +60,8 @@ export default function Sidebar({ kb }) {
           🔥 The Forge
         </button>
       </Link>
-      <Link href="/workshop">
-        <button className={`nav-btn ${pathname.startsWith("/workshop") ? "active" : ""}`}>
+      <Link href="/anvil">
+        <button className={`nav-btn ${pathname.startsWith("/anvil") ? "active" : ""}`}>
           🛠️ The Anvil
         </button>
       </Link>

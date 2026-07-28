@@ -1,6 +1,6 @@
-// One-time content-authoring script for Workshop B (output-matching +
-// build-to-spec challenge types). Appends to the `workshop_challenges`
-// arrays Workshop A already created on the same 4 pilot topics — does not
+// One-time content-authoring script for Anvil B (output-matching +
+// build-to-spec challenge types). Appends to the `anvil_challenges`
+// arrays Anvil A already created on the same 4 pilot topics — does not
 // touch existing reorder/fix entries.
 
 const fs = require("fs");
@@ -293,11 +293,11 @@ for (const [topicId, challenges] of Object.entries(NEW_CHALLENGES)) {
     console.error(`Topic not found: ${topicId}`);
     process.exit(1);
   }
-  if (!Array.isArray(topic.workshop_challenges)) {
-    console.error(`Topic ${topicId} has no existing workshop_challenges array — Workshop A content missing?`);
+  if (!Array.isArray(topic.anvil_challenges)) {
+    console.error(`Topic ${topicId} has no existing anvil_challenges array — Anvil A content missing?`);
     process.exit(1);
   }
-  topic.workshop_challenges.push(...challenges);
+  topic.anvil_challenges.push(...challenges);
   addedTopics += 1;
   addedChallenges += challenges.length;
 }

@@ -1,5 +1,5 @@
-// Workshop C follow-up: adds Java and C# pilot topics to The Workshop,
-// same pattern as the JS/C++ batch (scripts/add-workshop-c-challenges.js).
+// Anvil C follow-up: adds Java and C# pilot topics to The Anvil,
+// same pattern as the JS/C++ batch (scripts/add-anvil-c-challenges.js).
 // Every expected_output here was verified against the real bundled
 // toolchains (Temurin JDK, .NET 10 SDK via csc.exe + apphost patching),
 // staged to a space-free path exactly like java_runner.rs/csharp_runner.rs
@@ -339,11 +339,11 @@ function addTo(track, topicId, challenges) {
     console.error(`Topic not found: ${topicId}`);
     process.exit(1);
   }
-  if (topic.workshop_challenges) {
-    console.error(`Topic ${topicId} already has workshop_challenges — refusing to overwrite.`);
+  if (topic.anvil_challenges) {
+    console.error(`Topic ${topicId} already has anvil_challenges — refusing to overwrite.`);
     process.exit(1);
   }
-  topic.workshop_challenges = challenges;
+  topic.anvil_challenges = challenges;
   return challenges.length;
 }
 
@@ -352,4 +352,4 @@ total += addTo(expert.language_tracks.java, "java_collections_framework", JAVA_C
 total += addTo(expert.language_tracks.csharp, "cs_linq", CSHARP_CHALLENGES);
 
 fs.writeFileSync(KB_PATH, JSON.stringify(kb, null, 2) + "\n", "utf8");
-console.log(`Added ${total} new Workshop challenges across 2 new pilot topics (Java, C#).`);
+console.log(`Added ${total} new Anvil challenges across 2 new pilot topics (Java, C#).`);

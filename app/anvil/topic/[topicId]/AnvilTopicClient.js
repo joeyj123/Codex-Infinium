@@ -14,7 +14,7 @@ import { runCpp, isTauriRuntime } from "@/lib/cppRunner";
 import { runJava } from "@/lib/javaRunner";
 import { runCsharp } from "@/lib/csharpRunner";
 import { forgeExampleXp } from "@/lib/forgeXp";
-import { getWorkshopTopic, getWorkshopTopicTierId } from "@/lib/workshop";
+import { getAnvilTopic, getAnvilTopicTierId } from "@/lib/anvil";
 import ExposureSelector from "@/components/ExposureSelector";
 import ForgeReferencePane from "@/components/ForgeReferencePane";
 import Walkthrough from "@/components/Walkthrough";
@@ -26,7 +26,7 @@ import Walkthrough from "@/components/Walkthrough";
 const BROWSER_LIVE_LANGS = ["python", "javascript"];
 const TAURI_LIVE_LANGS = ["cpp", "java", "csharp"];
 
-const WORKSHOP_INTRO_STEPS = [
+const ANVIL_INTRO_STEPS = [
   {
     title: "The Anvil",
     body: "Four challenge types: Reorder scrambled code into a working program, Fix a broken one, Predict what a snippet prints, or Build code from a spec.",
@@ -46,7 +46,7 @@ function buildInitialOrder(challenge) {
   return challenge.shuffled_lines.map((_, i) => i);
 }
 
-export default function WorkshopTopicClient() {
+export default function AnvilTopicClient() {
   const { topicId } = useParams();
   const searchParams = useSearchParams();
   // A `lang` param means this is an Expert-track topic; its absence means a
@@ -56,15 +56,15 @@ export default function WorkshopTopicClient() {
   const langParam = searchParams.get("lang");
   const isExpert = !!langParam;
   const lang = langParam || "python";
-  const resolvedTierId = isExpert ? "expert" : getWorkshopTopicTierId(kb, topicId);
+  const resolvedTierId = isExpert ? "expert" : getAnvilTopicTierId(kb, topicId);
   const router = useRouter();
   const { exposure, loaded: forgeLoaded } = useForge();
   const { loaded: onboardingLoaded, hasSeenMode, markModeSeen } = useOnboarding();
-  const { hasCompletedWorkshopChallenge, markWorkshopChallengeComplete } = useProgress();
+  const { hasCompletedAnvilChallenge, markAnvilChallengeComplete } = useProgress();
 
   const tier = kb.tiers.find((t) => t.id === resolvedTierId);
-  const topic = isExpert ? getWorkshopTopic(kb, topicId, lang) : getWorkshopTopic(kb, topicId);
-  const challenges = topic?.workshop_challenges || [];
+  const topic = isExpert ? getAnvilTopic(kb, topicId, lang) : getAnvilTopic(kb, topicId);
+  const challenges = topic?.anvil_challenges || [];
 
   const [index, setIndex] = useState(0);
   const [order, setOrder] = useState([]);
@@ -101,7 +101,7 @@ export default function WorkshopTopicClient() {
   }
 
   useEffect(() => {
-    const alreadyDone = challenge ? hasCompletedWorkshopChallenge(challenge.id) : false;
+    const alreadyDone = challenge ? hasCompletedAnvilChallenge(challenge.id) : false;
     setRevealedHints([]);
     setSolutionRevealed(exposure === "guided" || alreadyDone);
     setReferenceOpen(exposure === "guided");
@@ -126,7 +126,7 @@ export default function WorkshopTopicClient() {
         <button
           className="btn"
           style={{ marginTop: 16 }}
-          onClick={() => router.push(isExpert ? `/workshop?lang=${lang}` : `/workshop?tier=${resolvedTierId}`)}
+          onClick={() => router.push(isExpert ? `/anvil?lang=${lang}` : `/anvil?tier=${resolvedTierId}`)}
         >
           ⬅️ Back
         </button>
@@ -141,7 +141,7 @@ export default function WorkshopTopicClient() {
   const showHints = exposure !== "gauntlet";
   const referenceAllowed = exposure !== "gauntlet";
   const answerRequiredForSolution = exposure !== "guided";
-  const alreadyCompleted = hasCompletedWorkshopChallenge(challenge.id);
+  const alreadyCompleted = hasCompletedAnvilChallenge(challenge.id);
 
   function goTo(newIndex) {
     if (newIndex < 0 || newIndex >= challenges.length) return;
@@ -182,7 +182,7 @@ export default function WorkshopTopicClient() {
   // language is currently live.
   //  - reorder/fix/build, live: run the learner's own code for real via
   //    execute(), compare against expected_output with gradeCodeOutput —
-  //    unchanged from Workshop A/B.
+  //    unchanged from Anvil A/B.
   //  - reorder/fix/build, not live (C++ outside Tauri): can't execute
   //    anything, so fall back to lib/grading.js's gradeAnswer() — the same
   //    offline concept-coverage/answer-bank engine Forge A2 built and Forge
@@ -209,7 +209,7 @@ export default function WorkshopTopicClient() {
       setSolutionRevealed(true);
       if (!alreadyCompleted) {
         const xp = forgeExampleXp(exposure, result.tier);
-        markWorkshopChallengeComplete(challenge.id, xp, tier.name);
+        markAnvilChallengeComplete(challenge.id, xp, tier.name);
       }
       return;
     }
@@ -223,7 +223,7 @@ export default function WorkshopTopicClient() {
       setSolutionRevealed(true);
       if (!alreadyCompleted) {
         const xp = forgeExampleXp(exposure, result.tier);
-        markWorkshopChallengeComplete(challenge.id, xp, tier.name);
+        markAnvilChallengeComplete(challenge.id, xp, tier.name);
       }
       return;
     }
@@ -234,7 +234,7 @@ export default function WorkshopTopicClient() {
     setSolutionRevealed(true);
     if (!alreadyCompleted) {
       const xp = forgeExampleXp(exposure, result.tier);
-      markWorkshopChallengeComplete(challenge.id, xp, tier.name);
+      markAnvilChallengeComplete(challenge.id, xp, tier.name);
     }
   }
 
@@ -255,7 +255,7 @@ export default function WorkshopTopicClient() {
       <div className="study-toolbar">
         <button
           className="btn"
-          onClick={() => router.push(isExpert ? `/workshop?lang=${lang}` : `/workshop?tier=${resolvedTierId}`)}
+          onClick={() => router.push(isExpert ? `/anvil?lang=${lang}` : `/anvil?tier=${resolvedTierId}`)}
         >
           ⬅️ Back
         </button>
@@ -326,10 +326,10 @@ export default function WorkshopTopicClient() {
           </p>
 
           {isReorder ? (
-            <div className="workshop-reorder-list">
+            <div className="anvil-reorder-list">
               {order.map((lineIdx, pos) => (
-                <div key={lineIdx} className="workshop-reorder-block">
-                  <div className="workshop-reorder-controls">
+                <div key={lineIdx} className="anvil-reorder-block">
+                  <div className="anvil-reorder-controls">
                     <button className="btn" disabled={pos === 0} onClick={() => moveLine(pos, -1)}>
                       ▲
                     </button>
@@ -416,8 +416,8 @@ export default function WorkshopTopicClient() {
         <ForgeReferencePane topic={topic} tier={tier} tierId={resolvedTierId} onClose={() => setReferenceOpen(false)} />
       )}
 
-      {onboardingLoaded && !hasSeenMode("workshop") && (
-        <Walkthrough steps={WORKSHOP_INTRO_STEPS} onDone={() => markModeSeen("workshop")} />
+      {onboardingLoaded && !hasSeenMode("anvil") && (
+        <Walkthrough steps={ANVIL_INTRO_STEPS} onDone={() => markModeSeen("anvil")} />
       )}
     </div>
   );

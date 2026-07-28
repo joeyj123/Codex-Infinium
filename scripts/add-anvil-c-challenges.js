@@ -1,10 +1,10 @@
-// One-time content-authoring script for Workshop C (extending Workshop's
-// challenge types to more languages). Adds a fresh `workshop_challenges`
+// One-time content-authoring script for Anvil C (extending Anvil's
+// challenge types to more languages). Adds a fresh `anvil_challenges`
 // array to one pilot topic each in the JavaScript and C++ Expert tracks —
-// the first Workshop content outside Python. Does not touch the existing
-// Python pilot topics/challenges from Workshop A/B.
+// the first Anvil content outside Python. Does not touch the existing
+// Python pilot topics/challenges from Anvil A/B.
 //
-// Unlike Workshop A/B's Python content, every challenge here also carries
+// Unlike Anvil A/B's Python content, every challenge here also carries
 // `key_concepts` + `answer_bank`, needed for the offline fallback grading
 // path (Forge A2's engine) used when C++ isn't running inside Tauri.
 
@@ -333,11 +333,11 @@ function addTo(track, topicId, challenges) {
     console.error(`Topic not found: ${topicId}`);
     process.exit(1);
   }
-  if (topic.workshop_challenges) {
-    console.error(`Topic ${topicId} already has workshop_challenges — refusing to overwrite.`);
+  if (topic.anvil_challenges) {
+    console.error(`Topic ${topicId} already has anvil_challenges — refusing to overwrite.`);
     process.exit(1);
   }
-  topic.workshop_challenges = challenges;
+  topic.anvil_challenges = challenges;
   return challenges.length;
 }
 
@@ -346,4 +346,4 @@ total += addTo(expert.language_tracks.javascript, "js_json_native", JS_CHALLENGE
 total += addTo(expert.language_tracks.cpp, "cpp_stl", CPP_CHALLENGES);
 
 fs.writeFileSync(KB_PATH, JSON.stringify(kb, null, 2) + "\n", "utf8");
-console.log(`Added ${total} new Workshop challenges across 2 new pilot topics (JavaScript, C++).`);
+console.log(`Added ${total} new Anvil challenges across 2 new pilot topics (JavaScript, C++).`);

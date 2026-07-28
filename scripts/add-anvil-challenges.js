@@ -1,6 +1,6 @@
-// One-time content-authoring script for Workshop A (The Workshop, Forge F pilot).
-// Adds a `workshop_challenges` array to a small batch of Expert Python topics.
-// Run once with `node scripts/add-workshop-challenges.js`, then delete/leave as a record.
+// One-time content-authoring script for Anvil A (The Anvil, Forge F pilot).
+// Adds a `anvil_challenges` array to a small batch of Expert Python topics.
+// Run once with `node scripts/add-anvil-challenges.js`, then delete/leave as a record.
 
 const fs = require("fs");
 const path = require("path");
@@ -272,10 +272,10 @@ for (const [topicId, challenges] of Object.entries(CHALLENGES)) {
     console.error(`Topic not found: ${topicId}`);
     process.exit(1);
   }
-  topic.workshop_challenges = challenges;
+  topic.anvil_challenges = challenges;
   addedTopics += 1;
   addedChallenges += challenges.length;
 }
 
 fs.writeFileSync(KB_PATH, JSON.stringify(kb, null, 2) + "\n", "utf8");
-console.log(`Added workshop_challenges to ${addedTopics} topics (${addedChallenges} challenges total).`);
+console.log(`Added anvil_challenges to ${addedTopics} topics (${addedChallenges} challenges total).`);
