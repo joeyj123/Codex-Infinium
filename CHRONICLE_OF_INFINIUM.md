@@ -1620,3 +1620,16 @@ Display-name-only rename, no internal rename — grepped the whole codebase for 
 **No deeper rename recommended**: file/folder paths, the `/workshop` route, `workshop_challenges` field name, and every `getWorkshop*`/`markWorkshopChallengeComplete`-style internal identifier were all left as-is, per the task's explicit instruction. These are internal-only and invisible to Joey day-to-day — renaming them would only add route/regression risk (breaking the static export's `generateStaticParams`, any bookmarked `/workshop` links, etc.) for zero user-visible benefit. Flagged but not recommended; no action taken without confirmation.
 
 Committed and pushed to GitHub `main` (UI/copy-only change to `components/Sidebar.js`, `app/workshop/page.js`, `app/workshop/topic/[topicId]/WorkshopTopicClient.js`; no `RELEASING.md` release process needed).
+
+## Backlog: "Workshop" (new concept) — capstone/tutorial mode, name-only (2026-07-28)
+
+A new, separate mode — distinct from **The Anvil** (the just-renamed reorder/fix/output/build drills) and **The Crucible** (arcade games, also backlog). Not scoped, not started, no file/schema work done.
+
+**What it does**: guides the user through building one real, complete project start to finish (e.g. a simple game or basic website), rather than isolated drills.
+
+**Per-project, it would include**:
+- Relevant Study (Read) sections and glossary definitions the project actually needs, pulled in and reused from existing content — not duplicated.
+- Step-by-step build instructions.
+- Either an in-app terminal to run code and see output, or clear direction to use the device's own terminal.
+
+**Naming collision flagged for later**: this new mode's working name, "Workshop," directly collides with the internal names still in place from the just-renamed old Workshop/Forge F (`/workshop` route, `lib/workshop.js`, `workshop_challenges` field, `getWorkshop*` functions) — those were deliberately left as internal identifiers during the display-name rename to "The Anvil," on the reasoning that they're invisible to Joey day-to-day. If this new capstone mode is ever built under the same "Workshop" name, its own internal identifiers will need to avoid the `workshop` prefix to not collide with the existing (differently-purposed) internals. Worth resolving before scoping, not before.
