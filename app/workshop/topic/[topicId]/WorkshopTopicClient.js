@@ -28,7 +28,7 @@ const TAURI_LIVE_LANGS = ["cpp", "java", "csharp"];
 
 const WORKSHOP_INTRO_STEPS = [
   {
-    title: "The Workshop",
+    title: "The Anvil",
     body: "Four challenge types: Reorder scrambled code into a working program, Fix a broken one, Predict what a snippet prints, or Build code from a spec.",
   },
   {
@@ -116,7 +116,7 @@ export default function WorkshopTopicClient() {
   }, [index, exposure, topicId, lang]);
 
   if (!tier) return <p>Unknown tier.</p>;
-  if (!topic) return <p>Unknown Workshop topic.</p>;
+  if (!topic) return <p>Unknown Anvil topic.</p>;
 
   if (challenges.length === 0) {
     return (

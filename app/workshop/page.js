@@ -31,7 +31,7 @@ function WorkshopPageInner() {
         <button className="btn" onClick={() => router.push("/workshop?tier=expert")}>
           ⬅️ Change Language
         </button>
-        <h1 style={{ marginTop: 12 }}>🛠️ {track.name} — The Workshop</h1>
+        <h1 style={{ marginTop: 12 }}>🛠️ {track.name} — The Anvil</h1>
         <p style={{ color: "var(--muted)" }}>
           Reorder scrambled code, fix a broken one, predict the output, or build from a spec — graded by really
           running your code.
@@ -64,7 +64,7 @@ function WorkshopPageInner() {
           ⬅️ Change Difficulty
         </button>
         <h1 style={{ marginTop: 12 }}>
-          {expert.icon} {expert.name} — The Workshop
+          {expert.icon} {expert.name} — The Anvil
         </h1>
         <p style={{ color: "var(--muted)" }}>Choose a language track.</p>
 
@@ -107,7 +107,7 @@ function WorkshopPageInner() {
           ⬅️ Change Difficulty
         </button>
         <h1 style={{ marginTop: 12 }}>
-          {tier.icon} {tier.name} — The Workshop
+          {tier.icon} {tier.name} — The Anvil
         </h1>
         <p style={{ color: "var(--muted)" }}>
           Reorder scrambled code, fix a broken one, predict the output, or build from a spec — graded by really
@@ -138,7 +138,7 @@ function WorkshopPageInner() {
 
   return (
     <div>
-      <h1>🛠️ The Workshop</h1>
+      <h1>🛠️ The Anvil</h1>
       <p style={{ color: "var(--muted)" }}>Choose a difficulty.</p>
 
       <div className="lang-grid" style={{ marginTop: 20 }}>

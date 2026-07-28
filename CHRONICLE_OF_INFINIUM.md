@@ -1606,3 +1606,17 @@ Task was to author Workshop content for all 57 Novice topics. Before writing any
 **Not done this session**: Apprentice, Journeyman, Master, and Legend tiers remain fully unauthored, per the "one tier per session" instruction — stopping here without proceeding to any other tier. The 15 skipped History/Physics Novice topics also remain a known, logged gap.
 
 Committed and pushed to GitHub `main` (content-only change to `data/knowledge_base.json`; no `RELEASING.md` release process needed).
+
+## Session: Renamed "Workshop" display name to "The Anvil" (2026-07-28)
+
+Display-name-only rename, no internal rename — grepped the whole codebase for `Workshop` first rather than assuming locations, and found exactly 7 user-facing occurrences across 3 files (everything else matching was either an internal identifier like `lib/workshop.js`, `workshop_challenges`, `getWorkshopTopic`, the `/workshop` route itself, code comments, or historical Chronicle log entries — all correctly left untouched per the task's instruction):
+
+* `components/Sidebar.js` — the nav button label.
+* `app/workshop/page.js` — all 4 heading occurrences (top-level page, Expert language sub-picker, Expert language-track topic list, pre-Expert tier topic list).
+* `app/workshop/topic/[topicId]/WorkshopTopicClient.js` — the onboarding walkthrough's step title, and the "Unknown Workshop topic" fallback error string.
+
+**Verified**: `npm run build` — zero errors, route structure unchanged (still `/workshop`, `/workshop/topic/[topicId]`, same static page counts). Live in the dev preview: sidebar nav now reads "🛠️ The Anvil"; the top-level picker, the Expert language sub-picker, and the Novice tier topic list all correctly show "— The Anvil" in their headings with challenge counts intact (Novice 294, Expert 60 — confirming this was a pure copy change with zero effect on the underlying content from last session); reset the `codex_infinium_onboarding` localStorage flag to re-trigger the walkthrough and confirmed its title now reads "The Anvil" too.
+
+**No deeper rename recommended**: file/folder paths, the `/workshop` route, `workshop_challenges` field name, and every `getWorkshop*`/`markWorkshopChallengeComplete`-style internal identifier were all left as-is, per the task's explicit instruction. These are internal-only and invisible to Joey day-to-day — renaming them would only add route/regression risk (breaking the static export's `generateStaticParams`, any bookmarked `/workshop` links, etc.) for zero user-visible benefit. Flagged but not recommended; no action taken without confirmation.
+
+Committed and pushed to GitHub `main` (UI/copy-only change to `components/Sidebar.js`, `app/workshop/page.js`, `app/workshop/topic/[topicId]/WorkshopTopicClient.js`; no `RELEASING.md` release process needed).

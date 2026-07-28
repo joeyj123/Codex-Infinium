@@ -62,7 +62,7 @@ export default function Sidebar({ kb }) {
       </Link>
       <Link href="/workshop">
         <button className={`nav-btn ${pathname.startsWith("/workshop") ? "active" : ""}`}>
-          🛠️ The Workshop
+          🛠️ The Anvil
         </button>
       </Link>
       <Link href="/settings">
