@@ -1,11 +1,11 @@
 {
-  "version": "0.1.1",
-  "notes": "Bundled C++/Java/C# compilers (steps 3-5) and the auto-updater itself (step 6).",
-  "pub_date": "2026-07-27T18:22:11Z",
+  "version": "0.1.2",
+  "notes": "Fixes Forge tier availability: Journeyman, Master, and Legend were hardcoded as 'Not yet available' regardless of content. Tier availability is now content-driven (same fix applied to The Anvil previously) - all three tiers' already-complete example banks (Journeyman 183, Master 102, Legend 54) now display correctly.",
+  "pub_date": "2026-07-28T20:44:19.000Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcHYrZ2k3NlFuaHZtUUJtNjVQVUZwandlYmVyL1dZN2xRZHRpejlVeS9qMnVpYTBZaDlvQ3ZhQlNSbFhkamtac2xySG4yR29UTDNxd0hwLytPczF6bTNYV2FweFZmUHdvPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1MTc0ODc1CWZpbGU6Q29kZXggSW5maW5pdW1fMC4xLjFfeDY0LXNldHVwLmV4ZQo2cFZSQThVbzRqZ05XU3d5UXlYVHcvN3g5OExIYmNLRVd3TEVNN1BuSVFIZFZnenNzN0F5MzAzVk1lTHBpaWpmYTdlRUIvSC9IZmhySHZobmpEY0ZBQT09Cg==",
-      "url": "https://github.com/joeyj123/Codex-Infinium/releases/download/v0.1.1/Codex-Infinium_0.1.1_x64-setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcHYrZ2k3NlFuaGdKSE1aSi93QnVORDZhMXBjQUoxWklXTm52TDQ3M1grQlhFMldJRlVRK0NUYllocXA5WER1MlVGNDhxYkxZSzM0UEJnNUZSck1UUHJtbU5lOUx1VGdnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1MjcxMzU5CWZpbGU6Q29kZXggSW5maW5pdW1fMC4xLjJfeDY0LXNldHVwLmV4ZQo0STAyalRWdE54RHh3K01wL2JrdGt3bnV3RWhSYTZ1WlQ2VnkxQm9KT0hxZjBrN2ViaHgzUFAzdFF0T0tIUTMzTy9nQzJEeWwyRTJ2UzQ3SWdveDNCUT09Cg==",
+      "url": "https://github.com/joeyj123/Codex-Infinium/releases/download/v0.1.2/Codex-Infinium_0.1.2_x64-setup.exe"
     }
   }
 }
