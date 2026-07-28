@@ -3273,7 +3273,7 @@
         "parameterized query"
       ],
       "definition": "Create, Read, Update, Delete — the four fundamental data operations, implemented in SQL by INSERT, SELECT, UPDATE, and DELETE.",
-      "technical_term": "CRUD / SQL Injection / Parameterized Query",
+      "technical_term": "CRUD / Parameterized Query",
       "tier_introduced": "journeyman",
       "topic_id": "basic_sql_crud"
     },

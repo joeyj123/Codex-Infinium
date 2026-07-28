@@ -3,14 +3,23 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { useRouter } from "next/navigation";
+import { highlightText } from "@/lib/glossary";
+import GlossaryText from "@/components/GlossaryText";
 
 // Wraps one highlighted glossary term in the reading text. Click/tap is the
 // primary interaction (works on touch) and pins the popover open; hovering
 // with a mouse shows the same popover as an additive preview on desktop,
 // closing automatically once the pointer leaves.
+//
+// `linksEnabled` controls whether THIS term's own popover cross-links other
+// glossary terms inside its definition. It defaults to true for terms
+// rendered in normal reading text. A term's popover, when it cross-links,
+// renders its nested terms with linksEnabled={false} — capping cross-linking
+// at one level deep so a popover-within-a-popover's definition is plain text,
+// not itself clickable.
 const POPOVER_WIDTH = 260;
 
-export default function GlossaryTerm({ term, text }) {
+export default function GlossaryTerm({ term, text, linksEnabled = true }) {
   const [pinned, setPinned] = useState(false);
   const [hovering, setHovering] = useState(false);
   const [pos, setPos] = useState(null);
@@ -89,7 +98,16 @@ export default function GlossaryTerm({ term, text }) {
             onClick={(e) => e.stopPropagation()}
           >
             <span className="glossary-popover-term">{term.technical_term}</span>
-            <span className="glossary-popover-def">{term.definition}</span>
+            <span className="glossary-popover-def">
+              {linksEnabled ? (
+                <GlossaryText
+                  segments={highlightText(term.definition, new Set(), term.id)}
+                  linksEnabled={false}
+                />
+              ) : (
+                term.definition
+              )}
+            </span>
             <button className="btn glossary-popover-link" onClick={goToTopic}>
               Read full page →
             </button>
