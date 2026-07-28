@@ -2190,7 +2190,8 @@
       "aliases": [
         "superclass",
         "parent class",
-        "child class"
+        "child class",
+        "inheritance"
       ],
       "definition": "A mechanism letting one class (a subclass) be defined as an extension of another (a superclass), automatically receiving its attributes and methods while adding or overriding its own.",
       "technical_term": "Inheritance / Subclass / Superclass",
@@ -3269,10 +3270,9 @@
       "id": "crud_sql",
       "term": "CRUD",
       "aliases": [
-        "SQL injection",
         "parameterized query"
       ],
-      "definition": "Create, Read, Update, Delete — the four fundamental data operations, implemented in SQL by INSERT, SELECT, UPDATE, and DELETE. SQL injection is a vulnerability where untrusted input is pasted directly into a query's text; parameterized queries are the standard defense against it.",
+      "definition": "Create, Read, Update, Delete — the four fundamental data operations, implemented in SQL by INSERT, SELECT, UPDATE, and DELETE.",
       "technical_term": "CRUD / SQL Injection / Parameterized Query",
       "tier_introduced": "journeyman",
       "topic_id": "basic_sql_crud"
@@ -5071,6 +5071,117 @@
       "technical_term": "Good First Issue / Issue Triaging",
       "tier_introduced": "legend",
       "topic_id": "open_source_contribution"
+    },
+    {
+      "id": "set_data_structure",
+      "term": "set",
+      "aliases": [],
+      "definition": "An unordered collection that never allows duplicate values — attempting to add a value already present simply does nothing, leaving the set unchanged — built specifically to make checking whether a value already exists dramatically faster than scanning through an array one item at a time.",
+      "technical_term": "Set",
+      "tier_introduced": "apprentice",
+      "topic_id": "sets"
+    },
+    {
+      "id": "prompt",
+      "term": "prompt",
+      "aliases": [],
+      "definition": "The input text a person provides to a language model. Since a model has no memory outside of whatever text is actually present in its current context window, each request is effectively self-contained — meaning how a prompt is phrased directly and measurably shapes the quality of what comes back.",
+      "technical_term": "Prompt",
+      "tier_introduced": "apprentice",
+      "topic_id": "prompting_basics"
+    },
+    {
+      "id": "graph_data_structure",
+      "term": "graph",
+      "aliases": [],
+      "definition": "A data structure made of vertices (points, or nodes) connected by edges, with no restriction on how those connections loop, cross, or multiply — considerably more flexible and general than a tree, and capable of representing any network of relationships at all, like a subway map or a social network.",
+      "technical_term": "Graph",
+      "tier_introduced": "journeyman",
+      "topic_id": "graphs_data_structure"
+    },
+    {
+      "id": "session",
+      "term": "session",
+      "aliases": [
+        "session record"
+      ],
+      "definition": "A server-side record that persists information about one visitor across multiple separate requests — since HTTP itself has no built-in memory between requests, a session is what actually lets a website recognize the same visitor as they click from page to page. A cookie is simply the mechanism carrying that session's ID back and forth.",
+      "technical_term": "Session",
+      "tier_introduced": "journeyman",
+      "topic_id": "cookies_sessions"
+    },
+    {
+      "id": "context_switch",
+      "term": "context switch",
+      "aliases": [],
+      "definition": "The act of an operating system pausing one running process, saving exactly enough of its state to resume it later, and loading a different process's saved state in its place — the actual mechanism underneath process scheduling that makes a single CPU core look like it's running many programs at once.",
+      "technical_term": "Context Switch",
+      "tier_introduced": "journeyman",
+      "topic_id": "process_scheduling"
+    },
+    {
+      "id": "cache_hierarchy",
+      "term": "cache hierarchy",
+      "aliases": [],
+      "definition": "The layered arrangement of increasingly larger, increasingly slower memory a CPU checks in order before finally falling back to RAM — a small, extremely fast cache sits closest to the CPU, backed by a larger, slightly slower one, and so on — so the common case of reusing recently-touched data stays fast without requiring every memory access to be that fast.",
+      "technical_term": "Cache Hierarchy",
+      "tier_introduced": "journeyman",
+      "topic_id": "risc_cisc_pipelining_cache"
+    },
+    {
+      "id": "sql_injection",
+      "term": "SQL injection",
+      "aliases": [],
+      "definition": "An attack where user-provided input is inserted directly into a database query without being safely escaped or separated from the query's actual structural syntax first — letting an attacker craft input that changes what the query itself means, rather than being treated as a plain value the query is merely searching for. A parameterized query, which keeps input and query structure strictly separate, is the standard defense.",
+      "technical_term": "SQL Injection",
+      "tier_introduced": "master",
+      "topic_id": "common_vulnerabilities"
+    },
+    {
+      "id": "consensus_algorithm",
+      "term": "consensus algorithm",
+      "aliases": [
+        "distributed consensus"
+      ],
+      "definition": "A procedure letting multiple independent machines, none of which fully trusts the others' current state, agree on a single value or sequence of events even when some machines are slow, crash, or send conflicting information. The general problem is called distributed consensus; Raft and Paxos are two well-known algorithms that solve it.",
+      "technical_term": "Consensus Algorithm",
+      "tier_introduced": "legend",
+      "topic_id": "distributed_consensus"
+    },
+    {
+      "id": "halting_problem",
+      "term": "halting problem",
+      "aliases": [
+        "undecidability",
+        "undecidable"
+      ],
+      "definition": "The proven-impossible question of whether a general algorithm could exist that reliably determines, for any given program and any given input, whether that program will eventually stop running or run forever — proven impossible by Alan Turing in 1936. A question with no such algorithm is called undecidable.",
+      "technical_term": "Halting Problem",
+      "tier_introduced": "legend",
+      "topic_id": "halting_problem"
+    },
+    {
+      "id": "sharding",
+      "term": "sharding",
+      "aliases": [
+        "horizontal partitioning",
+        "shard"
+      ],
+      "definition": "Splitting one dataset that has grown too large for a single machine into smaller pieces, called shards, spread across many machines, each holding a distinct subset of the data — also called horizontal partitioning.",
+      "technical_term": "Sharding / Horizontal Partitioning",
+      "tier_introduced": "legend",
+      "topic_id": "sharding"
+    },
+    {
+      "id": "replication",
+      "term": "replication",
+      "aliases": [
+        "replica"
+      ],
+      "definition": "Deliberately storing more than one copy of the same data on more than one machine, called replicas, so that the loss of any single machine doesn't mean the loss or unavailability of the data it held, and so more than one request can be served at once.",
+      "technical_term": "Replication",
+      "tier_introduced": "legend",
+      "topic_id": "replication"
     }
   ]
 }
