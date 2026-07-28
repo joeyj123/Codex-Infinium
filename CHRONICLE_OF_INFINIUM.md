@@ -1700,3 +1700,17 @@ Joey reported Journeyman/Master/Legend showing "Not yet available" in The Forge 
 - Ran both sanity checks from `RELEASING.md`: `raw.githubusercontent.com/.../latest.json` returns the pushed v0.1.2 JSON correctly; the release asset URL resolves with a `302` to a valid signed download link, confirming public read access works.
 
 Existing installs will pick this up automatically via the updater banner (or manually via Settings → Check for Updates) — no manual reinstall needed.
+
+## Session: Anvil Novice tier-placement audit (Session 1 of relocation project, read-only) (2026-07-28)
+
+Novice Anvil holds 294 challenges but Novice-tier content is 100% conceptual/hardware — zero programming syntax taught. These challenges use real Python (variables, `.upper()`, lists, `.append()`, loops, `len()`), so they're good content filed under the wrong tier. This session's scope was strictly analysis: figure out where each challenge actually belongs. No relocation happened — that's Session 2, pending Joey's go-ahead on the mapping.
+
+**Method**: delegated the extraction/cross-reference to a background agent (kept the ~7MB `knowledge_base.json` out of the main context window). Confirmed first that only Novice topics carry an `anvil_challenges` field at all — apprentice/journeyman/master/expert/legend teach concepts purely through `explanation` prose, no coded challenges — so "where is X taught" had to be verified by reading topic explanation text directly, not by matching against other challenges.
+
+**Result** (full detail in `ANVIL_TIER_AUDIT_SESSION1.md`, 294-row table): 280 challenges map to **apprentice** (variables, operators, conditionals, loops, lists, dicts, functions, list comprehensions), 14 map to **journeyman** specifically for `.upper()`/`.lower()`/`.strip()`/`.split()`/`.join()`/slicing (`string_manipulation`) and `int()`/`str()`/`float()` casting (`type_casting`) — apprentice's `variables_data_types` only introduces the concept of data types, not these specific method/casting syntaxes. Zero challenges needed master/expert/legend-level syntax (no classes, recursion, exceptions, imports). Zero challenges were unmappable.
+
+**Content gap found and flagged (not fixed this session)**: f-string interpolation (`f"...{var}..."`) appears in 38 challenges' solution code, but no topic in any tier explicitly teaches f-string syntax — the KB covers string concatenation and string methods, never the f-string literal itself. Session 2 (or a dedicated content session) needs to either add an f-string-teaching topic or decide how to route these 38 challenges without it. Logged in `CODEX_INFINIUM_HANDOFF.md`.
+
+**Caveat for Session 2**: many challenges exercise multiple concepts at once; the report picked each challenge's most-advanced concept as the "driving" one for its primary tier assignment, but the full concept list is preserved per-row so relocation can use the latest tier among *all* concepts a challenge touches, not just the single driving one, if that's the better rule.
+
+No code or content data was touched — `git status` confirms zero diff to `data/knowledge_base.json`. Committed and pushed to GitHub `main` (adds `ANVIL_TIER_AUDIT_SESSION1.md` and this Chronicle entry only; no `RELEASING.md` release process triggered, per updated protocol — releases are now batched on Joey's explicit go-ahead).

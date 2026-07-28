@@ -106,3 +106,5 @@ Existing Read explanations are too sparse. Going forward, **every technical term
 * Tests locally in PowerShell on Windows (ASUS TUF A16, RTX 4050) — **no `\\\&\\\&` chaining**, give sequential commands.
 * Short/direct replies generally, EXCEPT this project's actual educational content and planning — there he wants full depth and comprehensiveness.
 
+
+**NEW THIS SESSION (2026-07-28, Anvil tier audit)**: content gap discovered — f-string interpolation (`f"...{var}..."`) is used in the solution code of 38 Novice Anvil challenges but is never explicitly taught as a topic in any tier (KB covers string concatenation and string methods, not f-string literal syntax). Needs a decision before Session 2 relocation: add a dedicated topic teaching f-strings (which tier?), or route those 38 challenges to their next-best concept without it. See `ANVIL_TIER_AUDIT_SESSION1.md` for the full per-challenge breakdown.
