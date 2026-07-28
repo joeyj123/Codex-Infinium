@@ -18,8 +18,6 @@ import ExposureSelector from "@/components/ExposureSelector";
 import ForgeReferencePane from "@/components/ForgeReferencePane";
 import Walkthrough from "@/components/Walkthrough";
 
-const FORGE_READY_TIERS = ["novice", "apprentice", "expert"];
-
 // Python and JavaScript run for real in-browser (JS natively, Python via a
 // lazy-loaded Pyodide worker). C++, Java, and C# all run for real too, but
 // only inside the Tauri desktop shell (via the bundled MinGW-w64/g++,
@@ -59,13 +57,10 @@ export default function ForgeTopicClient() {
   const { hasCompletedForgeExample, markForgeExampleComplete } = useProgress();
 
   const tier = kb.tiers.find((t) => t.id === tierId);
-  const forgeReady = FORGE_READY_TIERS.includes(tierId);
   const isExpert = tierId === "expert";
-  const topic = forgeReady
-    ? isExpert
-      ? lang && tier?.language_tracks?.[lang]?.topics?.find((t) => t.id === topicId)
-      : tier?.topics?.find((t) => t.id === topicId)
-    : null;
+  const topic = isExpert
+    ? lang && tier?.language_tracks?.[lang]?.topics?.find((t) => t.id === topicId)
+    : tier?.topics?.find((t) => t.id === topicId);
   const examples = topic?.examples || [];
 
   const [index, setIndex] = useState(0);
@@ -128,22 +123,6 @@ export default function ForgeTopicClient() {
   }, [index, exposure, topicId]);
 
   if (!tier) return <p>Unknown tier.</p>;
-
-  if (!forgeReady) {
-    return (
-      <div>
-        <h1>
-          {tier.icon} {tier.name}
-        </h1>
-        <div className="banner banner-dim">
-          The Forge doesn't have examples for {tier.name} yet — Novice and Expert are the only tiers built out so far.
-        </div>
-        <button className="btn" style={{ marginTop: 16 }} onClick={() => router.push("/forge")}>
-          ⬅️ Back to The Forge
-        </button>
-      </div>
-    );
-  }
 
   if (isExpert && !lang) {
     return (

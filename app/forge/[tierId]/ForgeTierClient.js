@@ -5,7 +5,17 @@ import kb from "@/data/knowledge_base.json";
 import { SECTION_NAMES } from "@/lib/sectionNames";
 import ExposureSelector from "@/components/ExposureSelector";
 
-const FORGE_READY_TIERS = ["novice", "apprentice", "expert"];
+// Content-driven, not a hardcoded allowlist — a tier has Forge content the
+// moment any of its topics (or, for Expert, any topic in any language
+// track) carries at least one example, same pattern used for The Anvil.
+function tierHasForgeContent(tier) {
+  if (tier.id === "expert") {
+    return Object.values(tier.language_tracks || {}).some((track) =>
+      (track.topics || []).some((t) => (t.examples?.length || 0) > 0)
+    );
+  }
+  return (tier.topics || []).some((t) => (t.examples?.length || 0) > 0);
+}
 
 export default function ForgeTierClient() {
   const { tierId } = useParams();
@@ -16,15 +26,13 @@ export default function ForgeTierClient() {
 
   if (!tier) return <p>Unknown tier.</p>;
 
-  if (!FORGE_READY_TIERS.includes(tierId)) {
+  if (!tierHasForgeContent(tier)) {
     return (
       <div>
         <h1>
           {tier.icon} {tier.name}
         </h1>
-        <div className="banner banner-dim">
-          The Forge doesn't have examples for {tier.name} yet — Novice and Expert are the only tiers built out so far.
-        </div>
+        <div className="banner banner-dim">The Forge doesn't have examples for {tier.name} yet.</div>
         <button className="btn" style={{ marginTop: 16 }} onClick={() => router.push("/forge")}>
           ⬅️ Back to The Forge
         </button>
