@@ -14,7 +14,7 @@ import { runCpp, isTauriRuntime } from "@/lib/cppRunner";
 import { runJava } from "@/lib/javaRunner";
 import { runCsharp } from "@/lib/csharpRunner";
 import { forgeExampleXp } from "@/lib/forgeXp";
-import { getWorkshopTopic } from "@/lib/workshop";
+import { getWorkshopTopic, getWorkshopTopicTierId } from "@/lib/workshop";
 import ExposureSelector from "@/components/ExposureSelector";
 import ForgeReferencePane from "@/components/ForgeReferencePane";
 import Walkthrough from "@/components/Walkthrough";
@@ -49,14 +49,21 @@ function buildInitialOrder(challenge) {
 export default function WorkshopTopicClient() {
   const { topicId } = useParams();
   const searchParams = useSearchParams();
-  const lang = searchParams.get("lang") || "python";
+  // A `lang` param means this is an Expert-track topic; its absence means a
+  // flat pre-Expert tier topic, which is Python-only — `lang` below still
+  // ends up "python" either way, since that's the only language execute()
+  // ever needs to run for a pre-Expert challenge.
+  const langParam = searchParams.get("lang");
+  const isExpert = !!langParam;
+  const lang = langParam || "python";
+  const resolvedTierId = isExpert ? "expert" : getWorkshopTopicTierId(kb, topicId);
   const router = useRouter();
   const { exposure, loaded: forgeLoaded } = useForge();
   const { loaded: onboardingLoaded, hasSeenMode, markModeSeen } = useOnboarding();
   const { hasCompletedWorkshopChallenge, markWorkshopChallengeComplete } = useProgress();
 
-  const tier = kb.tiers.find((t) => t.id === "expert");
-  const topic = getWorkshopTopic(kb, topicId, lang);
+  const tier = kb.tiers.find((t) => t.id === resolvedTierId);
+  const topic = isExpert ? getWorkshopTopic(kb, topicId, lang) : getWorkshopTopic(kb, topicId);
   const challenges = topic?.workshop_challenges || [];
 
   const [index, setIndex] = useState(0);
@@ -116,7 +123,11 @@ export default function WorkshopTopicClient() {
       <div>
         <h1>{topic.title}</h1>
         <div className="banner banner-dim">No challenges have been forged for this topic yet.</div>
-        <button className="btn" style={{ marginTop: 16 }} onClick={() => router.push("/workshop")}>
+        <button
+          className="btn"
+          style={{ marginTop: 16 }}
+          onClick={() => router.push(isExpert ? `/workshop?lang=${lang}` : `/workshop?tier=${resolvedTierId}`)}
+        >
           ⬅️ Back
         </button>
       </div>
@@ -237,12 +248,15 @@ export default function WorkshopTopicClient() {
     ? "Submit your prediction to reveal the real output."
     : isLive
     ? "Click Run or Submit to execute your code."
-    : `${tier.language_tracks[lang]?.name || "This language"} compiles for real, but only inside the Codex Infinium desktop app — on the web, Submit is graded offline instead of executed.`;
+    : `${tier.language_tracks?.[lang]?.name || "This language"} compiles for real, but only inside the Codex Infinium desktop app — on the web, Submit is graded offline instead of executed.`;
 
   return (
     <div>
       <div className="study-toolbar">
-        <button className="btn" onClick={() => router.push(`/workshop?lang=${lang}`)}>
+        <button
+          className="btn"
+          onClick={() => router.push(isExpert ? `/workshop?lang=${lang}` : `/workshop?tier=${resolvedTierId}`)}
+        >
           ⬅️ Back
         </button>
         <h2 style={{ margin: 0, textAlign: "center" }}>{topic.title}</h2>
@@ -399,7 +413,7 @@ export default function WorkshopTopicClient() {
       </div>
 
       {referenceOpen && referenceAllowed && (
-        <ForgeReferencePane topic={topic} tier={tier} tierId="expert" onClose={() => setReferenceOpen(false)} />
+        <ForgeReferencePane topic={topic} tier={tier} tierId={resolvedTierId} onClose={() => setReferenceOpen(false)} />
       )}
 
       {onboardingLoaded && !hasSeenMode("workshop") && (
