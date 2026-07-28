@@ -1678,3 +1678,25 @@ Follow-up to `task_5e849f6e` (flagged during the Workshop Novice content session
 No `npm run build` re-run needed this session (no code changed); the build/static-export verification above was already performed as part of the diagnosis itself.
 
 Committed and pushed to GitHub `main` (documentation-only — this Chronicle entry; no other files changed this session; no `RELEASING.md` release process needed).
+
+## Session: Forge tier-availability bug — audit, fix, v0.1.2 release (2026-07-28)
+
+Joey reported Journeyman/Master/Legend showing "Not yet available" in The Forge on the desktop app, despite project records showing all three tiers content-complete. Ran the diagnose-first, checkpoint-before-fixing workflow rather than assuming.
+
+**Diagnosis (read-only, reported before any edit)**:
+- Found `const FORGE_READY_TIERS = ["novice", "apprentice", "expert"]` hardcoded in **three** places: `app/forge/page.js` (the difficulty picker), `app/forge/[tierId]/ForgeTierClient.js` (the tier topic list), and `app/forge/[tierId]/topic/[topicId]/ForgeTopicClient.js` (the topic detail page itself — this third one would have kept blocking direct topic URLs even if only the picker were fixed). Identical anti-pattern to the old Workshop/Anvil hardcoded-allowlist bug.
+- Verified content directly in `data/knowledge_base.json` rather than trusting memory: Journeyman 68/68 topics with 183 examples, Master 34/34 with 102, Legend 18/18 with 54 — all genuinely populated, matching project records exactly.
+- Checked git history: local `HEAD` matched `origin/main` exactly (no uncommitted/unpushed drift), and the only commit that ever touched `tauri.conf.json`'s version was the v0.1.1 release itself — the 13 commits since then never added Forge content, meaning all the Journeyman/Master/Legend Forge E example-authoring sessions predate v0.1.1. **Conclusion: not desktop-behind-on-commits — the packaged v0.1.1 build already contains the content, gated by the same bug present in current `main`/Vercel.** This has been live and broken since before the app was ever released, on both surfaces equally.
+
+**Fix**: removed all three hardcoded allowlists, replaced with content-driven readiness (a tier/topic counts as available the moment it has at least one example) — same pattern as The Anvil fix. Also deleted a stale hardcoded banner string ("Novice and Expert are the only tiers built out so far") that would have been actively wrong the moment this shipped.
+
+**Verified live** (dev preview): all 6 tiers now show correct counts — Novice 129, Apprentice 705, Journeyman 183, Master 102, Expert 112, Legend 54. Entered a real topic in each of Journeyman (Recursion), Master (Design Patterns list), and Legend (Distributed Systems list) with zero errors. Zero regression confirmed on Novice/Apprentice/Expert. `npm run build` clean.
+
+**Shipped as v0.1.2**, full `RELEASING.md` process since this is user-facing desktop content:
+- Bumped `src-tauri/tauri.conf.json` and `Cargo.toml` to 0.1.2, committed the code fix separately from the release commit.
+- `gh` CLI wasn't installed anywhere on the machine and this session had no elevation to `winget install` it — paused and had Joey install it in his own terminal rather than working around it. Once installed, `gh` wasn't yet on this session's `PATH` (separate shell process from Joey's terminal) — found and used it via its full install path (`C:\Program Files\GitHub CLI\gh.exe`) rather than waiting on a session restart.
+- `npx tauri build`'s signing step went silent (compiled cleanly, both installers built, but then the log just stopped after "Decrypting updater signing key, expect a prompt for password" with no `.exe.sig`/`.msi.sig` produced and no `tauri`/`cargo` process left running — looked stuck but had actually already exited). Rather than re-running the full ~6-minute Rust compile, signed the two already-built installers directly via `tauri signer sign -f <key> --password= -- <file>` (the standalone signing command, no rebuild needed). Note for next time: `-p ""` (empty string password via a separate arg) got mangled somewhere in the PowerShell→Node argv path and was read as "wrong password"; `--password=` (equals-sign, no separate token) is what actually worked — worth using that form directly next release instead of rediscovering it.
+- Published the GitHub Release (`v0.1.2`, both signed installers + both `.sig` files), wrote `latest.json` with the real `.exe.sig` contents pasted in verbatim, committed and pushed.
+- Ran both sanity checks from `RELEASING.md`: `raw.githubusercontent.com/.../latest.json` returns the pushed v0.1.2 JSON correctly; the release asset URL resolves with a `302` to a valid signed download link, confirming public read access works.
+
+Existing installs will pick this up automatically via the updater banner (or manually via Settings → Check for Updates) — no manual reinstall needed.
