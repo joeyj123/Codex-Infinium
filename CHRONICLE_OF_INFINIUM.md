@@ -2007,3 +2007,11 @@ Closed Git (`commits_branches_repos`, `merge_conflicts`, `pull_requests`, `why_g
 **Running total**: 350 → 380 challenges. 15 empty topics remain (down from 25). Next batch continues in topic order after `ai_history`.
 
 No `RELEASING.md` release process run.
+
+## Session: Apprentice Anvil Authoring — batch 6, 10 topics, 30 challenges (2026-07-29)
+
+Closed AI (`symbolic_vs_ml`, `neural_networks_basics`, `training_vs_inference`, `what_is_an_llm`, `prompting_basics`, `ai_limitations_ethics`), opened AI Going Deeper (`tokens_tokenization`, `model_parameters_size`, `context_window`, `finetuning_vs_prompting`), via `scripts/add-apprentice-anvil-batch6.js`. All 10 are conceptual AI/ML topics with nothing meaningfully executable in Anvil's Python sandbox, so all stayed print()-narration, matching the established pattern for purely conceptual content. All 30 verified via direct Python execution (byte-for-byte match), `npm run build` clean.
+
+**Running total**: 380 → 410 challenges. 5 empty topics remain (down from 15). Next batch continues in topic order after `finetuning_vs_prompting`.
+
+No `RELEASING.md` release process run.
