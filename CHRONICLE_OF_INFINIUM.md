@@ -1951,3 +1951,27 @@ First 10-topic batch (batch size increased from 6, per Joey, now that there's mo
 **Running total**: Apprentice Anvil content moved from 260 → 290 challenges. 45 empty topics remain (down from 55).
 
 No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
+
+## Session: Apprentice Anvil Authoring — batch 3, 10 topics, 30 challenges (2026-07-29)
+
+Closed out Language Fundamentals/Language Survey's remaining tail and all of Data Structures, opened Data, in topic order: `survey_html_css`, `evaluating_language_fit`, `frontend_frameworks_intro` (Languages section closers), `stacks_queues`, `linked_lists`, `hash_tables_internals` (Data Structures section closers), `what_is_json`, `what_is_csv`, `reading_writing_files`, `what_is_a_schema` (Data section openers).
+
+**Content-tier alignment**: the 3 languages-section topics (HTML/CSS, evaluating language fit, frontend frameworks) are conceptual/narrative subjects with no executable semantics of their own, so — matching batch 2's `survey_javascript`/etc. pattern — they use real, executing `print()`-only Python narrating facts, never claiming to execute HTML/CSS/JS. `linked_lists` and `hash_tables_internals` are genuine data structures, but Apprentice hasn't taught custom classes yet (no node/pointer object syntax available), so an actual linked list or hash table can't be implemented in executable Python at this tier — both followed the same narration pattern for that reason. `what_is_json`/`what_is_csv`/`reading_writing_files`/`what_is_a_schema` stayed narrative too, since `import json`/`import csv` usage isn't established anywhere in the tier. `stacks_queues` is the one exception: `arrays_lists` (already authored) gives Apprentice real list operations, and a Python list's `.append()`/`.pop()` directly implement stack push/pop, so those 3 challenges use real, executing list code rather than narration — including a `fix` challenge distinguishing `pop()` (LIFO, stack) from `pop(0)` (FIFO, queue).
+
+**Challenges authored** (3 each, 30 total), via `scripts/add-apprentice-anvil-batch3.js`:
+- `survey_html_css`: reorder (parse to DOM → apply CSS → render), output (HTML/CSS role facts), fix (missing quote)
+- `evaluating_language_fit`: reorder (performance → ecosystem → team familiarity), output (if/else on task type, JS as forced browser choice), fix (condition compared the wrong variable — `language` instead of `task`)
+- `frontend_frameworks_intro`: reorder (coordination problem → frameworks → components), output (component bundling facts), fix (missing quote)
+- `stacks_queues`: output (`list.append()`/`.pop()` as stack push/pop, LIFO order), fix (`pop()` vs `pop(0)` — LIFO vs FIFO), reorder (stack vs. queue order-and-ends narration)
+- `linked_lists`: reorder (scattered pointer-linked nodes → cheap insertion → no random access), output (node/null facts), fix (missing quote, doubly linked list fact)
+- `hash_tables_internals`: reorder (hash function → bucket index → lookup reruns the function), output (collision/chaining facts), fix (missing quote)
+- `what_is_json`: reorder (mismatched internal representations → JSON as shared format → parse into native structure), output (object/array syntax facts), fix (missing quote)
+- `what_is_csv`: reorder (header row → each line is a record → values match header order), output (compactness/quoting facts), fix (missing quote)
+- `reading_writing_files`: reorder (request access by path → OS returns handle → closing flushes to disk), output (reading vs. writing facts), fix (missing quote)
+- `what_is_a_schema`: reorder (schema defines fields/types → without one, failures surface late → validation catches it early), output (JSON Schema/static-type-system facts), fix (missing quote)
+
+**Verified**: every `solution_code` executed directly via Python (matching how Anvil actually runs Apprentice-tier code) and its output compared byte-for-byte against `expected_output` — all 30 passed with no mismatches. `data/knowledge_base.json` parses as valid JSON post-write. `npm run build` clean.
+
+**Running total**: Apprentice Anvil content moved from 290 → 320 challenges. 35 empty topics remain (down from 45). Next batch should pick up Apprentice's remaining Data section topics (after `what_is_a_schema`) in topic order.
+
+No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead.
