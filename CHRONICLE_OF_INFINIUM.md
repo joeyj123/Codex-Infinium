@@ -1747,3 +1747,15 @@ All three grading functions live in new `lib/gradeConcept.js`, returning the sam
 **Explicitly out of scope this session, by design**: topics 11–57 of Novice. Checkpointing here per Joey's instruction before continuing.
 
 No `RELEASING.md` release process run — content/data + small app-code change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
+
+## Session: Novice Anvil Session 2 — topics 11-20 authored, 30 more challenges (2026-07-29)
+
+Pure content-authoring follow-through on Session 1 — no UI or grading changes needed, since the `order`/`choice`/`match` types and `lib/gradeConcept.js` built last session already cover everything these 10 topics needed.
+
+**Content authored**: pulled the live Novice topic list again (per standing instruction not to assume from the prior session summary) and confirmed topics 11–20 in order: `displays_basics`, `firmware_vs_software_hardware`, `bios_uefi`, `boot_process`, `what_is_an_os`, `processes_threads`, `memory_management`, `file_systems`, `file_paths`, `file_types_extensions`. Authored 3 challenges each (30 total), mixing the three types per topic based on what the topic's own content actually supported — `boot_process` used `order`+`choice`×2 (no natural match-pairs fit as well as the 5-stage sequence and the two spot-the-wrong/predict-outcome scenarios did); `what_is_an_os`, `processes_threads`, `memory_management`, `file_systems`, `displays_basics`, and `file_types_extensions` skipped `order` entirely since none of those topics teach a literal step-by-step process worth reordering. Every challenge draws only on concepts explicitly present in its own topic's `explanation` text. Written via a new one-off script, `scripts/add-novice-anvil-session2.js`, following the same pattern as Session 1's script.
+
+**Verified live**: `npm run build` clean. Spot-checked `boot_process`'s Anvil topic page in-browser — the 5-stage `order` challenge renders, reorders, and reveals its worked solution correctly. Did not individually spot-check all 10 topics' pages in-browser — schema/render path was already proven correct in Session 1, so this session focused verification on confirming the pattern still holds with fresh content rather than re-testing the render path itself.
+
+**Explicitly out of scope this session, by design**: topics 21–57 of Novice (37 remaining). Checkpointing here per Joey's instruction before continuing.
+
+No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
