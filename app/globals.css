@@ -586,30 +586,62 @@ a { color: inherit; text-decoration: none; }
   border-bottom: 8px solid #120d07;
 }
 
+/* Study landing page — full-width shelf, spines centered and evenly spaced */
+.study-bookshelf {
+  width: 100%;
+  justify-content: center;
+  gap: 18px;
+  padding: 28px 24px 20px;
+}
+
 .book-spine {
   position: relative;
-  width: 64px;
-  height: 220px;
-  border-radius: 4px 8px 8px 4px;
-  border: 1px solid rgba(0,0,0,0.4);
-  box-shadow: inset -6px 0 10px rgba(0,0,0,0.35), 0 4px 10px rgba(0,0,0,0.4);
+  width: 72px;
+  height: 240px;
+  border-radius: 3px 10px 10px 3px;
+  border-left: 6px solid var(--spine-edge, #1a1209);
+  border-top: 1px solid rgba(255,255,255,0.12);
+  border-right: 1px solid rgba(0,0,0,0.5);
+  border-bottom: 1px solid rgba(0,0,0,0.5);
+  box-shadow:
+    inset -8px 0 16px rgba(0,0,0,0.45),
+    inset 2px 0 6px rgba(255,255,255,0.06),
+    0 6px 18px rgba(0,0,0,0.55);
   cursor: pointer;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
-  padding: 12px 4px;
-  transition: transform 0.15s ease;
+  padding: 14px 4px 10px;
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
   overflow: hidden;
 }
 
 .book-spine:hover:not(.book-spine-locked) {
-  transform: translateY(-6px);
+  transform: translateY(-10px) scale(1.03);
+  box-shadow:
+    inset -8px 0 16px rgba(0,0,0,0.45),
+    inset 2px 0 6px rgba(255,255,255,0.06),
+    0 14px 28px rgba(0,0,0,0.65);
+}
+
+/* Decorative top ribbon line */
+.book-spine::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 6px;
+  right: 0;
+  height: 4px;
+  background: var(--spine-ribbon, rgba(232,201,136,0.6));
+  opacity: 0.7;
+  border-radius: 0 8px 0 0;
 }
 
 .book-spine-icon {
-  font-size: 20px;
-  margin-bottom: 10px;
+  font-size: 22px;
+  margin-bottom: 12px;
+  filter: drop-shadow(0 1px 3px rgba(0,0,0,0.6));
 }
 
 .book-spine-label {
@@ -617,30 +649,28 @@ a { color: inherit; text-decoration: none; }
   transform: rotate(180deg);
   font-family: 'Cinzel', serif;
   font-size: 12px;
+  font-weight: 600;
   color: #f4ecd8;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.12em;
+  text-shadow: 0 1px 4px rgba(0,0,0,0.8);
   flex: 1;
+  line-height: 1;
 }
 
 .book-spine-fill {
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 6px;
   right: 0;
-  background: rgba(232, 201, 136, 0.35);
-  transition: height 0.4s ease;
+  background: linear-gradient(0deg, rgba(232,201,136,0.28) 0%, rgba(232,201,136,0.08) 100%);
+  transition: height 0.5s ease;
+  pointer-events: none;
 }
 
 .book-spine-locked {
-  opacity: 0.4;
-  cursor: not-allowed;
-  filter: grayscale(0.6);
-}
-
-.book-spine-chain {
-  position: absolute;
-  top: 6px;
-  font-size: 16px;
+  opacity: 0.32;
+  cursor: default;
+  filter: grayscale(0.75) brightness(0.75);
 }
 
 .book-cover-thumb {
