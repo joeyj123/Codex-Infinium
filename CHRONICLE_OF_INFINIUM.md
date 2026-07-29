@@ -1771,3 +1771,15 @@ Continuation of the same content-authoring project — no UI or grading changes 
 **Explicitly out of scope this session, by design**: topics 31–57 of Novice (27 remaining — this batch closed out File Formats and made a start on Networking; the section boundary crossed at topic 27, `what_is_internet`). Checkpointing here per Joey's instruction before continuing.
 
 No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
+
+## Session: Novice Anvil Session 4 — topics 31-40 authored, 30 more challenges (2026-07-29)
+
+Fourth straight content-authoring session on the same project — no UI or grading changes needed, still reusing the `order`/`choice`/`match` types and `lib/gradeConcept.js` from Session 1.
+
+**Content authored**: pulled the live Novice topic list again and confirmed topics 31–40 in order: `what_is_the_cloud`, `dns`, `wifi_basics`, `bluetooth_basics`, `ports_networking`, `tcp_vs_udp`, `mac_vs_ip_address`, `cellular_generations`, `osi_tcpip_layers`, `what_is_a_program` — closing out the rest of Networking and opening the Software section. Authored 3 challenges each (30 total). `dns` (type name → send query → get IP → send actual request), `osi_tcpip_layers` (the 5-layer physical→link→network→transport→application stack), and `what_is_a_program` (file on disk → OS loads into RAM → allocates memory/creates process → CPU fetch-decode-execute) used `order`; the remaining 7 topics (cloud, WiFi, Bluetooth, ports, TCP/UDP, MAC-vs-IP, cellular generations) are compare/contrast or definitional topics without a natural sequential process, so those used `choice`×2 + `match`. Every challenge draws only on concepts explicitly present in its own topic's `explanation` text. Written via `scripts/add-novice-anvil-session4.js`.
+
+**Verified live**: `npm run build` clean. Spot-checked `osi_tcpip_layers`'s Anvil topic page in-browser — the 5-item `order` challenge (physical → link → network → transport → application) renders, reorders, and reveals its worked solution correctly.
+
+**Explicitly out of scope this session, by design**: topics 41–57 of Novice (17 remaining — Software section continues, then Computing History and Physical Foundations subsections close out the tier). Checkpointing here per Joey's instruction before continuing.
+
+No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.

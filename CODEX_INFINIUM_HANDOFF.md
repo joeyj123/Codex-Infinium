@@ -123,3 +123,5 @@ Authored 31 no-code challenges (3-4 each, mixed types) across the first 10 Novic
 **UPDATE (2026-07-29, Novice Anvil Session 2)**: Authored 30 more no-code challenges (3 each, no new types needed) across topics 11–20 (`displays_basics` through `file_types_extensions`) via `scripts/add-novice-anvil-session2.js`. **37 Novice topics remain unauthored** (topics 21–57).
 
 **UPDATE (2026-07-29, Novice Anvil Session 3)**: Authored 30 more no-code challenges (3 each, no new types needed) across topics 21–30 (`container_formats_codecs` through `server_vs_client`) via `scripts/add-novice-anvil-session3.js`. **27 Novice topics remain unauthored** (topics 31–57).
+
+**UPDATE (2026-07-29, Novice Anvil Session 4)**: Authored 30 more no-code challenges (3 each, no new types needed) across topics 31–40 (`what_is_the_cloud` through `what_is_a_program`) via `scripts/add-novice-anvil-session4.js`. **17 Novice topics remain unauthored** (topics 41–57).
