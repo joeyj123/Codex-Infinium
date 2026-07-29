@@ -8,6 +8,7 @@ import { useOnboarding } from "@/lib/OnboardingContext";
 import { useProgress } from "@/lib/ProgressContext";
 import { gradeCodeOutput } from "@/lib/gradeCode";
 import { gradeAnswer } from "@/lib/grading";
+import { gradeOrder, gradeChoice, gradeMatch } from "@/lib/gradeConcept";
 import { runPython } from "@/lib/pyodideRunner";
 import { runJavaScript } from "@/lib/codeExec";
 import { runCpp, isTauriRuntime } from "@/lib/cppRunner";
@@ -46,6 +47,19 @@ function buildInitialOrder(challenge) {
   return challenge.shuffled_lines.map((_, i) => i);
 }
 
+// Same up/down-reorder mechanic as `reorder`, but over plain-text process
+// steps (`shuffled_items`) instead of code lines — no execution involved.
+function buildInitialConceptOrder(challenge) {
+  if (!challenge || challenge.type !== "order") return [];
+  return challenge.shuffled_items.map((_, i) => i);
+}
+
+// One right-side slot per left-side item, all unassigned to start.
+function buildInitialMatch(challenge) {
+  if (!challenge || challenge.type !== "match") return [];
+  return challenge.left.map(() => null);
+}
+
 export default function AnvilTopicClient() {
   const { topicId } = useParams();
   const searchParams = useSearchParams();
@@ -68,6 +82,9 @@ export default function AnvilTopicClient() {
 
   const [index, setIndex] = useState(0);
   const [order, setOrder] = useState([]);
+  const [conceptOrder, setConceptOrder] = useState([]);
+  const [choiceIndex, setChoiceIndex] = useState(null);
+  const [matchAssignment, setMatchAssignment] = useState([]);
   const [codeText, setCodeText] = useState("");
   const [revealedHints, setRevealedHints] = useState([]);
   const [solutionRevealed, setSolutionRevealed] = useState(false);
@@ -89,6 +106,10 @@ export default function AnvilTopicClient() {
   const isFix = challenge?.type === "fix";
   const isOutput = challenge?.type === "output";
   const isBuild = challenge?.type === "build";
+  const isOrderConcept = challenge?.type === "order";
+  const isChoiceConcept = challenge?.type === "choice";
+  const isMatchConcept = challenge?.type === "match";
+  const isConcept = isOrderConcept || isChoiceConcept || isMatchConcept;
   const isLive = BROWSER_LIVE_LANGS.includes(lang) || (tauriReady && TAURI_LIVE_LANGS.includes(lang));
 
   async function execute(code) {
@@ -106,6 +127,9 @@ export default function AnvilTopicClient() {
     setSolutionRevealed(exposure === "guided" || alreadyDone);
     setReferenceOpen(exposure === "guided");
     setOrder(buildInitialOrder(challenge));
+    setConceptOrder(buildInitialConceptOrder(challenge));
+    setChoiceIndex(null);
+    setMatchAssignment(buildInitialMatch(challenge));
     // codeText doubles as "code to execute" for fix/build and "typed
     // prediction" for output — the two never overlap on the same challenge.
     setCodeText(isFix ? challenge?.buggy_code || "" : isBuild ? challenge?.starter_code || "" : "");
@@ -162,16 +186,35 @@ export default function AnvilTopicClient() {
     });
   }
 
+  function moveConceptLine(pos, dir) {
+    const target = pos + dir;
+    if (target < 0 || target >= conceptOrder.length) return;
+    setConceptOrder((prev) => {
+      const next = [...prev];
+      [next[pos], next[target]] = [next[target], next[pos]];
+      return next;
+    });
+  }
+
+  function setMatchSlot(leftIdx, rightIdx) {
+    setMatchAssignment((prev) => {
+      const next = [...prev];
+      next[leftIdx] = rightIdx;
+      return next;
+    });
+  }
+
   function currentCode() {
     if (isReorder) return order.map((i) => challenge.shuffled_lines[i]).join("\n\n");
     return codeText;
   }
 
   // Not available for "output" challenges (nothing of the learner's own to
-  // run) or when the current language isn't live right now (e.g. C++ in a
-  // plain browser tab) — Run is only ever a live-execution preview.
+  // run), no-code concept challenges (nothing to execute at all), or when
+  // the current language isn't live right now (e.g. C++ in a plain browser
+  // tab) — Run is only ever a live-execution preview.
   async function runCode() {
-    if (isOutput || !isLive) return;
+    if (isOutput || isConcept || !isLive) return;
     setRunning(true);
     const execResult = await execute(currentCode());
     setRunning(false);
@@ -196,6 +239,26 @@ export default function AnvilTopicClient() {
   //    available.
   async function submitAnswer() {
     setRunning(true);
+
+    if (isConcept) {
+      setRunning(false);
+      let result;
+      if (isOrderConcept) {
+        const arranged = conceptOrder.map((i) => challenge.shuffled_items[i]);
+        result = gradeOrder(arranged, challenge.items);
+      } else if (isChoiceConcept) {
+        result = gradeChoice(choiceIndex, challenge.correct_index);
+      } else {
+        result = gradeMatch(matchAssignment, challenge.correct_assignments);
+      }
+      setGradeResult(result);
+      setSolutionRevealed(true);
+      if (!alreadyCompleted) {
+        const xp = forgeExampleXp(exposure, result.tier);
+        markAnvilChallengeComplete(challenge.id, xp, tier.name);
+      }
+      return;
+    }
 
     if (isOutput) {
       const actualResult = isLive
@@ -250,6 +313,14 @@ export default function AnvilTopicClient() {
     ? "Click Run or Submit to execute your code."
     : `${tier.language_tracks?.[lang]?.name || "This language"} compiles for real, but only inside the Codex Infinium desktop app — on the web, Submit is graded offline instead of executed.`;
 
+  const conceptTypeLabel = isOrderConcept
+    ? "🧩 Reorder the Process"
+    : isChoiceConcept
+    ? challenge?.variant === "predict_outcome"
+      ? "🔮 Predict the Outcome"
+      : "❓ Spot the Wrong Concept"
+    : "🏗️ Match the System";
+
   return (
     <div>
       <div className="study-toolbar">
@@ -274,7 +345,15 @@ export default function AnvilTopicClient() {
       <div className="card forge-example-card" style={{ marginTop: 18 }}>
         <p className="stat-line" style={{ marginBottom: 10 }}>
           Challenge {index + 1} / {challenges.length} —{" "}
-          {isReorder ? "🧩 Reorder" : isFix ? "🛠️ Fix" : isOutput ? "🔮 Predict Output" : "🏗️ Build to Spec"}
+          {isConcept
+            ? conceptTypeLabel
+            : isReorder
+            ? "🧩 Reorder"
+            : isFix
+            ? "🛠️ Fix"
+            : isOutput
+            ? "🔮 Predict Output"
+            : "🏗️ Build to Spec"}
         </p>
 
         <p style={{ fontSize: 17, lineHeight: 1.6 }}>{challenge.prompt}</p>
@@ -303,86 +382,179 @@ export default function AnvilTopicClient() {
           </div>
         )}
 
-        <div style={{ marginTop: 22 }}>
-          {isOutput && (
-            <>
-              <p className="section-tag" style={{ marginBottom: 8 }}>
-                The Code
-              </p>
-              <pre className="forge-terminal forge-code-box" style={{ marginBottom: 12 }}>
-                {challenge.snippet_code}
-              </pre>
-            </>
-          )}
-
-          <p className="section-tag" style={{ marginBottom: 8 }}>
-            {isReorder
-              ? "Reorder these blocks"
-              : isFix
-              ? "Fix this code"
-              : isOutput
-              ? "What will this print?"
-              : "Write your code"}
-          </p>
-
-          {isReorder ? (
-            <div className="anvil-reorder-list">
-              {order.map((lineIdx, pos) => (
-                <div key={lineIdx} className="anvil-reorder-block">
-                  <div className="anvil-reorder-controls">
-                    <button className="btn" disabled={pos === 0} onClick={() => moveLine(pos, -1)}>
-                      ▲
-                    </button>
-                    <button className="btn" disabled={pos === order.length - 1} onClick={() => moveLine(pos, 1)}>
-                      ▼
-                    </button>
-                  </div>
-                  <pre className="forge-terminal forge-code-box" style={{ margin: 0, flex: 1 }}>
-                    {challenge.shuffled_lines[lineIdx]}
-                  </pre>
-                </div>
-              ))}
-            </div>
-          ) : (
-            <textarea
-              className={isOutput ? "forge-answer-box" : "forge-answer-box forge-code-box"}
-              rows={isOutput ? 4 : 10}
-              spellCheck={false}
-              value={codeText}
-              onChange={(e) => setCodeText(e.target.value)}
-              placeholder={isOutput ? "Type exactly what you think the code above prints…" : undefined}
-            />
-          )}
-
-          <div className="btn-row" style={{ marginTop: 8 }}>
-            {!isOutput && isLive && (
-              <button className="btn" disabled={running} onClick={runCode}>
-                {running ? "Running…" : "▶ Run"}
-              </button>
-            )}
-            <button className="btn" disabled={running} onClick={submitAnswer}>
-              {running ? "Running…" : "Submit"}
-            </button>
-          </div>
-
-          <div style={{ marginTop: 12 }}>
+        {isConcept ? (
+          <div style={{ marginTop: 22 }}>
             <p className="section-tag" style={{ marginBottom: 8 }}>
-              {outputPanelLabel}
+              {isOrderConcept ? "Reorder these steps" : isChoiceConcept ? "Pick one" : "Match each pair"}
             </p>
-            <pre className="forge-terminal">{outputPanelText}</pre>
-          </div>
 
-          {gradeResult && (
-            <p className={`stat-line forge-grade-${gradeResult.tier}`} style={{ marginTop: 8 }}>
-              {gradeResult.label}
+            {isOrderConcept && (
+              <div className="anvil-reorder-list">
+                {conceptOrder.map((itemIdx, pos) => (
+                  <div key={itemIdx} className="anvil-reorder-block">
+                    <div className="anvil-reorder-controls">
+                      <button className="btn" disabled={pos === 0} onClick={() => moveConceptLine(pos, -1)}>
+                        ▲
+                      </button>
+                      <button
+                        className="btn"
+                        disabled={pos === conceptOrder.length - 1}
+                        onClick={() => moveConceptLine(pos, 1)}
+                      >
+                        ▼
+                      </button>
+                    </div>
+                    <pre className="forge-terminal forge-code-box" style={{ margin: 0, flex: 1 }}>
+                      {challenge.shuffled_items[itemIdx]}
+                    </pre>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {isChoiceConcept && (
+              <div className="anvil-reorder-list">
+                {challenge.options.map((opt, i) => (
+                  <button
+                    key={i}
+                    className="btn"
+                    style={{
+                      textAlign: "left",
+                      whiteSpace: "normal",
+                      background: choiceIndex === i ? "var(--accent, #444)" : undefined,
+                    }}
+                    onClick={() => setChoiceIndex(i)}
+                  >
+                    {opt}
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {isMatchConcept && (
+              <div className="anvil-reorder-list">
+                {challenge.left.map((label, i) => (
+                  <div key={i} className="anvil-reorder-block">
+                    <pre className="forge-terminal forge-code-box" style={{ margin: 0, flex: 1 }}>
+                      {label}
+                    </pre>
+                    <select
+                      className="forge-answer-box"
+                      style={{ flex: 1 }}
+                      value={matchAssignment[i] ?? ""}
+                      onChange={(e) => setMatchSlot(i, e.target.value === "" ? null : Number(e.target.value))}
+                    >
+                      <option value="">— choose —</option>
+                      {challenge.right_shuffled.map((r, j) => (
+                        <option key={j} value={j}>
+                          {r}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            <div className="btn-row" style={{ marginTop: 8 }}>
+              <button className="btn" disabled={running} onClick={submitAnswer}>
+                {running ? "Grading…" : "Submit"}
+              </button>
+            </div>
+
+            {gradeResult && (
+              <p className={`stat-line forge-grade-${gradeResult.tier}`} style={{ marginTop: 8 }}>
+                {gradeResult.label}
+              </p>
+            )}
+            {!gradeResult && alreadyCompleted && (
+              <p className="stat-line" style={{ marginTop: 8, color: "var(--muted)" }}>
+                Already recorded — you can resubmit to re-check your work, but it won't earn more XP.
+              </p>
+            )}
+          </div>
+        ) : (
+          <div style={{ marginTop: 22 }}>
+            {isOutput && (
+              <>
+                <p className="section-tag" style={{ marginBottom: 8 }}>
+                  The Code
+                </p>
+                <pre className="forge-terminal forge-code-box" style={{ marginBottom: 12 }}>
+                  {challenge.snippet_code}
+                </pre>
+              </>
+            )}
+
+            <p className="section-tag" style={{ marginBottom: 8 }}>
+              {isReorder
+                ? "Reorder these blocks"
+                : isFix
+                ? "Fix this code"
+                : isOutput
+                ? "What will this print?"
+                : "Write your code"}
             </p>
-          )}
-          {!gradeResult && alreadyCompleted && (
-            <p className="stat-line" style={{ marginTop: 8, color: "var(--muted)" }}>
-              Already recorded — you can resubmit to re-check your work, but it won't earn more XP.
-            </p>
-          )}
-        </div>
+
+            {isReorder ? (
+              <div className="anvil-reorder-list">
+                {order.map((lineIdx, pos) => (
+                  <div key={lineIdx} className="anvil-reorder-block">
+                    <div className="anvil-reorder-controls">
+                      <button className="btn" disabled={pos === 0} onClick={() => moveLine(pos, -1)}>
+                        ▲
+                      </button>
+                      <button className="btn" disabled={pos === order.length - 1} onClick={() => moveLine(pos, 1)}>
+                        ▼
+                      </button>
+                    </div>
+                    <pre className="forge-terminal forge-code-box" style={{ margin: 0, flex: 1 }}>
+                      {challenge.shuffled_lines[lineIdx]}
+                    </pre>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <textarea
+                className={isOutput ? "forge-answer-box" : "forge-answer-box forge-code-box"}
+                rows={isOutput ? 4 : 10}
+                spellCheck={false}
+                value={codeText}
+                onChange={(e) => setCodeText(e.target.value)}
+                placeholder={isOutput ? "Type exactly what you think the code above prints…" : undefined}
+              />
+            )}
+
+            <div className="btn-row" style={{ marginTop: 8 }}>
+              {!isOutput && isLive && (
+                <button className="btn" disabled={running} onClick={runCode}>
+                  {running ? "Running…" : "▶ Run"}
+                </button>
+              )}
+              <button className="btn" disabled={running} onClick={submitAnswer}>
+                {running ? "Running…" : "Submit"}
+              </button>
+            </div>
+
+            <div style={{ marginTop: 12 }}>
+              <p className="section-tag" style={{ marginBottom: 8 }}>
+                {outputPanelLabel}
+              </p>
+              <pre className="forge-terminal">{outputPanelText}</pre>
+            </div>
+
+            {gradeResult && (
+              <p className={`stat-line forge-grade-${gradeResult.tier}`} style={{ marginTop: 8 }}>
+                {gradeResult.label}
+              </p>
+            )}
+            {!gradeResult && alreadyCompleted && (
+              <p className="stat-line" style={{ marginTop: 8, color: "var(--muted)" }}>
+                Already recorded — you can resubmit to re-check your work, but it won't earn more XP.
+              </p>
+            )}
+          </div>
+        )}
 
         {answerRequiredForSolution && !solutionRevealed && (
           <p className="stat-line" style={{ marginTop: 14, color: "var(--muted)" }}>
@@ -395,7 +567,19 @@ export default function AnvilTopicClient() {
             <p className="section-tag" style={{ marginBottom: 8 }}>
               Worked Solution
             </p>
-            <pre className="forge-terminal forge-solution-code">{challenge.solution_code}</pre>
+            {isConcept ? (
+              <pre className="forge-terminal forge-solution-code">
+                {isOrderConcept
+                  ? challenge.items.join("\n")
+                  : isChoiceConcept
+                  ? challenge.options[challenge.correct_index]
+                  : challenge.left
+                      .map((label, i) => `${label} → ${challenge.right_shuffled[challenge.correct_assignments[i]]}`)
+                      .join("\n")}
+              </pre>
+            ) : (
+              <pre className="forge-terminal forge-solution-code">{challenge.solution_code}</pre>
+            )}
             <div className="banner" style={{ marginTop: 12 }}>
               {challenge.solution_summary}
             </div>
