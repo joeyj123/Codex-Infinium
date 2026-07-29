@@ -1999,3 +1999,11 @@ Closed Data (`serialization`), all of OOP Basics (`classes_objects`, `attributes
 **Running total**: Apprentice Anvil content moved from 320 → 350 challenges. 25 empty topics remain (down from 35). Next batch continues in topic order, picking up right after `what_is_git` in the Git section.
 
 No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead.
+
+## Session: Apprentice Anvil Authoring — batch 5, 10 topics, 30 challenges (2026-07-29)
+
+Closed Git (`commits_branches_repos`, `merge_conflicts`, `pull_requests`, `why_github_gitlab`), all of Reading Code (`reading_others_code`, `naming_conventions`, `code_style_formatting`, `what_is_clean_code`, `common_beginner_mistakes`), opened AI (`ai_history`), via `scripts/add-apprentice-anvil-batch5.js`. Git/`reading_others_code`/`ai_history` stayed print()-narration (no executable Git commands or history to run); `naming_conventions`/`code_style_formatting`/`what_is_clean_code` used real Python where concretely demonstrable (descriptive naming, Python's enforced-indentation syntax error, splitting an overloaded function); `common_beginner_mistakes` used real buggy Python for off-by-one, assignment-vs-comparison, and mutate-while-iterating. All 30 verified via direct Python execution (byte-for-byte match), `npm run build` clean.
+
+**Running total**: 350 → 380 challenges. 15 empty topics remain (down from 25). Next batch continues in topic order after `ai_history`.
+
+No `RELEASING.md` release process run.
