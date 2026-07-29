@@ -2015,3 +2015,31 @@ Closed AI (`symbolic_vs_ml`, `neural_networks_basics`, `training_vs_inference`, 
 **Running total**: 380 → 410 challenges. 5 empty topics remain (down from 15). Next batch continues in topic order after `finetuning_vs_prompting`.
 
 No `RELEASING.md` release process run.
+
+---
+
+## Session — 2026-07-29 — Batch 7 (Final Apprentice Anvil) + Study Bookshelf Fix
+
+### Batch 7: Final 4 Apprentice Anvil topics
+
+Topics: `embeddings`, `hallucination_mechanism`, `rag_retrieval_augmented_generation`, `agents_tool_use`
+
+All 4 are purely conceptual AI Going Deeper topics — no Pyodide-executable demonstration possible. All follow established print()-narration pattern.
+
+Challenges authored: 12 (3 per topic)
+Verification: 12/12 pass (file-based Python execution + PYTHONIOENCODING=utf-8 for em dash normalization)
+Build: clean
+
+**Running total: 410 → 422 challenges. 0 empty topics remain in Apprentice tier. Apprentice Anvil authoring COMPLETE.**
+
+### Study Bookshelf Fix
+
+Root cause: Commit `7023435` ("Restore direct 'The Study' link to sidebar nav") added a direct link to `/tier/${studyTierId}/study`, bypassing both the tier selector and chapter list.
+
+Fix:
+- Added `app/study/page.js` + `app/study/StudyHomeClient.js` — a dedicated `/study` landing page showing all 6 tiers as book spines (hover-highlight, locked state, read % fill). Uses existing `.shelf` / `.book-spine` CSS classes.
+- Updated `components/Sidebar.js` to link to `/study` instead of directly into the textbook. Active state highlights both `/study` and any `/tier/*/study` sub-path.
+
+Flow now: Sidebar "The Study" → `/study` bookshelf → click tier → `/tier/[tierId]` chapter list → click topic → topic hub → Study/Forge/Anvil modes.
+
+No `RELEASING.md` release process run — content-only and additive UI change, releases stay batched on Joey's explicit go-ahead.

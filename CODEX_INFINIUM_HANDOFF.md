@@ -169,3 +169,14 @@ Authored 31 no-code challenges (3-4 each, mixed types) across the first 10 Novic
 
 **UPDATE (2026-07-29, Apprentice Anvil authoring — batch 6, 10/61 topics done)**: Authored 30 new challenges (3 each) for `symbolic_vs_ml`, `neural_networks_basics`, `training_vs_inference`, `what_is_an_llm`, `prompting_basics`, `ai_limitations_ethics`, `tokens_tokenization`, `model_parameters_size`, `context_window`, `finetuning_vs_prompting` via `scripts/add-apprentice-anvil-batch6.js`. All 10 stayed print()-narration — purely conceptual AI/ML topics with nothing meaningfully executable in Python. Verified all 30 execute with output matching `expected_output` byte-for-byte, plus `npm run build` clean.
 - **Running total: 410 Anvil challenges across Apprentice (up from 380), 5 empty topics remain** (down from 15). Next batch continues in topic order after `finetuning_vs_prompting` — should finish out all remaining Apprentice Anvil content (only 5 topics left).
+
+---
+## UPDATE 2026-07-29 — Batch 7 complete + Study bookshelf fix
+
+Batch 7 (final): `embeddings`, `hallucination_mechanism`, `rag_retrieval_augmented_generation`, `agents_tool_use` — 12 challenges, 12/12 verified.
+
+**Apprentice Anvil authoring COMPLETE. 422 total challenges, 0 empty topics.**
+
+Study bug fixed: sidebar "The Study" now opens `/study` bookshelf tier selector → chapter list → topic hub → reading mode, instead of jumping straight into the textbook.
+
+Next: other tiers' Anvil content, or start on XP/progression features.
