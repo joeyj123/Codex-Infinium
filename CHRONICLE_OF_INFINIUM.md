@@ -1887,3 +1887,27 @@ Grand total held constant at 242 across both passes (verified after each script 
 **Final state confirmed**: a full-tier exhaustive re-scan after both relocation passes found exactly one remaining flagged challenge (`what_is_a_shell_wc5`, the deliberately-accepted soft-flag exception above) — zero unresolved/undecided forward-references remain in Apprentice.
 
 No `RELEASING.md` release process run — content relocation only, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
+
+## Session: Apprentice Anvil Authoring — Language Fundamentals batch, 6 topics, 18 challenges (2026-07-29)
+
+First authoring batch for the 61 empty Apprentice topics, starting with Language Fundamentals in topic order: `what_is_a_language` (idx 0), `compilers_vs_interpreters` (idx 1), `source_to_machine_runtime` (idx 2), `data_in_memory` (idx 4), `comments_documentation` (idx 9), `pseudocode_algorithmic_thinking` (idx 10). Pulled each topic's live `explanation` text directly from `data/knowledge_base.json` before writing anything.
+
+**Content-tier alignment decision worth flagging explicitly**: the first 3 topics (`what_is_a_language`, `compilers_vs_interpreters`, `source_to_machine_runtime`) all sit *before* `variables_data_types` (idx 3) — Apprentice's own first topic to teach assignment. Taken literally, that means no Python topic has taught variable assignment, arithmetic, or even string concatenation yet at those positions. Rather than bend the alignment rule, their 9 challenges use only bare `print()` calls with string literals — no variables, no operators of any kind — which is a real constraint but also a good thematic fit, since these topics are themselves about language syntax/translation concepts, not about teaching Python operations.
+
+**One deliberate, narrow exception, documented rather than silently made**: `data_in_memory` (idx 4) sits after `variables_data_types` but before `arrays_lists` (idx 25), which is where list syntax is formally taught. The topic's own existing `explanation` text already uses a list as its illustrating example of a reference type, with no such gating caveat — a pre-existing content choice in the KB, not something introduced this session. Demonstrating the topic's actual subject (value types being copied independently vs. reference types aliasing the same underlying data) is not really possible without *some* list literal and a single-element index assignment to mutate it, so this batch's 3 `data_in_memory` challenges use a bare list literal (`[1, 2, 3]`) plus one-element index assignment (`b[0] = 99`) — nothing further (no `.append()`, no slicing, no iteration). This is a judgment call, not an oversight; flagged here and in the handoff doc for visibility.
+
+**`comments_documentation` (idx 9) and `pseudocode_algorithmic_thinking` (idx 10)** both sit after `functions_scope` (idx 8), so the full variables/operators/conditionals/loops/functions toolkit was available and used normally — no constraint needed there.
+
+**Challenges authored** (3 each, 18 total), via `scripts/add-apprentice-anvil-lang-fundamentals.js`:
+- `what_is_a_language`: reorder (translation-pipeline narration), fix (missing closing quote), output (two literal prints)
+- `compilers_vs_interpreters`: reorder (compiled-language pipeline), fix (missing closing paren), output (two literal prints)
+- `source_to_machine_runtime`: reorder (lex/parse/translate/execute pipeline), fix (missing closing quote), output (two literal prints)
+- `data_in_memory`: output (value-type independent copy: `a=5; b=a; b=10`), output (reference-type aliasing: `a=[1,2,3]; b=a; b[0]=99`), fix (a challenge that mistakenly gives `b` its own separate list instead of aliasing `a`, so mutating `b` doesn't affect `a` — fixed by changing `b = [1, 2, 3]` to `b = a`)
+- `comments_documentation`: output (a comment sitting beside a real calculation, proving comments have zero runtime effect), fix (code contradicting its own comment — comment says "double," code triples), reorder (comment-and-code pairs that must run in the stated step order or raise a `NameError`)
+- `pseudocode_algorithmic_thinking`: build (translate "for each number 1 to 5, print it" into a real `for`/`range` loop), reorder (three-step even/odd-check algorithm), output (accumulator-pattern sum of evens 1-5)
+
+**Verified live**: `npm run build` clean. Spot-checked all 3 challenge types actually execute correctly through real Pyodide, not just render: dragged `what_is_a_language`'s reorder challenge into the correct order and submitted ("Strong match"); fixed its broken-quote `fix` challenge and submitted ("Strong match", correct output `Formal syntax matters`); ran both `data_in_memory` output challenges (value-type and reference-type predictions, both "Strong match"); ran `pseudocode_algorithmic_thinking`'s `build` challenge with the intended solution code ("Strong match", output `1\n2\n3\n4\n5`).
+
+**Running total**: Apprentice Anvil content moved from 242 → 260 challenges. 55 empty topics remain (down from 61).
+
+No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
