@@ -1795,3 +1795,17 @@ Fifth straight content-authoring session — no UI or grading changes needed, st
 **Explicitly out of scope this session, by design**: topics 51–57 of Novice (7 remaining — the rest of Physical Foundations: doping, electricity basics, signals, waves/frequency, transistor switching, CPU-from-transistors, chip manufacturing). This is the final batch of the entire Novice Anvil project. Checkpointing here per Joey's instruction before continuing.
 
 No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
+
+## Session: Novice Anvil Session 6 — topics 51-57 authored, NOVICE ANVIL 100% COMPLETE, 57/57 (2026-07-29)
+
+Sixth and final session of the Novice Anvil no-code content project. Every one of Novice's 57 topics now carries `anvil_challenges` — the tier that started this whole project fully empty (Session 1's context: prior Python-syntax challenges had all been relocated to Apprentice/Journeyman as not belonging in a 100%-conceptual tier) is now fully re-stocked with genuinely no-code, conceptual challenges.
+
+**Content authored**: pulled the live Novice topic list one final time and confirmed topics 51–57 in order: `doping`, `electricity_basics`, `signals_analog_digital`, `waves_frequency_clock_speed`, `transistor_switching`, `cpu_from_transistors`, `chip_manufacturing` — the remainder of the Physical Foundations subsection, closing out both this subsection and the entire Novice tier. Authored 3 challenges each (21 total, since this was a 7-topic batch rather than 10). `transistor_switching` (the MOSFET gate-voltage-to-conductive-channel sequence) and `chip_manufacturing` (wafer → photolithography → doping → dicing) used `order`; the other 5 topics are conceptual/definitional physics topics without a natural sequential process, so they used `choice`×2 + `match`. Every challenge draws only on concepts explicitly present in its own topic's `explanation` text. Written via `scripts/add-novice-anvil-session6.js`.
+
+**Verified live**: `npm run build` clean. Spot-checked `chip_manufacturing` — the tier's own closing topic — in-browser: the 4-step `order` challenge (wafer prep → photolithography → doping → yield testing/dicing) renders, reorders, and reveals its worked solution correctly.
+
+**Project totals across all 6 sessions**: 172 no-code Anvil challenges now live across all 57/57 Novice topics (Session 1: 31 across topics 1-10; Session 2: 30 across 11-20; Session 3: 30 across 21-30; Session 4: 30 across 31-40; Session 5: 30 across 41-50; Session 6: 21 across 51-57). Three challenge types (`order`, `choice`, `match`) built once in Session 1 (`lib/gradeConcept.js` + the concept-mode render branch in `AnvilTopicClient.js`) covered every topic across all 6 sessions with zero further UI or schema changes needed — the re-skin-the-existing-mechanics approach from Joey's original framing held up for the entire tier.
+
+**NOVICE ANVIL IS NOW COMPLETE — 57/57 TOPICS.** No further scope remains for this project unless new Novice topics are added to the curriculum in the future.
+
+No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
