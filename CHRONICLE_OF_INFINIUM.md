@@ -1809,3 +1809,21 @@ Sixth and final session of the Novice Anvil no-code content project. Every one o
 **NOVICE ANVIL IS NOW COMPLETE — 57/57 TOPICS.** No further scope remains for this project unless new Novice topics are added to the curriculum in the future.
 
 No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
+
+## Session: Anvil Reorder UI — arrows replaced with drag-and-drop (2026-07-29)
+
+The `reorder` (Python) and `order` (no-code) challenge types in `AnvilTopicClient.js` both used per-block ▲/▼ arrow buttons to reorder items — confirmed confusing to use, replaced with drag-and-drop.
+
+**What changed**: extracted the two nearly-identical arrow-button reorder blocks (one over `challenge.shuffled_lines` + `order` state, one over `challenge.shuffled_items` + `conceptOrder` state) into one new shared component, `components/AnvilReorderList.js`, and deleted the now-dead `moveLine`/`moveConceptLine` handlers along with the arrow buttons entirely. The new component takes `items` (the full shuffled label array), `order` (the current arrangement, as indices into `items`), and `onChange`, and renders the identical `.anvil-reorder-list`/`.anvil-reorder-block` markup with a drag handle (⠿) instead of arrows.
+
+**Drag mechanism**: built on Pointer Events rather than HTML5 drag-and-drop, specifically because Pointer Events unify mouse and touch in one code path (including `setPointerCapture`, which keeps the element that started a drag receiving move/up events regardless of where the pointer physically travels) — HTML5 native DnD has no reliable touch story. On `pointermove`, the dragged item's position swaps live with whichever item's bounding box the pointer is currently over (a standard "swap on hover" sortable-list pattern), so the list visibly reorders as you drag rather than only snapping at drop. `setPointerCapture` is wrapped in try/catch since a small number of pointer/browser combinations can reject capture for a given pointer id — without the guard, a rejected capture would silently abort the whole drag (caught during verification, see below).
+
+**Grading untouched**: `order`/`conceptOrder` remain the exact same state shape (arrays of indices into the original shuffled arrays) `currentCode()`, `submitAnswer()`, and `gradeOrder()` already expected — only how those state arrays get mutated changed (drag instead of arrow-swap), so zero grading/XP logic needed to change.
+
+**CSS**: removed the now-unused `.anvil-reorder-controls` / `.anvil-reorder-controls .btn` rules from `app/globals.css`, added `.anvil-reorder-dragging` (dims the item mid-drag) and `.anvil-reorder-handle` (styled with the existing `--muted` color variable, matching the app's established palette rather than introducing new colors).
+
+**Verified live**: `npm run build` clean. In-browser, simulated a full pointerdown→pointermove→pointerup drag sequence via dispatched `PointerEvent`s (the harness's Browser pane can't composite frames for a literal mouse-drag screenshot test, so this was the available verification path) on both challenge types:
+- No-code `order` (`what_is_a_computer`, challenge 1): dragged the first block to the last position, list reordered live, Submit correctly graded the new arrangement ("Partial match" for the resulting incorrect order — confirming grading reads the post-drag state, not a stale one).
+- Python `reorder` (`variables_data_types`, challenge 5, `motherboard_wc1`): dragged the misordered `print(...)` line into last position, Submit ran the reordered code for real through Pyodide and returned "Strong match" with the correct real Python output (`render this frame`) — confirming the code-execution grading path is fully unaffected.
+
+No `RELEASING.md` release process run — UI-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.

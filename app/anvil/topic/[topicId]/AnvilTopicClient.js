@@ -16,6 +16,7 @@ import { runJava } from "@/lib/javaRunner";
 import { runCsharp } from "@/lib/csharpRunner";
 import { forgeExampleXp } from "@/lib/forgeXp";
 import { getAnvilTopic, getAnvilTopicTierId } from "@/lib/anvil";
+import AnvilReorderList from "@/components/AnvilReorderList";
 import ExposureSelector from "@/components/ExposureSelector";
 import ForgeReferencePane from "@/components/ForgeReferencePane";
 import Walkthrough from "@/components/Walkthrough";
@@ -174,26 +175,6 @@ export default function AnvilTopicClient() {
 
   function revealHint(i) {
     setRevealedHints((prev) => (prev.includes(i) ? prev : [...prev, i]));
-  }
-
-  function moveLine(pos, dir) {
-    const target = pos + dir;
-    if (target < 0 || target >= order.length) return;
-    setOrder((prev) => {
-      const next = [...prev];
-      [next[pos], next[target]] = [next[target], next[pos]];
-      return next;
-    });
-  }
-
-  function moveConceptLine(pos, dir) {
-    const target = pos + dir;
-    if (target < 0 || target >= conceptOrder.length) return;
-    setConceptOrder((prev) => {
-      const next = [...prev];
-      [next[pos], next[target]] = [next[target], next[pos]];
-      return next;
-    });
   }
 
   function setMatchSlot(leftIdx, rightIdx) {
@@ -389,27 +370,7 @@ export default function AnvilTopicClient() {
             </p>
 
             {isOrderConcept && (
-              <div className="anvil-reorder-list">
-                {conceptOrder.map((itemIdx, pos) => (
-                  <div key={itemIdx} className="anvil-reorder-block">
-                    <div className="anvil-reorder-controls">
-                      <button className="btn" disabled={pos === 0} onClick={() => moveConceptLine(pos, -1)}>
-                        ▲
-                      </button>
-                      <button
-                        className="btn"
-                        disabled={pos === conceptOrder.length - 1}
-                        onClick={() => moveConceptLine(pos, 1)}
-                      >
-                        ▼
-                      </button>
-                    </div>
-                    <pre className="forge-terminal forge-code-box" style={{ margin: 0, flex: 1 }}>
-                      {challenge.shuffled_items[itemIdx]}
-                    </pre>
-                  </div>
-                ))}
-              </div>
+              <AnvilReorderList items={challenge.shuffled_items} order={conceptOrder} onChange={setConceptOrder} />
             )}
 
             {isChoiceConcept && (
@@ -497,23 +458,7 @@ export default function AnvilTopicClient() {
             </p>
 
             {isReorder ? (
-              <div className="anvil-reorder-list">
-                {order.map((lineIdx, pos) => (
-                  <div key={lineIdx} className="anvil-reorder-block">
-                    <div className="anvil-reorder-controls">
-                      <button className="btn" disabled={pos === 0} onClick={() => moveLine(pos, -1)}>
-                        ▲
-                      </button>
-                      <button className="btn" disabled={pos === order.length - 1} onClick={() => moveLine(pos, 1)}>
-                        ▼
-                      </button>
-                    </div>
-                    <pre className="forge-terminal forge-code-box" style={{ margin: 0, flex: 1 }}>
-                      {challenge.shuffled_lines[lineIdx]}
-                    </pre>
-                  </div>
-                ))}
-              </div>
+              <AnvilReorderList items={challenge.shuffled_lines} order={order} onChange={setOrder} />
             ) : (
               <textarea
                 className={isOutput ? "forge-answer-box" : "forge-answer-box forge-code-box"}
