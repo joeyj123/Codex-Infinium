@@ -17,6 +17,12 @@ export default function Sidebar({ kb }) {
   const achievementCount = getUnlockedAchievementIds(progress, rank, kb).length;
   const achievementTotal = buildAchievementDefs(kb).length;
 
+  // No "last read topic" state is tracked anywhere in ProgressContext, so
+  // the direct nav link falls back to Study's normal entry point: the
+  // most-recently-unlocked tier's book, opened at its own default first page.
+  const studyTierId = progress.unlockedTiers[progress.unlockedTiers.length - 1] || "novice";
+  const studyActive = pathname.startsWith(`/tier/`) && pathname.includes("/study");
+
   return (
     <aside className="sidebar">
       <div style={{ position: "relative" }}>
@@ -53,6 +59,11 @@ export default function Sidebar({ kb }) {
       <Link href="/progression">
         <button className={`nav-btn ${pathname === "/progression" ? "active" : ""}`}>
           🗺️ Progression Map
+        </button>
+      </Link>
+      <Link href={`/tier/${studyTierId}/study`}>
+        <button className={`nav-btn ${studyActive ? "active" : ""}`}>
+          📖 The Study
         </button>
       </Link>
       <Link href="/forge">

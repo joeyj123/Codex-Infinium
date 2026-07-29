@@ -1911,3 +1911,15 @@ First authoring batch for the 61 empty Apprentice topics, starting with Language
 **Running total**: Apprentice Anvil content moved from 242 → 260 challenges. 55 empty topics remain (down from 61).
 
 No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
+
+## Session: Fix — "The Study" nav link missing from sidebar (2026-07-29)
+
+Joey flagged this as a regression worth its own quick-fix session before it got lost track of: the sidebar only showed Dashboard, Progression Map, The Forge, The Anvil, and Settings — no direct way back into reading without routing through Dashboard → tier spine → topic.
+
+**Root cause investigation, not assumed**: ran `git log --follow -p -- components/Sidebar.js` across all 4 commits that have ever touched the file. Found no evidence "The Study" was ever a direct sidebar nav item that got removed or broke — the design has, as far as this repo's history goes, always routed reading access through Dashboard's tier spines to `/tier/{tierId}` and from there to `/tier/{tierId}/study`, matching the Chronicle's own earlier design notes about spines opening "that tier's Book, visually unifying Dashboard and Study mode." So this wasn't a code regression to root-cause — it's a genuinely missing direct nav item relative to what Joey actually needs day to day, not a broken link or dropped route.
+
+**Fix**: added a `📖 The Study` link to `components/Sidebar.js`, positioned before The Forge (Study → Forge → Anvil, matching read-then-practice curriculum flow), same nav-item tier as Forge/Anvil. No "last read topic" state exists anywhere in `lib/ProgressContext.js` (only `completedTopics` and `unlockedTiers` are tracked, no per-topic "currently reading" pointer), so per the kickoff's own fallback instruction, the link routes to Study's normal entry point for the most-recently-unlocked tier (`/tier/{progress.unlockedTiers.at(-1)}/study`), landing on that tier's book at its default first page. Active-state highlighting checks `pathname.startsWith("/tier/") && pathname.includes("/study")`.
+
+**Verified live**: `npm run build` clean. Confirmed the link renders as `📖 The Study` → `/tier/novice/study` in the current test progress state, clicking it lands correctly on Novice's first page (`What a Computer Is`), and it picks up the `active` class while on a Study route. Confirmed all 5 pre-existing nav items (Dashboard, Progression Map, Forge, Anvil, Settings) are byte-for-byte unchanged — additive-only, per the kickoff's explicit scope.
+
+No `RELEASING.md` release process run — small UI fix, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
