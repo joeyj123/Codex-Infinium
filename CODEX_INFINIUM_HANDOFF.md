@@ -108,3 +108,5 @@ Existing Read explanations are too sparse. Going forward, **every technical term
 
 
 **NEW THIS SESSION (2026-07-28, Anvil tier audit)**: content gap discovered — f-string interpolation (`f"...{var}..."`) is used in the solution code of 38 Novice Anvil challenges but is never explicitly taught as a topic in any tier (KB covers string concatenation and string methods, not f-string literal syntax). Needs a decision before Session 2 relocation: add a dedicated topic teaching f-strings (which tier?), or route those 38 challenges to their next-best concept without it. See `ANVIL_TIER_AUDIT_SESSION1.md` for the full per-challenge breakdown.
+
+**NEW THIS SESSION (2026-07-28, Anvil Session 2)**: Novice Anvil is now fully empty (0 challenges) and shows "Not yet available" — a future session needs to author real Novice-appropriate no-code challenges (conceptual/hardware reasoning, not Python syntax) if Novice Anvil is meant to have content again. Also: the f-string content gap flagged in Session 1 is now resolved — `apprentice`/`journeyman` doc references to that gap can be considered closed.
