@@ -1975,3 +1975,27 @@ Closed out Language Fundamentals/Language Survey's remaining tail and all of Dat
 **Running total**: Apprentice Anvil content moved from 290 → 320 challenges. 35 empty topics remain (down from 45). Next batch should pick up Apprentice's remaining Data section topics (after `what_is_a_schema`) in topic order.
 
 No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead.
+
+## Session: Apprentice Anvil Authoring — batch 4, 10 topics, 30 challenges (2026-07-29)
+
+Closed Data (`serialization`), all of OOP Basics (`classes_objects`, `attributes_properties`, `methods`, `inheritance`, `encapsulation`), all of Functional Basics (`pure_functions`, `first_class_functions`, `map_filter_reduce`), and opened Git (`what_is_git`), via `scripts/add-apprentice-anvil-batch4.js`.
+
+**First use of real class syntax**: `classes_objects` onward is the first point Apprentice teaches Python's `class` keyword, so all 5 OOP topics use genuine, executing class-based code (constructors, attributes, methods, inheritance/`super`-style subclassing) rather than the print()-narration pattern batch 3 needed for `linked_lists`/`hash_tables_internals`. `encapsulation` uses Python's single-underscore naming convention plus manual getter/setter-style methods, not `@property` decorators (not yet taught anywhere). `serialization` introduces real `import json` / `json.dumps` / `json.loads` usage, the first actual code exercising the module `what_is_json` (batch 3) had kept narrative. `pure_functions`/`first_class_functions`/`map_filter_reduce` use real functions and Python's built-in `map`/`filter`. `what_is_git` has no executable Git commands, so it stayed print()-narration like other purely conceptual topics.
+
+**Challenges authored** (3 each, 30 total):
+- `serialization`: output (`json.dumps`), fix (`dumps` vs `loads` confusion), reorder (serialize → store/transmit → deserialize)
+- `classes_objects`: output (constructor + attribute), fix (independent object memory), reorder (class/object/instantiation narration)
+- `attributes_properties`: output (two attributes), fix (missing default parameter value), reorder (instance vs. class attribute)
+- `methods`: output (`self` + string return), fix (method forgetting `self.` on both read and write), reorder (method-call mechanism narration)
+- `inheritance`: output (inherited method via subclassing), fix (missing `(Employee)` subclass declaration), reorder (inheritance + overriding narration)
+- `encapsulation`: output (`_balance` + validated `withdraw`), fix (missing sufficient-funds check), reorder (encapsulation narration)
+- `pure_functions`: output (repeatable `double()` calls), fix (removing a side-effecting external mutation), reorder (purity-definition narration)
+- `first_class_functions`: output (function assigned to a variable), fix (passing `square` vs. accidentally calling `square()`), reorder (first-class/higher-order narration)
+- `map_filter_reduce`: output (`map`), fix (inverted `is_even` condition breaking `filter`), reorder (map/filter/reduce definitions)
+- `what_is_git`: reorder (version control narration), output (local-first/commit facts), fix (missing quote)
+
+**Verified**: every `solution_code` executed directly in Python with output compared byte-for-byte against `expected_output` — all 30 passed. `data/knowledge_base.json` parses as valid JSON post-write. `npm run build` clean.
+
+**Running total**: Apprentice Anvil content moved from 320 → 350 challenges. 25 empty topics remain (down from 35). Next batch continues in topic order, picking up right after `what_is_git` in the Git section.
+
+No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead.
