@@ -1827,3 +1827,22 @@ The `reorder` (Python) and `order` (no-code) challenge types in `AnvilTopicClien
 - Python `reorder` (`variables_data_types`, challenge 5, `motherboard_wc1`): dragged the misordered `print(...)` line into last position, Submit ran the reordered code for real through Pyodide and returned "Strong match" with the correct real Python output (`render this frame`) — confirming the code-execution grading path is fully unaffected.
 
 No `RELEASING.md` release process run — UI-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
+
+## Session: Anvil Content Audit — Apprentice tier (read-only, no content changed) (2026-07-29)
+
+Audit-only session ahead of authoring new Apprentice Anvil content. Pulled the live 69-topic Apprentice list and every existing `anvil_challenges` entry directly from `data/knowledge_base.json` (not from memory or prior chronicle notes) and cross-checked each populated topic's challenge code against that topic's actual position in the curriculum sequence.
+
+**Coverage**: 242 challenges total (matching the count Session 2's Novice relocation moved here), but concentrated in only 8 of 69 topics — 61 topics (88%) currently have zero Anvil content: `variables_data_types` (77), `operators` (29), `conditionals` (20), `loops` (44), `functions_scope` (3), `survey_python` (4), `arrays_lists` (39), `dictionaries_maps` (26).
+
+**Misplacement findings — 21 confirmed forward-references**, found by scanning each challenge's actual code fields (not just its topic label) for syntax that isn't taught until a later topic:
+- **`def` (function definitions) used before `functions_scope` (topic 8) teaches it**: 4 challenges in `variables_data_types` (topic 3), 4 in `operators` (topic 5), 4 in `conditionals` (topic 6) — 12 total.
+- **List comprehensions used before `survey_python` (topic 16) teaches them**: 2 challenges in `loops` (topic 7) — `binary_to_electricity_wc2`, `binary_to_electricity_wc6`.
+- **Python set literals (`{...}` + `in`) used before `sets` (topic 27) teaches them**: 6 challenges in `loops` (topic 7), 1 in `arrays_lists` (topic 25) — 7 total.
+
+Two additional soft flags, not misplacements: `functions_scope`'s `what_is_a_shell_wc5` uses a set literal as a secondary detail (its dominant concept, function definition, is correctly homed); `dictionaries_maps`'s `motherboard_wc6` uses `.values()`/`all()`, worth a light content-depth check but not necessarily wrong.
+
+**Root cause**: these are inherited from Session 2's Novice relocation, which mapped each challenge to its single "dominant" concept topic without checking whether *secondary* concepts in the same challenge (a set literal riding alongside a for-loop, a `def` riding alongside string concatenation) were actually taught yet at that topic's position — the same class of gap Session 1's Novice audit already flagged once for f-strings, just recurring here in a different shape.
+
+**No content was authored, edited, moved, or deleted this session** — audit and report only, per the kickoff prompt's explicit scope. Full gap table (topic / count / types / flagged issues) delivered to Joey in-chat; next session should use it to plan authoring batches for the 61 empty topics and fix the 21 misplaced challenges (likely relocating the `def`-using ones down to `functions_scope` or later, and the set-literal ones down to `sets`, mirroring exactly how Novice Session 2 handled its own f-string gap).
+
+No `RELEASING.md` release process run — audit-only, no content or code changed.
