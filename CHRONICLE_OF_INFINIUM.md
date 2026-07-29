@@ -1923,3 +1923,31 @@ Joey flagged this as a regression worth its own quick-fix session before it got 
 **Verified live**: `npm run build` clean. Confirmed the link renders as `📖 The Study` → `/tier/novice/study` in the current test progress state, clicking it lands correctly on Novice's first page (`What a Computer Is`), and it picks up the `active` class while on a Study route. Confirmed all 5 pre-existing nav items (Dashboard, Progression Map, Forge, Anvil, Settings) are byte-for-byte unchanged — additive-only, per the kickoff's explicit scope.
 
 No `RELEASING.md` release process run — small UI fix, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
+
+## Session: Apprentice Anvil Authoring — batch 2, 10 topics, 30 challenges (2026-07-29)
+
+First 10-topic batch (batch size increased from 6, per Joey, now that there's more session budget). Covered the rest of Language Fundamentals and all 5 of Language Survey, in topic order: `errors_debugging` (idx 11), `package_managers_dependencies` (idx 12), `high_vs_low_level` (idx 13), `language_paradigms` (idx 14), `syntax_vs_semantics` (idx 15), `survey_javascript` (idx 17), `survey_java` (idx 18), `survey_c_cpp` (idx 19), `survey_csharp` (idx 20), `survey_sql` (idx 21).
+
+**Content-tier alignment**: idx 11-15 sit after `functions_scope` (idx 8) but before `arrays_lists` (idx 25), so the full variables/operators/conditionals/loops/functions toolkit was used freely, with no list literals needed (unlike the prior batch's `data_in_memory` exception — none of these 5 topics actually required one).
+
+**A different, more significant constraint for the 5 language-survey topics**: Apprentice's Anvil challenges always execute as Python, regardless of which language a topic is actually about — `AnvilTopicClient.js` only resolves a non-Python `lang` for Expert-track topics; every pre-Expert tier always calls `execute()` in Python. Writing "JavaScript code" or "SQL code" as a challenge's `solution_code` would either fail to run or misrepresent that other language's real semantics under Python's own rules (JavaScript's `==`/`===` distinction, for instance, simply doesn't exist as a comparable operator pair in Python). So `survey_javascript`/`survey_java`/`survey_c_cpp`/`survey_csharp`/`survey_sql` all reused the same pattern this tier's very first 3 topics established last session: real, executing Python code built entirely from `print()` statements narrating that language's actual facts and architecture — never claiming to demonstrate that other language's own runtime behavior.
+
+**Caught and fixed during authoring, before running the script**: two `reorder` challenges (`survey_csharp`, `survey_sql`) initially dropped possessive apostrophes (writing "Microsoft own intermediate representation" instead of "Microsoft's own") to avoid breaking Python's single-quoted string literals. Fixed by switching those specific `print()` calls to double-quoted strings instead of mangling the grammar — verified live afterward that the apostrophes render and execute correctly.
+
+**Challenges authored** (3 each, 30 total), via `scripts/add-apprentice-anvil-batch2.js`:
+- `errors_debugging`: fix (runtime error — division by zero), fix (logic error — off-by-one in a range), reorder (debugging methodology: read error → reproduce → inspect with a debugger → fix and retest)
+- `package_managers_dependencies`: output (`import math; math.sqrt(16)`, a real stdlib dependency), fix (missing `import math`), reorder (manifest → download → import/use → lockfile)
+- `high_vs_low_level`: output (if/elif chain classifying a language's level), fix (wrong elif condition misclassifying C), reorder (assembly → C → Java/C# → Python/JavaScript spectrum)
+- `language_paradigms`: output (imperative while-loop accumulator), reorder (imperative/OOP/functional narration), fix (an "impure" double() function adding an extra 1)
+- `syntax_vs_semantics`: fix (`if x = 5:` — genuinely invalid Python syntax, not just JS-style semantically-wrong-but-valid), output (`range(1, 5)` producing a syntactically-valid-but-surprising 4), reorder (syntax vs. semantics narration)
+- `survey_javascript`: reorder (browser-only → Node.js → both), output (`==`/`===` facts), fix (missing quote)
+- `survey_java`: reorder (bytecode → JVM → native instructions, the "write once, run anywhere" pipeline), output (bytecode/JVM facts), fix (missing quote)
+- `survey_c_cpp`: reorder (compile-to-native → manual allocate → manual release → memory leak consequence chain), output (C/C++ facts), fix (missing quote)
+- `survey_csharp`: reorder (CIL → CLR → cross-platform, the C#/.NET parallel to Java's pipeline), output (CIL/CLR facts), fix (missing quote)
+- `survey_sql`: reorder (imperative-vs-declarative narration, why SQL is declarative), output (DDL/DML facts), fix (missing quote)
+
+**Verified live**: `npm run build` clean. Spot-checked all 3 challenge types with real Pyodide execution, not just rendering: `errors_debugging`'s both `fix` challenges submitted correctly ("Strong match" — the division-by-zero fix output `5.0`, the off-by-one fix output `15`); its `reorder` challenge dragged into the correct order and submitted ("Strong match"); `survey_csharp`'s `reorder` (the one with the fixed apostrophes) dragged into order and submitted, confirming the double-quoted strings execute and print correctly including the possessive apostrophes; `survey_sql` spot-checked for correct rendering.
+
+**Running total**: Apprentice Anvil content moved from 260 → 290 challenges. 45 empty topics remain (down from 55).
+
+No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
