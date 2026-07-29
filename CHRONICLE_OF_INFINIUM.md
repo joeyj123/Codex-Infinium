@@ -1846,3 +1846,44 @@ Two additional soft flags, not misplacements: `functions_scope`'s `what_is_a_she
 **No content was authored, edited, moved, or deleted this session** — audit and report only, per the kickoff prompt's explicit scope. Full gap table (topic / count / types / flagged issues) delivered to Joey in-chat; next session should use it to plan authoring batches for the 61 empty topics and fix the 21 misplaced challenges (likely relocating the `def`-using ones down to `functions_scope` or later, and the set-literal ones down to `sets`, mirroring exactly how Novice Session 2 handled its own f-string gap).
 
 No `RELEASING.md` release process run — audit-only, no content or code changed.
+
+## Session: Apprentice Anvil Relocation — 32 forward-reference challenges moved, 0 unresolved remain (2026-07-29)
+
+Follow-through on the prior session's audit. Re-verified all 21 flagged challenge ids against the live `data/knowledge_base.json` first (all still present at their audited positions, none had shifted) before moving anything.
+
+**First relocation pass** (`scripts/relocate-apprentice-forward-refs.js`), the 21 challenges from the kickoff prompt, moved verbatim (no rewriting):
+- 12 `def`-using challenges (`variables_data_types` ×4, `operators` ×4, `conditionals` ×4) → `functions_scope`
+- 2 list-comprehension challenges (`loops`) → `survey_python`
+- 7 set-literal challenges (`loops` ×6, `arrays_lists` ×1) → `sets`
+
+**Found 11 more during the mandatory post-move re-scan**: after the first pass, ran a full-tier exhaustive scan (every populated topic, every challenge, checked against that topic's actual position relative to `functions_scope`/`survey_python`/`sets`) rather than trusting the fixed 21-item list was complete — it wasn't. The prior audit's set-literal check had only been run against 5 of the 8 populated topics, missing `variables_data_types` and `conditionals` entirely, and one `def` usage in `loops` (`what_is_a_shell_wc7`) had been missed too. Second pass (`scripts/relocate-apprentice-forward-refs-2.js`) moved these 11 the same way:
+- 1 more `def` challenge (`loops`: `what_is_a_shell_wc7`) → `functions_scope`
+- 10 more set-literal challenges (`variables_data_types` ×5, `operators` ×1, `conditionals` ×4, all from the `container_formats_codecs`/`what_is_terminal`/`browser_vs_app` relocated-from-Novice cluster) → `sets`
+
+**32 challenges relocated in total** across both passes.
+
+**Soft-flag decisions** (from the audit's two "review, decide relocate or leave" items):
+- `what_is_a_shell_wc5` (in `functions_scope`): **left in place**. Its dominant concept — a function definition with a ternary default — is correctly homed there; the set literal (`{'ls', 'cd'}`) it also uses is a secondary detail, and moving the whole challenge to `sets` would misplace its actual primary teaching point for the sake of one incidental line. This is the one remaining challenge anywhere in Apprentice that technically uses not-yet-taught syntax — a deliberate, documented exception, not an oversight.
+- `motherboard_wc6` (in `dictionaries_maps`): **left in place**. Confirmed via full-text search that neither `.values()` nor `all()` is explicitly taught anywhere in Apprentice's 69 topics — this is a genuine content gap (same shape as Novice Session 1's f-string finding), not a misplacement, since there's no better-fitting topic to move it to. Flagged in the handoff doc as a standing content gap for whoever authors a future dict-methods-focused topic or revises `dictionaries_maps`.
+
+**Before → after counts** (all relocations combined):
+
+| Topic | Before | After |
+|---|---|---|
+| `variables_data_types` | 77 | 68 |
+| `operators` | 29 | 24 |
+| `conditionals` | 20 | 12 |
+| `loops` | 44 | 35 |
+| `arrays_lists` | 39 | 38 |
+| `functions_scope` | 3 | 16 |
+| `survey_python` | 4 | 6 |
+| `sets` | 0 | 17 |
+| `dictionaries_maps` | 26 | 26 (unchanged) |
+
+Grand total held constant at 242 across both passes (verified after each script run) — every move was a relocation, nothing was added or dropped.
+
+**Verified live**: `npm run build` clean. Spot-checked `sets` (previously empty, now 17) — ran and submitted its first `fix` challenge (`what_is_terminal_wc2`, the exact-match-vs-partial-match terminal command check) for real through Pyodide, got "Strong match" with correct output (`False`). Spot-checked `functions_scope` (now 16, up from 3) — confirmed its first challenge (`io_devices_usb_wc4`) renders correctly.
+
+**Final state confirmed**: a full-tier exhaustive re-scan after both relocation passes found exactly one remaining flagged challenge (`what_is_a_shell_wc5`, the deliberately-accepted soft-flag exception above) — zero unresolved/undecided forward-references remain in Apprentice.
+
+No `RELEASING.md` release process run — content relocation only, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
