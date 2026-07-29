@@ -1783,3 +1783,15 @@ Fourth straight content-authoring session on the same project — no UI or gradi
 **Explicitly out of scope this session, by design**: topics 41–57 of Novice (17 remaining — Software section continues, then Computing History and Physical Foundations subsections close out the tier). Checkpointing here per Joey's instruction before continuing.
 
 No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
+
+## Session: Novice Anvil Session 5 — topics 41-50 authored, 30 more challenges (2026-07-29)
+
+Fifth straight content-authoring session — no UI or grading changes needed, still reusing the `order`/`choice`/`match` types and `lib/gradeConcept.js` from Session 1.
+
+**Content authored**: pulled the live Novice topic list again and confirmed topics 41–50 in order: `browser_vs_app`, `what_is_an_update` (closing out Software), then `mechanical_calculators`, `vacuum_tubes_to_ics`, `punch_cards_to_keyboards`, `arpanet_to_internet`, `pc_boom`, `mobile_era`, `brief_ai_history` (the entire Computing History subsection, start to finish), then `silicon_semiconductors` (opening Physical Foundations). Authored 3 challenges each (30 total). History-subsection topics are naturally chronological, so 6 of the 7 (`mechanical_calculators`, `vacuum_tubes_to_ics`, `punch_cards_to_keyboards`, `arpanet_to_internet`, `mobile_era`, `brief_ai_history`) used `order` for a milestones-in-sequence challenge; `pc_boom` used `choice`×2 + `match` instead since its content is more compare/contrast (Apple/IBM/Microsoft's distinct roles) than a single clean timeline. The two Software topics and `silicon_semiconductors` also used `choice`×2 + `match`. Every challenge draws only on concepts explicitly present in its own topic's `explanation` text. Written via `scripts/add-novice-anvil-session5.js`.
+
+**Verified live**: `npm run build` clean. Spot-checked `arpanet_to_internet`'s Anvil topic page in-browser — the 4-item `order` challenge (ARPANET 1969 → TCP/IP 1983 → World Wide Web 1989-91 → commercial ISPs/browsers 1990s) renders, reorders, and reveals its worked solution correctly.
+
+**Explicitly out of scope this session, by design**: topics 51–57 of Novice (7 remaining — the rest of Physical Foundations: doping, electricity basics, signals, waves/frequency, transistor switching, CPU-from-transistors, chip manufacturing). This is the final batch of the entire Novice Anvil project. Checkpointing here per Joey's instruction before continuing.
+
+No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
