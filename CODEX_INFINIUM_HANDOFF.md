@@ -121,3 +121,5 @@ New file `lib/gradeConcept.js` (gradeOrder/gradeChoice/gradeMatch) returns the s
 Authored 31 no-code challenges (3-4 each, mixed types) across the first 10 Novice topics (`what_is_a_computer` through `io_devices_usb`) via `scripts/add-novice-anvil-session1.js`. Verified live in-browser for `what_is_a_computer` (all 3 types render, grade, and reveal worked solutions correctly) — the remaining 9 topics' content was authored to the same schema but not yet individually spot-checked in-browser. **47 Novice topics remain unauthored** for this new challenge format (topics 11–57).
 
 **UPDATE (2026-07-29, Novice Anvil Session 2)**: Authored 30 more no-code challenges (3 each, no new types needed) across topics 11–20 (`displays_basics` through `file_types_extensions`) via `scripts/add-novice-anvil-session2.js`. **37 Novice topics remain unauthored** (topics 21–57).
+
+**UPDATE (2026-07-29, Novice Anvil Session 3)**: Authored 30 more no-code challenges (3 each, no new types needed) across topics 21–30 (`container_formats_codecs` through `server_vs_client`) via `scripts/add-novice-anvil-session3.js`. **27 Novice topics remain unauthored** (topics 31–57).

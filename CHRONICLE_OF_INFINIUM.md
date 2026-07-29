@@ -1759,3 +1759,15 @@ Pure content-authoring follow-through on Session 1 — no UI or grading changes 
 **Explicitly out of scope this session, by design**: topics 21–57 of Novice (37 remaining). Checkpointing here per Joey's instruction before continuing.
 
 No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
+
+## Session: Novice Anvil Session 3 — topics 21-30 authored, 30 more challenges (2026-07-29)
+
+Continuation of the same content-authoring project — no UI or grading changes needed, third session in a row reusing the `order`/`choice`/`match` types and `lib/gradeConcept.js` built in Session 1.
+
+**Content authored**: pulled the live Novice topic list again and confirmed topics 21–30 in order: `container_formats_codecs`, `archives_compression`, `disk_images_iso`, `roms_emulation`, `what_is_terminal`, `basic_nav_commands`, `what_is_a_shell`, `what_is_internet`, `ip_addresses`, `server_vs_client` — the tail end of the File Formats subsection plus the start of the CLI and Networking subsections. Authored 3 challenges each (30 total). Only `roms_emulation` (the dump→emulator→translate→run pipeline) and `basic_nav_commands` (the pwd→mkdir→cd→ls workflow) used `order` — every other topic in this batch is a compare/contrast or definitional topic without a natural step-by-step process to reorder, so those 8 used `choice`×2 + `match` instead. Every challenge draws only on concepts explicitly present in its own topic's `explanation` text. Written via `scripts/add-novice-anvil-session3.js`, following the same pattern as the two prior session scripts.
+
+**Verified live**: `npm run build` clean. Spot-checked `roms_emulation`'s Anvil topic page in-browser — the 4-step `order` challenge (dump cartridge → load into emulator → translate instructions → game runs) renders, reorders, and reveals its worked solution correctly.
+
+**Explicitly out of scope this session, by design**: topics 31–57 of Novice (27 remaining — this batch closed out File Formats and made a start on Networking; the section boundary crossed at topic 27, `what_is_internet`). Checkpointing here per Joey's instruction before continuing.
+
+No `RELEASING.md` release process run — content-only change, releases stay batched on Joey's explicit go-ahead. Committed and pushed to GitHub `main`.
