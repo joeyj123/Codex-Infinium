@@ -187,3 +187,10 @@ Next: other tiers' Anvil content, or start on XP/progression features.
 Authored 30 new no-code challenges (order/choice/match, 3 each) for `separation_of_concerns`, `what_is_state`, `mvc_pattern`, `building_an_api`, `middleware`, `error_handling_patterns`, `logging`, `testing_unit_tests`, `environment_variables_config`, `software_development_lifecycle` via `scripts/add-journeyman-anvil-batch3.js`. No judgment calls needed — all 10 are conceptual Architecture/API topics with straightforward analogy-based `explanation` text, content-tier alignment not a concern for concept-only challenge types.
 
 **Running total: 90 no-code Journeyman Anvil challenges (up from 60), 38 empty topics remain** (down from 48). Checkpoint per kickoff instructions — stopped, awaiting go-ahead for next batch of 10 (would continue into remaining Architecture/API + Database section topics).
+
+---
+## UPDATE 2026-07-30 — Journeyman Anvil batch 4, 10/28 topics done
+
+Authored 30 new no-code challenges for `agile_scrum_practically`, `code_review_practice`, `software_licensing`, `accessibility_a11y`, `relational_vs_nonrelational`, `tables_rows_columns_keys`, `basic_sql_crud`, `joins`, `indexes`, `acid_properties_transactions` via `scripts/add-journeyman-anvil-batch4.js`. No judgment calls needed.
+
+**Running total: 120 no-code Journeyman Anvil challenges (up from 90), 28 empty topics remain** (down from 38; `f_strings` excluded from this count — it already has 38 pre-existing `build`-type challenges). Checkpoint per kickoff instructions — stopped, awaiting go-ahead for next batch (would continue into remaining Database section + Web/HTTP section topics).

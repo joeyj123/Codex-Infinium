@@ -2056,3 +2056,13 @@ Content pulled directly from each topic's live `explanation` in `data/knowledge_
 **Running total**: Journeyman Anvil no-code content moved from 60 → 90 challenges. 38 empty topics remain (down from 48).
 
 Checkpoint reached per kickoff instructions — stopped after this batch, awaiting go-ahead for next 10. No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
+
+## Session: Journeyman Anvil Authoring — batch 4, 10 topics, 30 challenges (2026-07-30)
+
+Continued Journeyman's no-code-type authoring, next 10 topics in tier order: `agile_scrum_practically`, `code_review_practice`, `software_licensing`, `accessibility_a11y` (closing out Architecture/Practices), `relational_vs_nonrelational`, `tables_rows_columns_keys`, `basic_sql_crud`, `joins`, `indexes`, `acid_properties_transactions` (opening Databases section).
+
+Content pulled directly from each topic's live `explanation` in `data/knowledge_base.json` before authoring, via `scripts/add-journeyman-anvil-batch4.js`.
+
+**Running total**: Journeyman Anvil no-code content moved from 90 → 120 challenges. 28 empty topics remain (down from 38; `f_strings` also shows as 0 no-code but is excluded from this count — it already carries 38 pre-existing `build`-type challenges from earlier tier design).
+
+Checkpoint reached per kickoff instructions — stopped after this batch, awaiting go-ahead for next 10. No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
