@@ -325,3 +325,12 @@ Authored 72 challenges for all 9 empty C++ topics via `scripts/add-expert-cpp-an
 First Legend batch (18 topics total, flat list, no-code order/choice/match pattern like Journeyman/Master). Authored 30 challenges for `cap_theorem`, `distributed_consensus`, `eventual_consistency`, `sharding`, `replication`, `transformer_architecture`, `scaling_laws`, `training_data_pipeline`, `rlhf`, `inference_optimization` via `scripts/add-legend-anvil-batch1.js`.
 
 **Running total: 30 no-code Legend challenges, 8 empty topics remain**: `turing_machines_computability`, `halting_problem`, `p_vs_np_np_completeness`, `choosing_a_capstone_project`, `open_source_contribution`, `reading_code_at_scale`, `staying_current_in_tech`, `bridging_construction_and_tech`. Checkpoint — awaiting go-ahead for the final batch.
+
+---
+## UPDATE 2026-07-30 — Legend Anvil batch 2 (FINAL) — LEGEND COMPLETE, ALL TIERS COMPLETE
+
+Authored final 24 challenges for the remaining 8 Legend topics via `scripts/add-legend-anvil-batch2.js`.
+
+**LEGEND TIER COMPLETE: 54 total, 0 empty.**
+
+**ALL SIX TIERS' ANVIL CONTENT NOW COMPLETE: Novice, Apprentice (422), Journeyman (204), Master (102), Expert (433), Legend (54).** No further Anvil authoring backlog remains. Next: other feature work, or polish/QA pass — Joey's call.
