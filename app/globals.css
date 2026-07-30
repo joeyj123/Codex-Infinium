@@ -586,18 +586,63 @@ a { color: inherit; text-decoration: none; }
   border-bottom: 8px solid #120d07;
 }
 
-/* Study landing page — full-width shelf, spines centered and evenly spaced */
+/* Study landing page — full-viewport, spines fill available height, no scroll */
+.main:has(.study-home-page) {
+  height: 100vh;
+  max-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding: 24px 48px;
+}
+
+.study-home-page {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+}
+
 .study-bookshelf {
   width: 100%;
+  flex: 1;
+  min-height: 0;
   justify-content: center;
   gap: 18px;
-  padding: 28px 24px 20px;
+  padding: 24px 24px 0;
+  /* wooden shelf plank beneath the spines */
+  border-bottom: 14px solid #2a1c0f;
+  border-radius: 6px 6px 3px 3px;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      rgba(0,0,0,0.16) 0px,
+      rgba(0,0,0,0.16) 2px,
+      transparent 2px,
+      transparent 26px
+    ),
+    linear-gradient(180deg, #241a10 0%, #1a1209 100%);
+  box-shadow: 0 10px 18px -6px rgba(0,0,0,0.6), inset 0 -4px 0 rgba(0,0,0,0.35);
+  position: relative;
+}
+
+.study-bookshelf::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -14px;
+  height: 6px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.35), transparent);
+  pointer-events: none;
 }
 
 .book-spine {
   position: relative;
-  width: 72px;
-  height: 240px;
+  width: 15%;
+  max-width: 130px;
+  min-width: 80px;
+  height: 100%;
   border-radius: 3px 10px 10px 3px;
   border-left: 6px solid var(--spine-edge, #1a1209);
   border-top: 1px solid rgba(255,255,255,0.12);
@@ -668,9 +713,9 @@ a { color: inherit; text-decoration: none; }
 }
 
 .book-spine-locked {
-  opacity: 0.32;
+  opacity: 0.6;
   cursor: default;
-  filter: grayscale(0.75) brightness(0.75);
+  filter: grayscale(0.5) brightness(0.95);
 }
 
 .book-cover-thumb {

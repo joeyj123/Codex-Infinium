@@ -23,7 +23,7 @@ export default function StudyHomeClient() {
   if (!loaded) return null;
 
   return (
-    <div>
+    <div className="study-home-page">
       <h2 style={{ marginBottom: 4 }}>📖 The Study</h2>
       <p className="stat-line" style={{ marginBottom: 8 }}>
         Choose a tier to open its book.
