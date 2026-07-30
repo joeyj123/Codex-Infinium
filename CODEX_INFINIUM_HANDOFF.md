@@ -311,3 +311,10 @@ Next: C# track (10 topics, `cs_linq` pre-existing with 8).
 ## UPDATE 2026-07-30 — Expert Anvil (C# track) batch 1 — C# TRACK COMPLETE
 
 Authored 72 challenges (8/topic, matching `cs_linq` field shape) for all 9 empty C# topics via `scripts/add-expert-csharp-anvil-batch1.js`. Same no-.NET-SDK caveat as Java — brace-balance checked (0 issues across 140 fields), recommend spot-check in desktop app. **C# track COMPLETE: 80 total, 0 empty.** Only C++ remains for Expert.
+
+---
+## UPDATE 2026-07-30 — Expert Anvil (C++ track) batch 1 — EXPERT ANVIL FULLY COMPLETE
+
+Authored 72 challenges for all 9 empty C++ topics via `scripts/add-expert-cpp-anvil-batch1.js`, matching `cpp_stl` precedent. Same no-compiler caveat — brace-balance checked (0 issues/140 fields). Proactively caught and fixed the same `.replace()` no-op reorder-block bug from Java before running the script.
+
+**EXPERT ANVIL FULLY COMPLETE: all 5 language tracks done — Python 105, JS 88, Java 80, C# 80, C++ 80 = 433 total challenges.** Next: Legend tier, or other work — Joey's call.

@@ -2210,3 +2210,9 @@ Next: C# track (10 topics, 1 pre-existing: `cs_linq`). No `RELEASING.md` release
 Covered all 9 empty C# topics (`cs_dotnet_runtime`, `cs_properties`, `cs_async_await_native`, `cs_unity_context`, `cs_value_types_structs`, `cs_nullable_reference_types`, `cs_asp_net`, `cs_nuget`, `cs_visual_studio_ecosystem`), matching `cs_linq` precedent's shape (8 challenges/topic, `buggy_code`/`snippet_code`/`starter_code`/`answer_bank`), via `scripts/add-expert-csharp-anvil-batch1.js`. Same caveat as Java: no .NET SDK here to execute-verify — used low-risk standard syntax, checked brace-balance across all 140 code fields (0 issues). Tooling/platform topics (`cs_unity_context`, `cs_asp_net`, `cs_nuget`, `cs_visual_studio_ecosystem`) use `Console.WriteLine` narration. **Recommend spot-checking in the desktop app.**
 
 **C# TRACK COMPLETE: 80 challenges, 0 empty.** Only C++ track remains for Expert. Committed and pushed to GitHub `main`.
+
+## Session: Expert Anvil (C++ track) batch 1 — C++ TRACK COMPLETE, EXPERT ANVIL COMPLETE (2026-07-30)
+
+Covered all 9 empty C++ topics (`cpp_manual_memory`, `cpp_pointers_references_practical`, `cpp_raii`, `cpp_templates`, `cpp_smart_pointers`, `cpp_compilation_process`, `cpp_game_engines`, `cpp_undefined_behavior`, `cpp_build_systems`), matching `cpp_stl` precedent's shape, via `scripts/add-expert-cpp-anvil-batch1.js`. Same no-compiler caveat as Java/C# — brace-balance checked across all 140 code fields (0 issues). Caught and fixed the same 8-instance `.replace()` no-op bug from the Java session before running the script this time (proactively grepped for it). Tooling/non-deterministic topics use `cout` narration.
+
+**C++ TRACK COMPLETE: 80 challenges, 0 empty. EXPERT ANVIL FULLY COMPLETE across all 5 language tracks** (Python 105, JavaScript 88, Java 80, C# 80, C++ 80 = 433 total). Committed and pushed to GitHub `main`.
