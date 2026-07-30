@@ -284,3 +284,12 @@ Authored 80 challenges (8 per topic, matching `js_json_native` precedent) for `j
 **JavaScript track COMPLETE: 88 total challenges across all 11 topics, 0 empty.**
 
 Next: Java track (10 topics, `java_collections_framework` pre-existing with 8).
+
+---
+## UPDATE 2026-07-30 — Bug fix: wrong field names across all Python/JS Expert content
+
+Before starting Java, read its precedent (`java_collections_framework`) and `AnvilTopicClient.js` directly to confirm field conventions — found this session's Python (batches 1-2) and JS (batch 1) content used the wrong field names for `fix`/`output`/`build` types: `broken_code` instead of `buggy_code` (app reads `challenge.buggy_code`), no `snippet_code` at all for `output` (app reads/executes `challenge.snippet_code`), no `starter_code` for `build` (app reads `challenge.starter_code`). 157 challenges affected.
+
+Fixed directly in `data/knowledge_base.json`: renamed `broken_code`→`buggy_code` (31), added `snippet_code = solution_code` for output (42, matches precedent where these are always identical), added generic `starter_code` stubs for build (42 — functionally correct since grading always runs the learner's own edited code, not the stub). Also dropped an unused `items` field mistakenly added to code `reorder` challenges (the app's code-`reorder` type only reads `shuffled_lines`; `items` belongs only to the separate no-code concept `order` type from Journeyman/Master).
+
+Re-verified all 157 solution_code snippets after the fix (same real-Python-interpreter / sandbox-replicating-Node scripts as before) — 77/77 Python, 80/80 JS still pass. Patched the 3 authoring scripts' field names too. Committed and pushed before starting Java.

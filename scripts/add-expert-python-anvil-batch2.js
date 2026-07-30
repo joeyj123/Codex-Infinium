@@ -1,3 +1,8 @@
+// NOTE (2026-07-30 follow-up fix): originally used broken_code for fix challenges and
+// omitted snippet_code (output type) / starter_code (build type) entirely — the app
+// actually reads buggy_code/snippet_code/starter_code (see AnvilTopicClient.js). This
+// file was patched to buggy_code; snippet_code/starter_code were added directly to
+// data/knowledge_base.json by a follow-up one-off patch, not reflected in this script.
 // Expert Anvil (Python track) batch 2: py_project_structure (finishes the Python track).
 // Project structure is about multi-file/folder layout, not something demonstrable
 // as a single executing script, so this uses real, executing print()-narration of
@@ -37,7 +42,7 @@ const CONTENT = {
       id: "py_project_structure_wc2",
       type: "fix",
       prompt: "Fix this code so it accurately describes conventional Python project structure instead of claiming everything belongs in one single file.",
-      broken_code: "print(\"A well-organized Python project keeps every single line of code in one giant file.\")",
+      buggy_code: "print(\"A well-organized Python project keeps every single line of code in one giant file.\")",
       solution_code: "print(\"A well-organized Python project separates its code into clearly named modules and folders by responsibility.\")",
       expected_output: "A well-organized Python project separates its code into clearly named modules and folders by responsibility.",
       hints: ["The whole point of project structure is splitting code across multiple organized files, not one giant file.", "Modules and folders should be named around what they're responsible for."],

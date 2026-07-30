@@ -2174,3 +2174,17 @@ Covered all 10 empty JavaScript topics in order: `js_var_let_const`, `js_promise
 **JAVASCRIPT TRACK COMPLETE: 88 total challenges across all 11 topics, 0 empty topics remain.**
 
 Next: Java track (10 topics, 1 pre-existing: `java_collections_framework`). No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
+
+## Session: Bug fix — wrong field names across all Python/JS Expert content (2026-07-30)
+
+Before starting the Java track, checked its pre-existing precedent (`java_collections_framework`) to confirm field conventions and discovered a real bug in everything authored so far this session (Python batches 1-2, JavaScript batch 1 — 157 challenges total across `fix`/`output`/`build` types). Confirmed by reading `app/anvil/topic/[topicId]/AnvilTopicClient.js` directly:
+
+- `fix` challenges: the app reads `challenge.buggy_code` (line 136) to populate the editable code panel. All of this session's `fix` challenges used `broken_code` instead — a field the app never reads, so the panel would have rendered empty.
+- `output` challenges: the app executes `challenge.snippet_code` (line 246) and displays it (line 445). None of this session's `output` challenges included `snippet_code` at all — only `solution_code`, which the app doesn't read for this type.
+- `build` challenges: the app reads `challenge.starter_code` (line 136) for the initial editable text. None of this session's `build` challenges included `starter_code`.
+
+**Fix applied directly to `data/knowledge_base.json`** via a one-off patch script (not saved as a permanent script, since it's a mechanical field-rename/field-add, not new content): renamed `broken_code` → `buggy_code` (31 challenges), added `snippet_code = solution_code` for `output` type (42 challenges, matching the existing precedent where these two fields are always identical), and added a generic `starter_code` stub (`# write your code here` / `// write your code here`) for `build` type (42 challenges) — since `starter_code` is just the initial editable text the learner types over before submitting; the real grading always executes the learner's *own* edited code against `expected_output`, so a generic stub is functionally correct even though precedent's stubs are more tailored per-challenge. Also dropped an unused `items` field mistakenly added to `reorder`-type challenges (harmless, but confirmed via source read that the code `reorder` type only ever reads `shuffled_lines`, never `items` — `items` belongs only to the separate no-code `order`-type concept challenges used in Journeyman/Master).
+
+**Re-verified everything after the fix**: re-ran the same real-interpreter (Python) and sandbox-replicating (`new Function` + fake console, JS) verification scripts used earlier this session against all 157 affected challenges' `solution_code` — 77/77 Python and 80/80 JavaScript still pass, confirming the field-rename didn't disturb correctness. The 3 authoring scripts (`add-expert-python-anvil-batch1.js`, `add-expert-python-anvil-batch2.js`, `add-expert-javascript-anvil-batch1.js`) were also patched (`broken_code` → `buggy_code`) and annotated with a note that `snippet_code`/`starter_code` were added directly to the KB, not reflected in the scripts themselves.
+
+Committed and pushed to GitHub `main` before proceeding to the Java track.
