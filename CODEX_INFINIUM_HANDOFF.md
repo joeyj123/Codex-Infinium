@@ -208,3 +208,12 @@ Authored 30 new no-code challenges for `normalization_1nf_2nf_3nf`, `nosql_datab
 Authored 30 new no-code challenges for `async_await`, `rate_limiting`, `memory_addresses_pointers_tieback`, `infinite_loop_cpu`, `memory_leak`, `process_scheduling`, `virtual_memory_paging`, `semaphores_mutexes`, `deadlocks`, `assembly_machine_instructions` via `scripts/add-journeyman-anvil-batch6.js`. No judgment calls needed.
 
 **Running total: 180 no-code Journeyman Anvil challenges (up from 150), only 8 empty topics remain**: `risc_cisc_pipelining_cache`, `calling_an_api_practically`, `system_vs_user_prompts`, `structured_output`, `prompt_chaining`, `vector_databases`, `cost_latency_tradeoffs`, `vibecoding_backstage`. Checkpoint per kickoff instructions — stopped, awaiting go-ahead for the final batch (would complete Journeyman Anvil no-code content).
+
+---
+## UPDATE 2026-07-30 — Journeyman Anvil batch 7 (FINAL) — JOURNEYMAN ANVIL COMPLETE
+
+Authored final 24 no-code challenges for `risc_cisc_pipelining_cache`, `calling_an_api_practically`, `system_vs_user_prompts`, `structured_output`, `prompt_chaining`, `vector_databases`, `cost_latency_tradeoffs`, `vibecoding_backstage` via `scripts/add-journeyman-anvil-batch7.js`. No judgment calls needed.
+
+**Journeyman Anvil no-code authoring COMPLETE. 204 total no-code challenges, 0 empty topics** (`f_strings` keeps its separate 38 pre-existing `build`-type challenges, untouched throughout).
+
+Next: Master/Expert/Legend tiers' Anvil content, or other feature work — Joey's call.

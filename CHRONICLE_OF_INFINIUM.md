@@ -2086,3 +2086,13 @@ Content pulled directly from each topic's live `explanation` in `data/knowledge_
 **Running total**: Journeyman Anvil no-code content moved from 150 → 180 challenges. Only 8 empty topics remain (down from 18; `f_strings` still excluded), all in the final AI/LLM + `risc_cisc_pipelining_cache`/`calling_an_api_practically` section: `risc_cisc_pipelining_cache`, `calling_an_api_practically`, `system_vs_user_prompts`, `structured_output`, `prompt_chaining`, `vector_databases`, `cost_latency_tradeoffs`, `vibecoding_backstage`.
 
 Checkpoint reached per kickoff instructions — stopped after this batch, awaiting go-ahead for the final batch (8 topics, would complete Journeyman Anvil no-code content entirely). No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
+
+## Session: Journeyman Anvil Authoring — batch 7 (FINAL), 8 topics, 24 challenges (2026-07-30)
+
+Closed out Journeyman's final 8 empty topics, all in the AI/LLM-practical closing section: `risc_cisc_pipelining_cache`, `calling_an_api_practically`, `system_vs_user_prompts`, `structured_output`, `prompt_chaining`, `vector_databases`, `cost_latency_tradeoffs`, `vibecoding_backstage`.
+
+Content pulled directly from each topic's live `explanation` in `data/knowledge_base.json` before authoring, via `scripts/add-journeyman-anvil-batch7.js`.
+
+**JOURNEYMAN ANVIL NO-CODE CONTENT COMPLETE: 204 total challenges across all 68 eligible topics, 0 empty topics remain.** (`f_strings` retains its pre-existing 38 `build`-type challenges, untouched by this project across all 7 batches.)
+
+No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
