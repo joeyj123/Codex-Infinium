@@ -224,3 +224,10 @@ Next: Master/Expert/Legend tiers' Anvil content, or other feature work — Joey'
 First Master tier authoring pass (previously 0/34). Authored 30 no-code challenges for `what_is_a_design_pattern`, `singleton_pattern`, `factory_pattern`, `observer_pattern`, `mvvm_and_other_variants`, `anti_patterns`, `scalability_basics`, `load_balancing`, `caching_at_scale`, `cdns` via `scripts/add-master-anvil-batch1.js`. No judgment calls needed — all 10 are conceptual topics with clear analogy-based `explanation` text.
 
 **Running total: 30 no-code Master Anvil challenges, 24 empty topics remain** (down from 34). Checkpoint per kickoff instructions — stopped, awaiting go-ahead for next batch (would continue into remaining Scale/Infrastructure section).
+
+---
+## UPDATE 2026-07-30 — Master Anvil batch 2, 10/14 topics done
+
+Authored 30 no-code challenges for `microservices_vs_monolith`, `message_queues`, `common_vulnerabilities`, `encryption_basics`, `password_hashing`, `https_tls`, `least_privilege_principle`, `api_keys_secrets_management`, `profiling`, `premature_optimization` via `scripts/add-master-anvil-batch2.js`. No judgment calls needed.
+
+**Running total: 60 no-code Master Anvil challenges (up from 30), 14 empty topics remain** (down from 24). Checkpoint per kickoff instructions — stopped, awaiting go-ahead for next batch (would continue into remaining Performance + DevOps section topics).

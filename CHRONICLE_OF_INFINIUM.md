@@ -2106,3 +2106,13 @@ Content pulled directly from each topic's live `explanation` in `data/knowledge_
 **Running total**: Master Anvil no-code content moved from 0 → 30 challenges. 24 empty topics remain (down from 34).
 
 Checkpoint reached per kickoff instructions — stopped after this batch, awaiting go-ahead for next 10. No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
+
+## Session: Master Anvil Authoring — batch 2, 10 topics, 30 challenges (2026-07-30)
+
+Continued Master's no-code-type authoring, next 10 topics in tier order: `microservices_vs_monolith`, `message_queues` (closing out Scale/Infrastructure), `common_vulnerabilities`, `encryption_basics`, `password_hashing`, `https_tls`, `least_privilege_principle`, `api_keys_secrets_management` (Security section), `profiling`, `premature_optimization` (opening Performance section).
+
+Content pulled directly from each topic's live `explanation` in `data/knowledge_base.json` before authoring, via `scripts/add-master-anvil-batch2.js`.
+
+**Running total**: Master Anvil no-code content moved from 30 → 60 challenges. 14 empty topics remain (down from 24).
+
+Checkpoint reached per kickoff instructions — stopped after this batch, awaiting go-ahead for next 10. No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
