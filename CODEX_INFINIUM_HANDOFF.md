@@ -306,3 +306,8 @@ Authored 72 challenges (8 per topic, matching `java_collections_framework` prece
 **Java track COMPLETE: 80 total challenges across all 10 topics, 0 empty.**
 
 Next: C# track (10 topics, `cs_linq` pre-existing with 8).
+
+---
+## UPDATE 2026-07-30 — Expert Anvil (C# track) batch 1 — C# TRACK COMPLETE
+
+Authored 72 challenges (8/topic, matching `cs_linq` field shape) for all 9 empty C# topics via `scripts/add-expert-csharp-anvil-batch1.js`. Same no-.NET-SDK caveat as Java — brace-balance checked (0 issues across 140 fields), recommend spot-check in desktop app. **C# track COMPLETE: 80 total, 0 empty.** Only C++ remains for Expert.

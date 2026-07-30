@@ -2204,3 +2204,9 @@ Covered all 9 empty Java topics in order: `java_jvm_bytecode`, `java_strict_typi
 **JAVA TRACK COMPLETE: 80 total challenges across all 10 topics, 0 empty topics remain.**
 
 Next: C# track (10 topics, 1 pre-existing: `cs_linq`). No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
+
+## Session: Expert Anvil (C# track) batch 1 — C# TRACK COMPLETE (2026-07-30)
+
+Covered all 9 empty C# topics (`cs_dotnet_runtime`, `cs_properties`, `cs_async_await_native`, `cs_unity_context`, `cs_value_types_structs`, `cs_nullable_reference_types`, `cs_asp_net`, `cs_nuget`, `cs_visual_studio_ecosystem`), matching `cs_linq` precedent's shape (8 challenges/topic, `buggy_code`/`snippet_code`/`starter_code`/`answer_bank`), via `scripts/add-expert-csharp-anvil-batch1.js`. Same caveat as Java: no .NET SDK here to execute-verify — used low-risk standard syntax, checked brace-balance across all 140 code fields (0 issues). Tooling/platform topics (`cs_unity_context`, `cs_asp_net`, `cs_nuget`, `cs_visual_studio_ecosystem`) use `Console.WriteLine` narration. **Recommend spot-checking in the desktop app.**
+
+**C# TRACK COMPLETE: 80 challenges, 0 empty.** Only C++ track remains for Expert. Committed and pushed to GitHub `main`.
