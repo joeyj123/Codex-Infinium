@@ -260,3 +260,12 @@ Authored 70 challenges (7 per topic, matching existing precedent's pattern) for 
 **Bug caught via actual execution, not just inspection**: initial `py_async_specifics` draft used top-level `await`, assuming Pyodide's `runPythonAsync` wrapper support extended to user code. It doesn't — `pyodideRunner.js` runs user code via plain synchronous `exec()` inside that wrapper, so top-level `await` is a `SyntaxError` there too. Caught by running all 70 `solution_code` snippets against a real local Python 3.11 interpreter (verification script, since deleted) — 7 failed. Fixed by wrapping async examples in `async def main(): ...` + `asyncio.run(main())`. Re-verified: 70/70 pass against a real interpreter, matching `expected_output` exactly.
 
 **Running total: Python track moved from 28 (4 pre-existing topics) → 98 challenges, only `py_project_structure` remains empty.** Checkpoint per kickoff instructions — stopped, awaiting go-ahead (finish `py_project_structure`, then JS/Java/C#/C++ tracks).
+
+---
+## UPDATE 2026-07-30 — Expert Anvil (Python track) batch 2 — PYTHON TRACK COMPLETE
+
+Authored final 7 challenges for `py_project_structure` (real print()-narration, same reasoning as batch 1's other tooling-only topics — project layout is multi-file, not a single executing script) via `scripts/add-expert-python-anvil-batch2.js`. Verified all 7 against a real Python interpreter — 7/7 passed.
+
+**Python track COMPLETE: 105 total challenges across all 15 topics, 0 empty.**
+
+Next: JavaScript track (11 topics — 10 empty, `js_json_native` pre-existing with 8), authoring in batches per Joey's standing instructions (checkpoint after each batch, no proceeding without go-ahead).
