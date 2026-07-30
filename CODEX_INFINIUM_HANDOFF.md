@@ -247,3 +247,16 @@ Authored final 12 no-code challenges for `multi_agent_systems`, `retrieval_syste
 **Master Anvil no-code authoring COMPLETE. 102 total no-code challenges, 0 empty topics.**
 
 Next: Expert/Legend tiers' Anvil content, or other feature work — Joey's call.
+
+---
+## UPDATE 2026-07-30 — Expert Anvil (Python track) batch 1, 10/1 topics done in Python track
+
+**Key structural difference from Journeyman/Master, discovered before authoring and confirmed with Joey**: Expert has 5 `language_tracks` (python/javascript/java/csharp/cpp), each with its own topic list, not one flat tier. Pre-existing Expert content already uses real executable code challenge types (`reorder`/`fix`/`output`/`build` with actual `solution_code`/`expected_output`), not `order/choice/match` — confirmed `AnvilTopicClient.js` runs a real per-language runtime for Expert, unlike every other tier which always executes as Python. Asked Joey to scope batch 1; chose Python track first, 10 topics.
+
+Authored 70 challenges (7 per topic, matching existing precedent's pattern) for `py_zen_and_pep8`, `py_context_managers`, `py_virtual_environments`, `py_pip_and_requirements`, `py_pandas_numpy_intro`, `py_streamlit_specifics`, `py_flask_django_overview`, `py_type_hints`, `py_async_specifics`, `py_common_libraries_overview` via `scripts/add-expert-python-anvil-batch1.js`.
+
+**Judgment call**: 6 tooling/framework topics (`py_virtual_environments`, `py_pip_and_requirements`, `py_pandas_numpy_intro`, `py_streamlit_specifics`, `py_flask_django_overview`, `py_common_libraries_overview`) can't demonstrate their real packages executing — `lib/pyodideRunner.js` never calls `loadPackage`/`micropip`, so numpy/pandas/flask/streamlit aren't importable in the sandbox. These use real, executing `print()`-narration instead, consistent with prior tiers' handling of non-executable-at-this-tier topics.
+
+**Bug caught via actual execution, not just inspection**: initial `py_async_specifics` draft used top-level `await`, assuming Pyodide's `runPythonAsync` wrapper support extended to user code. It doesn't — `pyodideRunner.js` runs user code via plain synchronous `exec()` inside that wrapper, so top-level `await` is a `SyntaxError` there too. Caught by running all 70 `solution_code` snippets against a real local Python 3.11 interpreter (verification script, since deleted) — 7 failed. Fixed by wrapping async examples in `async def main(): ...` + `asyncio.run(main())`. Re-verified: 70/70 pass against a real interpreter, matching `expected_output` exactly.
+
+**Running total: Python track moved from 28 (4 pre-existing topics) → 98 challenges, only `py_project_structure` remains empty.** Checkpoint per kickoff instructions — stopped, awaiting go-ahead (finish `py_project_structure`, then JS/Java/C#/C++ tracks).
