@@ -201,3 +201,10 @@ Authored 30 new no-code challenges for `agile_scrum_practically`, `code_review_p
 Authored 30 new no-code challenges for `normalization_1nf_2nf_3nf`, `nosql_database_types`, `http_methods`, `status_codes`, `request_response_headers`, `cookies_sessions`, `auth_vs_authz`, `cors`, `caching_basics`, `concurrency_intro` via `scripts/add-journeyman-anvil-batch5.js`. No judgment calls needed.
 
 **Running total: 150 no-code Journeyman Anvil challenges (up from 120), 18 empty topics remain** (down from 28; `f_strings` still excluded). Checkpoint per kickoff instructions — stopped, awaiting go-ahead for next batch (would continue into remaining Web/HTTP + OS/Concurrency section topics).
+
+---
+## UPDATE 2026-07-30 — Journeyman Anvil batch 6, 10/8 topics done (only 8 empty left)
+
+Authored 30 new no-code challenges for `async_await`, `rate_limiting`, `memory_addresses_pointers_tieback`, `infinite_loop_cpu`, `memory_leak`, `process_scheduling`, `virtual_memory_paging`, `semaphores_mutexes`, `deadlocks`, `assembly_machine_instructions` via `scripts/add-journeyman-anvil-batch6.js`. No judgment calls needed.
+
+**Running total: 180 no-code Journeyman Anvil challenges (up from 150), only 8 empty topics remain**: `risc_cisc_pipelining_cache`, `calling_an_api_practically`, `system_vs_user_prompts`, `structured_output`, `prompt_chaining`, `vector_databases`, `cost_latency_tradeoffs`, `vibecoding_backstage`. Checkpoint per kickoff instructions — stopped, awaiting go-ahead for the final batch (would complete Journeyman Anvil no-code content).

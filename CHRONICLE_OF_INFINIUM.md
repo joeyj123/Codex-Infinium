@@ -2076,3 +2076,13 @@ Content pulled directly from each topic's live `explanation` in `data/knowledge_
 **Running total**: Journeyman Anvil no-code content moved from 120 → 150 challenges. 18 empty topics remain (down from 28; `f_strings` still excluded as noted above).
 
 Checkpoint reached per kickoff instructions — stopped after this batch, awaiting go-ahead for next 10. No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
+
+## Session: Journeyman Anvil Authoring — batch 6, 10 topics, 30 challenges (2026-07-30)
+
+Continued Journeyman's no-code-type authoring, next 10 topics in tier order: `async_await`, `rate_limiting` (closing out Web/HTTP), `memory_addresses_pointers_tieback`, `infinite_loop_cpu`, `memory_leak`, `process_scheduling`, `virtual_memory_paging`, `semaphores_mutexes`, `deadlocks`, `assembly_machine_instructions` (OS/Concurrency + Hardware-tieback section).
+
+Content pulled directly from each topic's live `explanation` in `data/knowledge_base.json` before authoring, via `scripts/add-journeyman-anvil-batch6.js`.
+
+**Running total**: Journeyman Anvil no-code content moved from 150 → 180 challenges. Only 8 empty topics remain (down from 18; `f_strings` still excluded), all in the final AI/LLM + `risc_cisc_pipelining_cache`/`calling_an_api_practically` section: `risc_cisc_pipelining_cache`, `calling_an_api_practically`, `system_vs_user_prompts`, `structured_output`, `prompt_chaining`, `vector_databases`, `cost_latency_tradeoffs`, `vibecoding_backstage`.
+
+Checkpoint reached per kickoff instructions — stopped after this batch, awaiting go-ahead for the final batch (8 topics, would complete Journeyman Anvil no-code content entirely). No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
