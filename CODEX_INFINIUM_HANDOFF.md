@@ -269,3 +269,18 @@ Authored final 7 challenges for `py_project_structure` (real print()-narration, 
 **Python track COMPLETE: 105 total challenges across all 15 topics, 0 empty.**
 
 Next: JavaScript track (11 topics — 10 empty, `js_json_native` pre-existing with 8), authoring in batches per Joey's standing instructions (checkpoint after each batch, no proceeding without go-ahead).
+
+---
+## UPDATE 2026-07-30 — Expert Anvil (JavaScript track) batch 1 — JS TRACK COMPLETE
+
+Authored 80 challenges (8 per topic, matching `js_json_native` precedent) for `js_var_let_const`, `js_promises_async`, `js_dom_manipulation`, `js_event_loop`, `js_react_vue_overview`, `js_npm_ecosystem`, `js_this_keyword`, `js_frontend_vs_backend_node`, `js_typescript_intro`, `js_common_libraries` via `scripts/add-expert-javascript-anvil-batch1.js`.
+
+**Key sandbox limitation confirmed by direct testing**: `lib/codeExec.js` runs code via synchronous `new Function()`, with `postMessage` sent before any microtask/macrotask ever flushes — so Promise `.then()`/`setTimeout` continuations never appear in output. Confirmed with a direct test: `console.log('a'); Promise.resolve().then(()=>console.log('b')); console.log('c')` → captures only `"a\nc"`. No DOM, no React/Vue/lodash/dayjs, no real TS compiler either.
+
+**Judgment call**: 8 of 10 topics (`js_promises_async`, `js_dom_manipulation`, `js_event_loop`, `js_react_vue_overview`, `js_npm_ecosystem`, `js_frontend_vs_backend_node`, `js_typescript_intro`, `js_common_libraries`) use real executing `console.log()`-narration since their real behavior can't be correctly demonstrated in this sandbox. Only `js_var_let_const` and `js_this_keyword` use fully real, sandbox-safe JS.
+
+**Bugs caught via actual execution against a Node script replicating the sandbox's exact console-shim mechanics** (not just inspection): 2 mismatches in `js_this_keyword` — `wc2` wrongly assumed detached-method `this` is `undefined` (it's actually the global object in non-strict code); `wc6` printed a raw `undefined` value, which the sandbox's `Array.join`-based console shim silently renders as an empty string. Both fixed (wrap in `typeof`, correct expected_output). Re-verified: 80/80 pass.
+
+**JavaScript track COMPLETE: 88 total challenges across all 11 topics, 0 empty.**
+
+Next: Java track (10 topics, `java_collections_framework` pre-existing with 8).
