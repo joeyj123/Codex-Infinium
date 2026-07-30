@@ -318,3 +318,10 @@ Authored 72 challenges (8/topic, matching `cs_linq` field shape) for all 9 empty
 Authored 72 challenges for all 9 empty C++ topics via `scripts/add-expert-cpp-anvil-batch1.js`, matching `cpp_stl` precedent. Same no-compiler caveat — brace-balance checked (0 issues/140 fields). Proactively caught and fixed the same `.replace()` no-op reorder-block bug from Java before running the script.
 
 **EXPERT ANVIL FULLY COMPLETE: all 5 language tracks done — Python 105, JS 88, Java 80, C# 80, C++ 80 = 433 total challenges.** Next: Legend tier, or other work — Joey's call.
+
+---
+## UPDATE 2026-07-30 — Legend Anvil batch 1, 10/8 topics done
+
+First Legend batch (18 topics total, flat list, no-code order/choice/match pattern like Journeyman/Master). Authored 30 challenges for `cap_theorem`, `distributed_consensus`, `eventual_consistency`, `sharding`, `replication`, `transformer_architecture`, `scaling_laws`, `training_data_pipeline`, `rlhf`, `inference_optimization` via `scripts/add-legend-anvil-batch1.js`.
+
+**Running total: 30 no-code Legend challenges, 8 empty topics remain**: `turing_machines_computability`, `halting_problem`, `p_vs_np_np_completeness`, `choosing_a_capstone_project`, `open_source_contribution`, `reading_code_at_scale`, `staying_current_in_tech`, `bridging_construction_and_tech`. Checkpoint — awaiting go-ahead for the final batch.

@@ -2216,3 +2216,9 @@ Covered all 9 empty C# topics (`cs_dotnet_runtime`, `cs_properties`, `cs_async_a
 Covered all 9 empty C++ topics (`cpp_manual_memory`, `cpp_pointers_references_practical`, `cpp_raii`, `cpp_templates`, `cpp_smart_pointers`, `cpp_compilation_process`, `cpp_game_engines`, `cpp_undefined_behavior`, `cpp_build_systems`), matching `cpp_stl` precedent's shape, via `scripts/add-expert-cpp-anvil-batch1.js`. Same no-compiler caveat as Java/C# — brace-balance checked across all 140 code fields (0 issues). Caught and fixed the same 8-instance `.replace()` no-op bug from the Java session before running the script this time (proactively grepped for it). Tooling/non-deterministic topics use `cout` narration.
 
 **C++ TRACK COMPLETE: 80 challenges, 0 empty. EXPERT ANVIL FULLY COMPLETE across all 5 language tracks** (Python 105, JavaScript 88, Java 80, C# 80, C++ 80 = 433 total). Committed and pushed to GitHub `main`.
+
+## Session: Legend Anvil batch 1, 10 topics, 30 challenges (2026-07-30)
+
+First Legend authoring batch (previously 0/18, flat topic list like Journeyman/Master, no-code order/choice/match pattern). Covered first 10 topics: `cap_theorem`, `distributed_consensus`, `eventual_consistency`, `sharding`, `replication` (Distributed Systems), `transformer_architecture`, `scaling_laws`, `training_data_pipeline`, `rlhf`, `inference_optimization` (AI/LLM Depth), via `scripts/add-legend-anvil-batch1.js`.
+
+**Running total: 30 no-code Legend challenges, 8 empty topics remain**: `turing_machines_computability`, `halting_problem`, `p_vs_np_np_completeness`, `choosing_a_capstone_project`, `open_source_contribution`, `reading_code_at_scale`, `staying_current_in_tech`, `bridging_construction_and_tech`. Checkpoint per kickoff instructions — stopped, awaiting go-ahead for the final batch. Committed and pushed to GitHub `main`.
