@@ -217,3 +217,10 @@ Authored final 24 no-code challenges for `risc_cisc_pipelining_cache`, `calling_
 **Journeyman Anvil no-code authoring COMPLETE. 204 total no-code challenges, 0 empty topics** (`f_strings` keeps its separate 38 pre-existing `build`-type challenges, untouched throughout).
 
 Next: Master/Expert/Legend tiers' Anvil content, or other feature work — Joey's call.
+
+---
+## UPDATE 2026-07-30 — Master Anvil batch 1, 10/34 topics done
+
+First Master tier authoring pass (previously 0/34). Authored 30 no-code challenges for `what_is_a_design_pattern`, `singleton_pattern`, `factory_pattern`, `observer_pattern`, `mvvm_and_other_variants`, `anti_patterns`, `scalability_basics`, `load_balancing`, `caching_at_scale`, `cdns` via `scripts/add-master-anvil-batch1.js`. No judgment calls needed — all 10 are conceptual topics with clear analogy-based `explanation` text.
+
+**Running total: 30 no-code Master Anvil challenges, 24 empty topics remain** (down from 34). Checkpoint per kickoff instructions — stopped, awaiting go-ahead for next batch (would continue into remaining Scale/Infrastructure section).

@@ -2096,3 +2096,13 @@ Content pulled directly from each topic's live `explanation` in `data/knowledge_
 **JOURNEYMAN ANVIL NO-CODE CONTENT COMPLETE: 204 total challenges across all 68 eligible topics, 0 empty topics remain.** (`f_strings` retains its pre-existing 38 `build`-type challenges, untouched by this project across all 7 batches.)
 
 No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
+
+## Session: Master Anvil Authoring — batch 1, 10 topics, 30 challenges (2026-07-30)
+
+First authoring batch for Master tier, previously 0/34 topics covered. Covered first 10 topics in tier order — all of Design Patterns and the start of Scale/Infrastructure: `what_is_a_design_pattern`, `singleton_pattern`, `factory_pattern`, `observer_pattern`, `mvvm_and_other_variants`, `anti_patterns` (Design Patterns section), `scalability_basics`, `load_balancing`, `caching_at_scale`, `cdns` (opening Scale section).
+
+Content pulled directly from each topic's live `explanation` in `data/knowledge_base.json` before authoring; all challenges are concept-level (order/choice/match), matching the same no-code approach used throughout Journeyman, via `scripts/add-master-anvil-batch1.js`.
+
+**Running total**: Master Anvil no-code content moved from 0 → 30 challenges. 24 empty topics remain (down from 34).
+
+Checkpoint reached per kickoff instructions — stopped after this batch, awaiting go-ahead for next 10. No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
