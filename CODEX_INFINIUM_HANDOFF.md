@@ -231,3 +231,10 @@ First Master tier authoring pass (previously 0/34). Authored 30 no-code challeng
 Authored 30 no-code challenges for `microservices_vs_monolith`, `message_queues`, `common_vulnerabilities`, `encryption_basics`, `password_hashing`, `https_tls`, `least_privilege_principle`, `api_keys_secrets_management`, `profiling`, `premature_optimization` via `scripts/add-master-anvil-batch2.js`. No judgment calls needed.
 
 **Running total: 60 no-code Master Anvil challenges (up from 30), 14 empty topics remain** (down from 24). Checkpoint per kickoff instructions — stopped, awaiting go-ahead for next batch (would continue into remaining Performance + DevOps section topics).
+
+---
+## UPDATE 2026-07-30 — Master Anvil batch 3, 10/4 topics done (only 4 empty left)
+
+Authored 30 no-code challenges for `caching_vs_precomputation`, `database_query_optimization`, `concurrency_at_scale`, `what_is_devops`, `cicd_pipelines`, `containers_docker`, `what_is_the_cloud_infrastructure`, `infrastructure_as_code`, `monitoring_alerting`, `evaluating_ai_models` via `scripts/add-master-anvil-batch3.js`. No judgment calls needed.
+
+**Running total: 90 no-code Master Anvil challenges (up from 60), only 4 empty topics remain**: `multi_agent_systems`, `retrieval_systems_at_scale`, `ai_safety_alignment_intro`, `responsible_ai_deployment`. Checkpoint per kickoff instructions — stopped, awaiting go-ahead for the final batch (would complete Master Anvil no-code content).
