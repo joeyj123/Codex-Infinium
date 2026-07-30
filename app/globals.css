@@ -607,6 +607,7 @@ a { color: inherit; text-decoration: none; }
   width: 100%;
   flex: 1;
   min-height: 0;
+  flex-wrap: nowrap;
   justify-content: center;
   gap: 18px;
   padding: 24px 24px 0;
@@ -639,9 +640,9 @@ a { color: inherit; text-decoration: none; }
 
 .book-spine {
   position: relative;
-  width: 15%;
+  flex: 1 1 0;
   max-width: 130px;
-  min-width: 80px;
+  min-width: 0;
   height: 100%;
   border-radius: 3px 10px 10px 3px;
   border-left: 6px solid var(--spine-edge, #1a1209);
