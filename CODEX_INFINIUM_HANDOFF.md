@@ -293,3 +293,16 @@ Before starting Java, read its precedent (`java_collections_framework`) and `Anv
 Fixed directly in `data/knowledge_base.json`: renamed `broken_code`→`buggy_code` (31), added `snippet_code = solution_code` for output (42, matches precedent where these are always identical), added generic `starter_code` stubs for build (42 — functionally correct since grading always runs the learner's own edited code, not the stub). Also dropped an unused `items` field mistakenly added to code `reorder` challenges (the app's code-`reorder` type only reads `shuffled_lines`; `items` belongs only to the separate no-code concept `order` type from Journeyman/Master).
 
 Re-verified all 157 solution_code snippets after the fix (same real-Python-interpreter / sandbox-replicating-Node scripts as before) — 77/77 Python, 80/80 JS still pass. Patched the 3 authoring scripts' field names too. Committed and pushed before starting Java.
+
+---
+## UPDATE 2026-07-30 — Expert Anvil (Java track) batch 1 — JAVA TRACK COMPLETE
+
+Authored 72 challenges (8 per topic, matching `java_collections_framework` precedent's exact field shape — `buggy_code`/`snippet_code`/`starter_code`/`answer_bank` learned directly from it, avoiding a repeat of the prior field-name bug) for `java_jvm_bytecode`, `java_strict_typing`, `java_oop_emphasis`, `java_interfaces`, `java_exceptions_checked`, `java_spring_overview`, `java_android_context`, `java_garbage_collection`, `java_maven_gradle` via `scripts/add-expert-java-anvil-batch1.js`.
+
+**Important caveat, flagged clearly**: no JDK available in this environment — Java only runs via the real bundled JDK inside the Tauri desktop app (`lib/javaRunner.js`), so unlike Python/JS this batch's code could NOT be execution-verified against a real compiler. Mitigated with only well-established low-risk syntax, plus a structural brace-balance check across all 72 challenges (all balanced) — **this content should be spot-checked live in the desktop app** before being fully trusted like Python/JS.
+
+**Caught and fixed before running the script**: 8 reorder challenges had a broken `.replace(wrap(""), "")` pattern that silently no-opped, leaving confusing block content — rewrote all 8 with clean explicit two-block strings.
+
+**Java track COMPLETE: 80 total challenges across all 10 topics, 0 empty.**
+
+Next: C# track (10 topics, `cs_linq` pre-existing with 8).
