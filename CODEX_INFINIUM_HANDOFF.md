@@ -180,3 +180,10 @@ Batch 7 (final): `embeddings`, `hallucination_mechanism`, `rag_retrieval_augment
 Study bug fixed: sidebar "The Study" now opens `/study` bookshelf tier selector → chapter list → topic hub → reading mode, instead of jumping straight into the textbook.
 
 Next: other tiers' Anvil content, or start on XP/progression features.
+
+---
+## UPDATE 2026-07-30 — Journeyman Anvil batch 3, 10/48 topics done
+
+Authored 30 new no-code challenges (order/choice/match, 3 each) for `separation_of_concerns`, `what_is_state`, `mvc_pattern`, `building_an_api`, `middleware`, `error_handling_patterns`, `logging`, `testing_unit_tests`, `environment_variables_config`, `software_development_lifecycle` via `scripts/add-journeyman-anvil-batch3.js`. No judgment calls needed — all 10 are conceptual Architecture/API topics with straightforward analogy-based `explanation` text, content-tier alignment not a concern for concept-only challenge types.
+
+**Running total: 90 no-code Journeyman Anvil challenges (up from 60), 38 empty topics remain** (down from 48). Checkpoint per kickoff instructions — stopped, awaiting go-ahead for next batch of 10 (would continue into remaining Architecture/API + Database section topics).

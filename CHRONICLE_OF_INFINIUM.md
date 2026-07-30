@@ -2043,3 +2043,16 @@ Fix:
 Flow now: Sidebar "The Study" → `/study` bookshelf → click tier → `/tier/[tierId]` chapter list → click topic → topic hub → Study/Forge/Anvil modes.
 
 No `RELEASING.md` release process run — content-only and additive UI change, releases stay batched on Joey's explicit go-ahead.
+
+
+## Session: Journeyman Anvil Authoring — batch 3, 10 topics, 30 challenges (2026-07-30)
+
+Continued Journeyman's no-code-type (order/choice/match) authoring, next 10 topics in tier order: `separation_of_concerns`, `what_is_state`, `mvc_pattern`, `building_an_api`, `middleware`, `error_handling_patterns`, `logging`, `testing_unit_tests`, `environment_variables_config`, `software_development_lifecycle` — first 10 of Journeyman's Architecture/API section, all previously empty.
+
+Content pulled directly from each topic's live `explanation` in `data/knowledge_base.json` before authoring; all challenges are concept-level (order/choice/match), no code execution involved for this tier's non-code-type batches.
+
+**Challenges authored** (3 each, 30 total), via `scripts/add-journeyman-anvil-batch3.js`.
+
+**Running total**: Journeyman Anvil no-code content moved from 60 → 90 challenges. 38 empty topics remain (down from 48).
+
+Checkpoint reached per kickoff instructions — stopped after this batch, awaiting go-ahead for next 10. No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
