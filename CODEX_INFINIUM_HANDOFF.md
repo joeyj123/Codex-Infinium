@@ -194,3 +194,10 @@ Authored 30 new no-code challenges (order/choice/match, 3 each) for `separation_
 Authored 30 new no-code challenges for `agile_scrum_practically`, `code_review_practice`, `software_licensing`, `accessibility_a11y`, `relational_vs_nonrelational`, `tables_rows_columns_keys`, `basic_sql_crud`, `joins`, `indexes`, `acid_properties_transactions` via `scripts/add-journeyman-anvil-batch4.js`. No judgment calls needed.
 
 **Running total: 120 no-code Journeyman Anvil challenges (up from 90), 28 empty topics remain** (down from 38; `f_strings` excluded from this count — it already has 38 pre-existing `build`-type challenges). Checkpoint per kickoff instructions — stopped, awaiting go-ahead for next batch (would continue into remaining Database section + Web/HTTP section topics).
+
+---
+## UPDATE 2026-07-30 — Journeyman Anvil batch 5, 10/18 topics done
+
+Authored 30 new no-code challenges for `normalization_1nf_2nf_3nf`, `nosql_database_types`, `http_methods`, `status_codes`, `request_response_headers`, `cookies_sessions`, `auth_vs_authz`, `cors`, `caching_basics`, `concurrency_intro` via `scripts/add-journeyman-anvil-batch5.js`. No judgment calls needed.
+
+**Running total: 150 no-code Journeyman Anvil challenges (up from 120), 18 empty topics remain** (down from 28; `f_strings` still excluded). Checkpoint per kickoff instructions — stopped, awaiting go-ahead for next batch (would continue into remaining Web/HTTP + OS/Concurrency section topics).

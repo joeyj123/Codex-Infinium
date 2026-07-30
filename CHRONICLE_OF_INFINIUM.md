@@ -2066,3 +2066,13 @@ Content pulled directly from each topic's live `explanation` in `data/knowledge_
 **Running total**: Journeyman Anvil no-code content moved from 90 → 120 challenges. 28 empty topics remain (down from 38; `f_strings` also shows as 0 no-code but is excluded from this count — it already carries 38 pre-existing `build`-type challenges from earlier tier design).
 
 Checkpoint reached per kickoff instructions — stopped after this batch, awaiting go-ahead for next 10. No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
+
+## Session: Journeyman Anvil Authoring — batch 5, 10 topics, 30 challenges (2026-07-30)
+
+Continued Journeyman's no-code-type authoring, next 10 topics in tier order: `normalization_1nf_2nf_3nf`, `nosql_database_types` (closing out Databases), `http_methods`, `status_codes`, `request_response_headers`, `cookies_sessions`, `auth_vs_authz`, `cors`, `caching_basics`, `concurrency_intro` (opening Web/HTTP section).
+
+Content pulled directly from each topic's live `explanation` in `data/knowledge_base.json` before authoring, via `scripts/add-journeyman-anvil-batch5.js`.
+
+**Running total**: Journeyman Anvil no-code content moved from 120 → 150 challenges. 18 empty topics remain (down from 28; `f_strings` still excluded as noted above).
+
+Checkpoint reached per kickoff instructions — stopped after this batch, awaiting go-ahead for next 10. No `RELEASING.md` release process run — content-only change. Committed and pushed to GitHub `main`.
