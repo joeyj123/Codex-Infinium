@@ -2230,3 +2230,23 @@ Closed out Legend's final 8 topics (Computability Theory: `turing_machines_compu
 **LEGEND TIER COMPLETE: 54 total challenges across all 18 topics, 0 empty.**
 
 **ALL SIX TIERS' ANVIL CONTENT NOW COMPLETE**: Novice, Apprentice (422), Journeyman (204), Master (102), Expert (433 across 5 language tracks), Legend (54). Committed and pushed to GitHub `main`.
+
+## Session: The Anvil retired — merged into The Forge (2026-07-30)
+
+Joey flagged that Forge and Anvil had converged into the same mode wearing two names: side-by-side code read showed both `ForgeTopicClient.js` and `AnvilTopicClient.js` sharing an identical page skeleton (`study-toolbar` → `ExposureSelector` → `card forge-example-card` → prompt → hints → answer box → Run/Submit → terminal → "Worked Solution" reveal → pager), the same CSS classes, the same exposure/XP system, and for 4 of Anvil's 7 challenge types (`reorder`/`fix`/`output`/`build`) the exact same textarea-based code flow as Forge. Only the 3 no-code concept types (`order`/`choice`/`match`) used distinct widgets.
+
+**Decision**: retire Anvil entirely. Fold all 1,425 `anvil_challenges` entries into their same topic's `examples[]` array, making Forge "a giant bank of examples." Joey's explicit call: no new content authoring for the fold — mechanical field reuse only (existing `hints` become `steps`, since Forge's renderer requires a `steps` array Anvil challenges never had). Also: examples should be a randomized bank per topic, not a fixed sequence.
+
+**Migration** (`scripts/migrate-anvil-into-forge.js`, one-off): for every topic across all tiers, and each of Expert's 5 language tracks, converted every `anvil_challenges[]` entry into a Forge example:
+- Concept types (`order`/`choice`/`match`) → plain prose example: `steps` = existing `hints`, `solution_summary` unchanged, no code fields.
+- Code-drill types → mapped onto Forge's existing `starter_code`/`solution_code`/`expected_output` shape: `fix`'s `buggy_code` → `starter_code`; `build`'s `starter_code` reused as-is; `output`'s `snippet_code` → `starter_code` (so the learner can view/run it directly, since Forge has no separate "given snippet, predict output" UI); `reorder` → blank `starter_code` (no scrambled-block widget in Forge, so it becomes a write-it-yourself example).
+- Pre-Expert tiers got an explicit `language: "python"` tag (required for `ForgeTopicClient` to treat a non-Expert example as a code topic); Expert-tier examples don't need this, since `isCodeTopic` is already forced true for the whole tier regardless of any per-example field.
+- Verified exact scope before running: Novice 172 (concept), Apprentice 422 (code), Journeyman 242 (204 concept + 38 pre-existing `f_strings` code), Master 102 (concept), Legend 54 (concept), Expert 433 across 5 tracks (code) = 1,425 total. Migration script logged exactly 1,425 migrated, confirming full coverage with nothing missed or double-counted.
+
+**Randomization**: `ForgeTopicClient.js` now shuffles its `examples` array client-side after mount (Fisher-Yates, same hydration-safe "start sequential, shuffle post-mount" pattern already used for `tauriReady`, to avoid an SSR/client mismatch from calling `Math.random()` during render) — reshuffles whenever the topic or language changes.
+
+**Cleanup**: deleted `app/anvil/` entirely, `components/AnvilReorderList.js`, `lib/anvil.js`, `lib/gradeConcept.js`; removed the "🛠️ The Anvil" sidebar nav link; removed the now-dead `hasCompletedAnvilChallenge`/`markAnvilChallengeComplete` functions from `ProgressContext.js` (left the `completedAnvilChallenges` array in the progress schema untouched, purely so any already-saved browser progress still parses safely — nothing writes to it going forward; all completion now flows through Forge's own tracking, reusing the original Anvil challenge ids as the new Forge example ids, so no progress data was invented or lost, just re-homed under one tracking system).
+
+**Verified live**: `npm run build` clean, confirmed 0 `/anvil` routes generated (was previously a route family, now gone). Loaded `separation_of_concerns` (Journeyman) live: "Example 1 / 6" (3 original Forge examples + 3 migrated concept challenges), rendered correctly with no crash on the migrated entries' `steps`. Reloaded and confirmed the first example changed — randomization working. Loaded `py_context_managers` (Expert Python): "Example 1 / 9" (2 original + 7 migrated code-drill challenges), confirming the code-type merge path too.
+
+A third mode (tentatively "Crucible"/"Gauntlet" naming, exact mechanic undecided — Joey is leaning away from a full game-style rebuild) was explicitly **not** started this session; only the Forge/Anvil merge and Anvil's removal were in scope. Committed and pushed to GitHub `main`.

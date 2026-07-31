@@ -334,3 +334,14 @@ Authored final 24 challenges for the remaining 8 Legend topics via `scripts/add-
 **LEGEND TIER COMPLETE: 54 total, 0 empty.**
 
 **ALL SIX TIERS' ANVIL CONTENT NOW COMPLETE: Novice, Apprentice (422), Journeyman (204), Master (102), Expert (433), Legend (54).** No further Anvil authoring backlog remains. Next: other feature work, or polish/QA pass — Joey's call.
+
+---
+## UPDATE 2026-07-30 — The Anvil retired, merged into The Forge
+
+Joey caught that Forge and Anvil had become the same mode under two names (confirmed via direct code read: identical page skeleton, shared CSS classes, and 4 of Anvil's 7 challenge types using the exact same textarea/Run/Submit/terminal flow as Forge). Decision: retire Anvil, fold all 1,425 `anvil_challenges` into `examples[]`, making Forge "a giant bank of examples." No new content authored for the fold (Joey's explicit call) — mechanical only: `hints` → `steps`, code-drill fields mapped onto Forge's existing `starter_code`/`solution_code`/`expected_output` shape, pre-Expert tiers tagged `language: "python"`.
+
+Ran via `scripts/migrate-anvil-into-forge.js` — 1,425 migrated, matching the exact pre-computed scope (Novice 172, Apprentice 422, Journeyman 242, Master 102, Legend 54, Expert 433). Added client-side randomized ordering to `ForgeTopicClient.js` (Fisher-Yates post-mount, same hydration-safe pattern as `tauriReady`). Deleted `app/anvil/`, `AnvilReorderList.js`, `lib/anvil.js`, `lib/gradeConcept.js`; removed the sidebar nav link; removed dead Anvil-specific functions from `ProgressContext.js` (left the old `completedAnvilChallenges` array in the schema untouched for backward-compat with saved progress — nothing writes to it anymore, all completion now flows through Forge's tracking using the same ids).
+
+**Verified live**: `npm run build` clean, 0 `/anvil` routes. Spot-checked `separation_of_concerns` (Journeyman, concept merge) and `py_context_managers` (Expert Python, code-drill merge) — both render correctly with the right combined example counts, and randomization confirmed working on reload.
+
+A third mode ("Crucible"/"Gauntlet", mechanic TBD — Joey is leaning away from a full game rebuild) was explicitly **not** started. Next: Joey's call on the third mode, or other work.

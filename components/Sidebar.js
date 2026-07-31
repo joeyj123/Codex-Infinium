@@ -67,11 +67,6 @@ export default function Sidebar({ kb }) {
           🔥 The Forge
         </button>
       </Link>
-      <Link href="/anvil">
-        <button className={`nav-btn ${pathname.startsWith("/anvil") ? "active" : ""}`}>
-          🛠️ The Anvil
-        </button>
-      </Link>
       <Link href="/settings">
         <button className={`nav-btn ${pathname === "/settings" ? "active" : ""}`}>
           ⚙️ Settings

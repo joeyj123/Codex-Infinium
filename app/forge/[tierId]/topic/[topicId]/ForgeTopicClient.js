@@ -64,6 +64,22 @@ export default function ForgeTopicClient() {
   const examples = topic?.examples || [];
 
   const [index, setIndex] = useState(0);
+  // Forge is a randomized bank of examples, not a fixed sequence — order
+  // starts sequential (matches server-rendered/static-export HTML, which
+  // can't safely call Math.random during render) and gets shuffled once
+  // client-side after mount, same hydration-safe pattern as tauriReady below.
+  const [order, setOrder] = useState(() => examples.map((_, i) => i));
+  useEffect(() => {
+    const shuffled = examples.map((_, i) => i);
+    for (let i = shuffled.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    setOrder(shuffled);
+    setIndex(0);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [topicId, lang]);
+  const orderedExamples = order.length === examples.length ? order.map((i) => examples[i]) : examples;
   const [revealedHints, setRevealedHints] = useState([]);
   const [solutionRevealed, setSolutionRevealed] = useState(false);
   const [referenceOpen, setReferenceOpen] = useState(false);
@@ -80,7 +96,7 @@ export default function ForgeTopicClient() {
     setTauriReady(isTauriRuntime());
   }, []);
 
-  const example = examples[index];
+  const example = orderedExamples[index];
   // isCodeTopic/isLive are per-example, not per-tier/per-URL: Expert's
   // language-track pages are always code topics (Python/JS run live in any
   // browser, C++ runs live only inside the Tauri desktop shell, Java/C#
@@ -162,7 +178,7 @@ export default function ForgeTopicClient() {
   const alreadyCompleted = hasCompletedForgeExample(example.id);
 
   function goTo(newIndex) {
-    if (newIndex < 0 || newIndex >= examples.length) return;
+    if (newIndex < 0 || newIndex >= orderedExamples.length) return;
     setIndex(newIndex);
   }
 
@@ -232,7 +248,7 @@ export default function ForgeTopicClient() {
 
       <div className="card forge-example-card" style={{ marginTop: 18 }}>
         <p className="stat-line" style={{ marginBottom: 10 }}>
-          Example {index + 1} / {examples.length}
+          Example {index + 1} / {orderedExamples.length}
         </p>
 
         <p style={{ fontSize: 17, lineHeight: 1.6 }}>{example.prompt}</p>
@@ -353,7 +369,7 @@ export default function ForgeTopicClient() {
         <button className="btn" disabled={index === 0} onClick={() => goTo(index - 1)}>
           ‹ Previous
         </button>
-        <button className="btn" disabled={index === examples.length - 1} onClick={() => goTo(index + 1)}>
+        <button className="btn" disabled={index === orderedExamples.length - 1} onClick={() => goTo(index + 1)}>
           Next ›
         </button>
       </div>
