@@ -1,11 +1,11 @@
 {
-  "version": "0.1.2",
-  "notes": "Fixes Forge tier availability: Journeyman, Master, and Legend were hardcoded as 'Not yet available' regardless of content. Tier availability is now content-driven (same fix applied to The Anvil previously) - all three tiers' already-complete example banks (Journeyman 183, Master 102, Legend 54) now display correctly.",
-  "pub_date": "2026-07-28T20:44:19.000Z",
+  "version": "0.1.3",
+  "notes": "Full Anvil content complete across all six tiers (Novice through Legend, all 5 Expert language tracks), then The Anvil was retired and merged into The Forge as a single randomized bank of examples. Study bookshelf layout/visual fixes.",
+  "pub_date": "2026-07-31T15:04:50.000Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcHYrZ2k3NlFuaGdKSE1aSi93QnVORDZhMXBjQUoxWklXTm52TDQ3M1grQlhFMldJRlVRK0NUYllocXA5WER1MlVGNDhxYkxZSzM0UEJnNUZSck1UUHJtbU5lOUx1VGdnPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1MjcxMzU5CWZpbGU6Q29kZXggSW5maW5pdW1fMC4xLjJfeDY0LXNldHVwLmV4ZQo0STAyalRWdE54RHh3K01wL2JrdGt3bnV3RWhSYTZ1WlQ2VnkxQm9KT0hxZjBrN2ViaHgzUFAzdFF0T0tIUTMzTy9nQzJEeWwyRTJ2UzQ3SWdveDNCUT09Cg==",
-      "url": "https://github.com/joeyj123/Codex-Infinium/releases/download/v0.1.2/Codex-Infinium_0.1.2_x64-setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcHYrZ2k3NlFuaGd4QUZSY29tQ0tFSjFaM1ZQamVDL0lUS3FxQlpNWmVucW5CZUVUQzJLSlZ5K1BLa000MXZXOXZGeUNYWmRaVjUzbU8xVWZIbmJxT290L1BpWjJ3akFVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1NTEzODkwCWZpbGU6Q29kZXggSW5maW5pdW1fMC4xLjNfeDY0LXNldHVwLmV4ZQpkWnZjeVM5TUgvelRWUElUYWN0blNKb0NobWpmVXo1akxVY0M5OFJCVGtxY2tEM3NOeEN4bWc5ZGR3c2NBUGIrMGtueXdkdExSbVVVY2V1dWhpZkhDZz09Cg==",
+      "url": "https://github.com/joeyj123/Codex-Infinium/releases/download/v0.1.3/Codex-Infinium_0.1.3_x64-setup.exe"
     }
   }
 }
