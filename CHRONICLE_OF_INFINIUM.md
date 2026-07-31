@@ -2250,3 +2250,17 @@ Joey flagged that Forge and Anvil had converged into the same mode wearing two n
 **Verified live**: `npm run build` clean, confirmed 0 `/anvil` routes generated (was previously a route family, now gone). Loaded `separation_of_concerns` (Journeyman) live: "Example 1 / 6" (3 original Forge examples + 3 migrated concept challenges), rendered correctly with no crash on the migrated entries' `steps`. Reloaded and confirmed the first example changed — randomization working. Loaded `py_context_managers` (Expert Python): "Example 1 / 9" (2 original + 7 migrated code-drill challenges), confirming the code-type merge path too.
 
 A third mode (tentatively "Crucible"/"Gauntlet" naming, exact mechanic undecided — Joey is leaning away from a full game-style rebuild) was explicitly **not** started this session; only the Forge/Anvil merge and Anvil's removal were in scope. Committed and pushed to GitHub `main`.
+
+## Session: Release v0.1.3 (2026-07-31)
+
+Full `RELEASING.md` process, covering the Anvil-into-Forge merge and Study bookshelf fixes from the prior sessions. Bumped version in `tauri.conf.json` and `Cargo.toml` (0.1.2 → 0.1.3).
+
+**First `tauri build` attempt genuinely hung** — no forward progress for over an hour despite the process still technically alive (confirmed via `Get-CimInstance Win32_Process`: a live `cargo build` and its parent npx/node chain, but zero new files written for 40+ minutes). Root cause never fully diagnosed (didn't matter once killed and retried) — likely a buffering/backgrounding quirk specific to how the first attempt piped PowerShell output through `Select-Object -Last 60`, which silently swallowed all progress output and made it impossible to tell hung from working. Killed the full process tree (`cargo.exe`, both `node.exe` legs of the npx→tauri-cli chain, and the wrapper shells) once confirmed stalled, rather than waiting further.
+
+**Second attempt succeeded cleanly**, this time backgrounding via a direct `> logfile 2>&1` redirect instead of a piped PowerShell `Select-Object`, giving real-time visibility into progress: Next.js static export → `cargo build` (finished in 1m26s) → WiX `.msi` bundling → NSIS `.exe` bundling → both updater `.sig` files generated. Total real build time once actually running: a few minutes, confirming the first attempt's hour-plus stall was a false hang, not genuine build slowness.
+
+**Standing rule updated mid-session**: Joey shortened the long-running-task check-in cadence from "20 min grace period, then every 5 min" to "every 5 min from the start" — `feedback_long_running_tasks.md` memory updated accordingly.
+
+Created GitHub release `v0.1.3` with all 4 assets (`.msi`, `.msi.sig`, `.exe`, `.exe.sig`, renamed to strip the space before "Infinium" per `RELEASING.md`'s own guidance). Wrote and pushed `latest.json` with the `.exe.sig` contents verbatim. Verified `raw.githubusercontent.com/.../latest.json` serves the new version correctly.
+
+Committed and pushed to GitHub `main` (`ab86137`).
