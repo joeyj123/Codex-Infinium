@@ -2298,3 +2298,17 @@ Given that, rewrote 3 more topics that were genuinely missing an in-context code
 **Verified**: `npm run build` clean after all 4 fixes.
 
 **Scope remaining**: Apprentice has 65 more topics not yet individually read in full (only sampled/scanned so far) — OOP section (attributes_properties, methods, inheritance), Language Fundamentals (variables_data_types, operators, conditionals, functions_scope, etc.), Data section (arrays_lists, dictionaries_maps, hash_tables_internals, etc.), Git section, Code Quality section, and the AI/LLM section (14 topics) all still need the same read-then-decide pass. Continuing next session; then Journeyman, Master, Legend, Expert remain entirely unaudited for this issue.
+
+## Session: Apprentice sweep finished; Journeyman, Master, Legend swept clean (2026-07-31)
+
+**Apprentice: sweep finished.** Read/skimmed the remaining 65 topics not covered last session (OOP, Git, Code Quality, full AI/LLM section). All solid — no further fixes beyond the 4 already done.
+
+**Journeyman (69 topics): full sweep, 0 fixes needed.** Read ~24 topics in full, including the strongest repeat-scan candidates (`indexes`, `recursion`, `sorting_algorithms`, `dynamic_programming_intro`) — `recursion` includes a complete traced `factorial(4)` call-stack walkthrough. Skimmed closings on the remaining 45. No Babbage-pattern offenders found anywhere in this tier.
+
+**Master (34 topics): full sweep, 0 fixes needed.** Read the top 3 repeat-scan candidates in full (`least_privilege_principle`, `profiling`, `retrieval_systems_at_scale`) — genuine depth throughout (RBAC/privilege creep, flame graphs/CPU-vs-memory profiling, chunking tradeoffs). Skimmed the remaining 31 closings — each introduces one additional genuinely new related concept rather than restating the topic's thesis.
+
+**Legend (18 topics): full sweep, 0 fixes needed.** `halting_problem` includes a complete, rigorous diagonalization proof walkthrough — genuinely excellent. All 18 closings are distinct, synthesizing statements.
+
+**Running total across the whole audit**: Novice 3 fixed / 57, Apprentice 4 fixed / 69, Journeyman 0 / 69, Master 0 / 34, Legend 0 / 18. The Babbage-level padding pattern turned out to be rare and isolated (7 topics total across 247 checked so far), not systemic — most of the corpus already meets the Hardware-tier bar. Expert (5 language tracks, ~61 topics) is the only section not yet swept.
+
+Committed and pushed to GitHub `main`, then moved directly into cutting a new desktop release per Joey's request, given the limited remaining session time.
