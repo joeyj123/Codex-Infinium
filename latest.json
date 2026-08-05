@@ -1,11 +1,11 @@
 {
-  "version": "0.1.4",
-  "notes": "Content quality audit: fixed repetitive/padding content in Novice (mechanical_calculators, mac_vs_ip_address, io_devices_usb) and Apprentice (stacks_queues, loops, linked_lists, data_in_memory - added real runnable code). Full read-through audit of Journeyman, Master, and Legend tiers confirmed no further issues.",
-  "pub_date": "2026-08-05T18:35:23.000Z",
+  "version": "0.1.5",
+  "notes": "Full six-tier content audit completed: fixed repetitive/padding content in Novice (mechanical_calculators, mac_vs_ip_address, io_devices_usb) and Apprentice (stacks_queues, loops, linked_lists, data_in_memory - added real runnable code). Journeyman, Master, Legend, and Expert confirmed clean. Also fixed glossary hover-highlight false positives by removing 6 overly generic aliases (difference, update, layer, index, node, Service).",
+  "pub_date": "2026-08-05T19:37:24.000Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcHYrZ2k3NlFuaHRKcytyTGJvbnRDN0Y3ZGFxUjBQOEZycFQ1UndmSlIvZDFHZFRLQi9TWWd4TUJsZitidFAwenRnbG9EdWtNMDFpMXYyZCtSYWNiRi80MkxGU2dSRWdBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1OTU0ODU2CWZpbGU6Q29kZXggSW5maW5pdW1fMC4xLjRfeDY0LXNldHVwLmV4ZQpPSUpJVERVQUx5VTlmS25ISXVuRmpSY3BYQkx0TkV6T0RrTDBKcENjYlFwRkZZOGdSeFpKdlNNR3lMQ0hKZGhMbm5ZMlVabHVzTm95eUJkOGxFcmtBUT09Cg==",
-      "url": "https://github.com/joeyj123/Codex-Infinium/releases/download/v0.1.4/Codex-Infinium_0.1.4_x64-setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcHYrZ2k3NlFuaG11V1licXJ3c25NWGR0czBCdzRrdmlCd1dNVWlxQmRha1RzQzZUNFdWSVBsK2k1ZjdmRG9WQ3dUVUg5ei9FM216TzNTZ3h2T3VIUndhTmxONGllWGd3PQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1OTU4NjQ0CWZpbGU6Q29kZXggSW5maW5pdW1fMC4xLjVfeDY0LXNldHVwLmV4ZQpvVm1vbm11MHJUK3JtekgwKzQwTW4rN0dCWHhNcEtKOVowYURVUU9TaFpKWFVWRXFpNm1YZ2VQWEVmNDhaKzdPSWJlekZVRG9SV2xZTG8wN2J2ekZBdz09Cg==",
+      "url": "https://github.com/joeyj123/Codex-Infinium/releases/download/v0.1.5/Codex-Infinium_0.1.5_x64-setup.exe"
     }
   }
 }
