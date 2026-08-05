@@ -2264,3 +2264,17 @@ Full `RELEASING.md` process, covering the Anvil-into-Forge merge and Study books
 Created GitHub release `v0.1.3` with all 4 assets (`.msi`, `.msi.sig`, `.exe`, `.exe.sig`, renamed to strip the space before "Infinium" per `RELEASING.md`'s own guidance). Wrote and pushed `latest.json` with the `.exe.sig` contents verbatim. Verified `raw.githubusercontent.com/.../latest.json` serves the new version correctly.
 
 Committed and pushed to GitHub `main` (`ab86137`).
+
+## Session: Repetitive-content audit + first Novice rewrite pass (2026-07-31)
+
+Joey flagged that Study/Forge textbook content — reading through Novice — felt repetitive: the same point restated across a topic's body, misconceptions, and closing paragraph in different words without adding anything new.
+
+**Audit, before touching anything**: sampled topics across all six tiers plus an Expert language track. Confirmed all 303 topics land in a suspiciously tight 5,900–7,600 character band, indicating a single fixed generation template (hook → definition → mechanism → connections → 3 "common misconceptions" → closing restatement). Read full topics from Novice, Apprentice, Journeyman, Master, Legend, and Expert C++ to gauge severity — found it's **not uniform**: severe in `mechanical_calculators` (Novice) and `operators` (Apprentice) and `pointers_references` (Journeyman), where a point gets stated in the body then restated near-verbatim in a misconception and again in the closing paragraph; much milder in Master/Legend/Expert, where misconceptions tend to introduce genuinely distinct claims rather than re-deriving the body's point.
+
+**Novice worst-offender identification**: since paraphrased repetition doesn't show up in exact n-gram matching, ran a literal 6-word-phrase-repeat scan across all 57 Novice topics as one signal (`mac_vs_ip_address` had the most: 5 literal repeats), combined with manually reading candidates. Confirmed `mac_vs_ip_address` restates "where a device currently sits on a network" near-verbatim four times (body, analogy paragraph, misconception #1, closing). Manually read `binary_basics`, `io_devices_usb`, `what_is_an_os`, and `cpu_from_transistors` as further candidates — `binary_basics`, `what_is_an_os`, and `cpu_from_transistors` turned out fine on close reading (their misconceptions add genuinely distinct angles sharing vocabulary from a running narrative thread, not the padding pattern); `io_devices_usb` had one real offense — "one shared physical connector and one shared underlying protocol" restated near-verbatim in its closing paragraph.
+
+**Rewrote 3 confirmed worst offenders** (`mechanical_calculators`, `mac_vs_ip_address`, `io_devices_usb`): trimmed the exact-repeat sentences/misconceptions, kept every genuine fact, and rewrote each closing paragraph to add a new synthesis angle instead of restating the body's thesis a second or third time. Lengths dropped roughly 10–18% (`mechanical_calculators` 6528→5561, `mac_vs_ip_address` ~6200→5052, `io_devices_usb` 6900→5594) with zero loss of unique content — purely cut duplication.
+
+**Verified**: `npm run build` clean after the edits.
+
+**Scope note for next session**: this was a first pass on 3 topics, not a full Novice sweep — the remaining ~54 Novice topics, and Apprentice/Journeyman (both confirmed to have the same severe pattern in at least one sampled topic each), still need the same audit-then-rewrite treatment. Given the scale (300+ topics total), continuing tier by tier in batches, starting with the rest of Novice, is the recommended next step.
