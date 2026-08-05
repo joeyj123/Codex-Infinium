@@ -639,9 +639,7 @@
     {
       "id": "patch",
       "term": "patch",
-      "aliases": [
-        "update"
-      ],
+      "aliases": [],
       "definition": "A newer version of a program's code, released to fix bugs, close security holes, or add new features — installing one replaces some or all of the previously installed files.",
       "technical_term": "Update / Patch",
       "tier_introduced": "novice",
@@ -1979,7 +1977,6 @@
       "id": "array_index",
       "term": "array",
       "aliases": [
-        "index",
         "zero-based indexing"
       ],
       "definition": "An ordered collection of values stored under one name and accessed by numeric position, called an index — most languages use zero-based indexing, where the first element sits at index 0, not 1.",
@@ -2014,7 +2011,6 @@
       "term": "union",
       "aliases": [
         "intersection",
-        "difference",
         "symmetric difference"
       ],
       "definition": "Union combines two sets into one with every value from either; intersection keeps only values present in both; difference keeps values in one set but not the other; symmetric difference keeps values in exactly one.",
@@ -2063,7 +2059,6 @@
       "id": "linked_list_node",
       "term": "linked list",
       "aliases": [
-        "node",
         "doubly linked list"
       ],
       "definition": "A structure made of individual nodes, each holding data and a pointer to the next node in the sequence, scattered anywhere in memory rather than sitting contiguously — a doubly linked list adds a \"previous\" pointer too.",
@@ -2466,7 +2461,6 @@
       "id": "weight_layer",
       "term": "weight",
       "aliases": [
-        "layer",
         "neuron"
       ],
       "definition": "A neural network's individual, adjustable connection strengths (weights), organized into layers of simple computational units (neurons), each transforming values passed forward from the layer before it.",
@@ -4572,7 +4566,6 @@
         "ART",
         "Dalvik",
         "Activity",
-        "Service",
         "BroadcastReceiver"
       ],
       "definition": "Modern Android compiles Java bytecode ahead of time into native machine code specific to the device's processor through the Android Runtime (ART), rather than running a standard JVM — an Activity represents one screen, a Service represents background work, and a BroadcastReceiver responds to system-wide events, each following Android's own component lifecycle rules.",
