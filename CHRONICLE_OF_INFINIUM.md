@@ -2278,3 +2278,23 @@ Joey flagged that Study/Forge textbook content — reading through Novice — fe
 **Verified**: `npm run build` clean after the edits.
 
 **Scope note for next session**: this was a first pass on 3 topics, not a full Novice sweep — the remaining ~54 Novice topics, and Apprentice/Journeyman (both confirmed to have the same severe pattern in at least one sampled topic each), still need the same audit-then-rewrite treatment. Given the scale (300+ topics total), continuing tier by tier in batches, starting with the rest of Novice, is the recommended next step.
+
+## Session: Novice full sweep complete; Apprentice audit started (2026-07-31)
+
+Joey clarified the standard: use `mechanical_calculators` (Babbage) as the worst-case floor, the Hardware section as the target quality bar, and use judgment rather than requiring him to point out specific topics — he can't read all 300+ himself.
+
+**Novice: full sweep completed.** Read all 57 topics (full reads for ~30, open/close/misconceptions skim for the rest). Confirmed only the 3 already-fixed topics hit Babbage-level redundancy; everything else — Hardware, Firmware, OS, CLI, Networking, Software, History, Physics — has real mechanism depth and non-repetitive closings. No further Novice changes made this session; declared done.
+
+**Important scope clarification given to Joey**: his stated goal is learning to code, and Novice is intentionally CS-foundations-only (hardware/OS/networking/history/physics) with zero coding content by design — that starts in Apprentice. Flagged this so future frustration with "why isn't this teaching me to code" gets pointed at the right tier.
+
+**Apprentice audit started** (69 topics). Ran the same literal-6-word-phrase-repeat scan used for Novice to prioritize candidates. `stacks_queues` was the clear worst offender (12 repeats) — LIFO/FIFO restated across body, misconceptions, and closing, and, more importantly, **zero real code** in a topic literally about a coding data structure. Rewrote with real Python (`list.append()/.pop()` as a stack, `collections.deque` as a queue).
+
+Read `classes_objects`, `encapsulation`, `map_filter_reduce`, `sets` (also flagged by the repeat-scan) — these are actually solid: real inline code (`Dog` class, `BankAccount`, real map/filter/reduce calls), genuinely distinct misconceptions. Their high repeat-count is a stylistic tic (overusing "genuinely/directly/specifically/deliberately" as filler intensifiers throughout this whole content set), not the Babbage padding pattern — left them alone rather than manufacturing changes to content that isn't actually broken.
+
+**Discovery worth flagging directly**: checked whether "explanation" text lacking a real, fenced code block (regex for ` ``` `) actually meant a coding gap, since 65 of 69 Apprentice topics' explanation fields have no code fence. Checked Forge's `examples[]` for a few of these (`variables_data_types` has 79 examples, 69 with real executable `solution_code`) — the hands-on coding practice already exists at scale, it just lives in Forge's example bank rather than inline in the reading prose. This reframes the "explanation" field as a conceptual chapter, not the place hands-on code is supposed to live.
+
+Given that, rewrote 3 more topics that were genuinely missing an in-context code anchor for a core coding concept (not just relying on Forge alone): `loops` (added real `while`/`for` examples plus a live infinite-loop and off-by-one demonstration), `linked_lists` (added a real `Node` class with traversal), `data_in_memory` (added real value-vs-reference-type code, `==` vs `is`).
+
+**Verified**: `npm run build` clean after all 4 fixes.
+
+**Scope remaining**: Apprentice has 65 more topics not yet individually read in full (only sampled/scanned so far) — OOP section (attributes_properties, methods, inheritance), Language Fundamentals (variables_data_types, operators, conditionals, functions_scope, etc.), Data section (arrays_lists, dictionaries_maps, hash_tables_internals, etc.), Git section, Code Quality section, and the AI/LLM section (14 topics) all still need the same read-then-decide pass. Continuing next session; then Journeyman, Master, Legend, Expert remain entirely unaudited for this issue.
