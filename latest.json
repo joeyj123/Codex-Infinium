@@ -1,11 +1,11 @@
 {
-  "version": "0.1.3",
-  "notes": "Full Anvil content complete across all six tiers (Novice through Legend, all 5 Expert language tracks), then The Anvil was retired and merged into The Forge as a single randomized bank of examples. Study bookshelf layout/visual fixes.",
-  "pub_date": "2026-07-31T15:04:50.000Z",
+  "version": "0.1.4",
+  "notes": "Content quality audit: fixed repetitive/padding content in Novice (mechanical_calculators, mac_vs_ip_address, io_devices_usb) and Apprentice (stacks_queues, loops, linked_lists, data_in_memory - added real runnable code). Full read-through audit of Journeyman, Master, and Legend tiers confirmed no further issues.",
+  "pub_date": "2026-08-05T18:35:23.000Z",
   "platforms": {
     "windows-x86_64": {
-      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcHYrZ2k3NlFuaGd4QUZSY29tQ0tFSjFaM1ZQamVDL0lUS3FxQlpNWmVucW5CZUVUQzJLSlZ5K1BLa000MXZXOXZGeUNYWmRaVjUzbU8xVWZIbmJxT290L1BpWjJ3akFVPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1NTEzODkwCWZpbGU6Q29kZXggSW5maW5pdW1fMC4xLjNfeDY0LXNldHVwLmV4ZQpkWnZjeVM5TUgvelRWUElUYWN0blNKb0NobWpmVXo1akxVY0M5OFJCVGtxY2tEM3NOeEN4bWc5ZGR3c2NBUGIrMGtueXdkdExSbVVVY2V1dWhpZkhDZz09Cg==",
-      "url": "https://github.com/joeyj123/Codex-Infinium/releases/download/v0.1.3/Codex-Infinium_0.1.3_x64-setup.exe"
+      "signature": "dW50cnVzdGVkIGNvbW1lbnQ6IHNpZ25hdHVyZSBmcm9tIHRhdXJpIHNlY3JldCBrZXkKUlVTcHYrZ2k3NlFuaHRKcytyTGJvbnRDN0Y3ZGFxUjBQOEZycFQ1UndmSlIvZDFHZFRLQi9TWWd4TUJsZitidFAwenRnbG9EdWtNMDFpMXYyZCtSYWNiRi80MkxGU2dSRWdBPQp0cnVzdGVkIGNvbW1lbnQ6IHRpbWVzdGFtcDoxNzg1OTU0ODU2CWZpbGU6Q29kZXggSW5maW5pdW1fMC4xLjRfeDY0LXNldHVwLmV4ZQpPSUpJVERVQUx5VTlmS25ISXVuRmpSY3BYQkx0TkV6T0RrTDBKcENjYlFwRkZZOGdSeFpKdlNNR3lMQ0hKZGhMbm5ZMlVabHVzTm95eUJkOGxFcmtBUT09Cg==",
+      "url": "https://github.com/joeyj123/Codex-Infinium/releases/download/v0.1.4/Codex-Infinium_0.1.4_x64-setup.exe"
     }
   }
 }
