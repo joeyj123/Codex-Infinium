@@ -2312,3 +2312,23 @@ Given that, rewrote 3 more topics that were genuinely missing an in-context code
 **Running total across the whole audit**: Novice 3 fixed / 57, Apprentice 4 fixed / 69, Journeyman 0 / 69, Master 0 / 34, Legend 0 / 18. The Babbage-level padding pattern turned out to be rare and isolated (7 topics total across 247 checked so far), not systemic — most of the corpus already meets the Hardware-tier bar. Expert (5 language tracks, ~61 topics) is the only section not yet swept.
 
 Committed and pushed to GitHub `main`, then moved directly into cutting a new desktop release per Joey's request, given the limited remaining session time.
+
+## Session: Expert sweep complete (audit finished, all 6 tiers); glossary hover false-positive fix (2026-08-05)
+
+**Expert tier (56 topics, 5 language tracks): full sweep, 0 fixes needed.** Read top repeat-scan candidates in full (`cs_value_types_structs` — boxing/unboxing, records; `js_npm_ecosystem` — `package.json`/scripts; `cpp_stl` — vector/map/unordered_map) plus closing-skimmed the remaining 53. Every closing introduces genuinely new real language detail (`ConfigureAwait(false)`, functional interfaces, `Promise.race()`, template specialization, header guards) rather than restating — the strongest section of the whole corpus, unsurprisingly, since real code naturally resists padding.
+
+**This completes the full repetitive-content audit across all six tiers.** Final tally: Novice 3 fixed / 57, Apprentice 4 fixed / 69, Journeyman 0 / 69, Master 0 / 34, Legend 0 / 18, Expert 0 / 56 (303 topics total). The Babbage-level padding pattern was isolated to 7 early topics, not systemic.
+
+**Glossary hover-highlight audit**: Joey flagged that some auto-highlighted glossary terms trigger on plain-English words with no CS meaning in context (screenshot showed "difference" — an ordinary sentence word — hijacked into showing the set-operations `union`/`intersection`/`difference` tooltip). Investigated `lib/glossary.js`: `highlightText()` auto-wraps any occurrence of a term or its aliases anywhere in body text, first-occurrence-per-page, with no contextual awareness of what the surrounding sentence is actually about — so an alias that's also a common English word or a word with a different specific CS meaning elsewhere in the course will misfire.
+
+Scanned all 456 glossary entries (terms + aliases) against a common-word stoplist, found 43 potential matches, manually reviewed each. Most (cache, process, thread, loop, stack, queue, etc.) are legitimate — they're genuinely the correct CS term and this course's content overwhelmingly uses them in that sense. Confirmed 6 genuine false-positives, each an **alias** (not the primary term) with no CS meaning of its own and/or actively colliding with a *different* topic's real terminology:
+- `difference` (alias of `union`) — plain English word, no connection to sets in most contexts
+- `update` (alias of `patch`) — used constantly in unrelated contexts (software updates generally, `what_is_an_update` in Novice)
+- `layer` (alias of `weight_layer`) — collides with OSI layers, abstraction layers, Docker image layers
+- `index` (alias of `array_index`) — collides directly with Journeyman's `indexes` (database indexing) topic
+- `node` (alias of `linked_list_node`) — collides with graph nodes and tree nodes, both covered as separate topics
+- `Service` (alias of `android_runtime_components`) — generic word, no reliable CS meaning out of context
+
+Removed all 6 aliases from `data/glossary.json` (kept each entry's primary term and its other, genuinely unambiguous aliases intact). `npm run build` verified clean. Committed (`bb2c70b`).
+
+**Release v0.1.4 note**: this session's actual content changes (glossary fix) are small; the previous session's v0.1.4 release already covers the tier-content fixes through Legend. Joey mentioned needing another release soon — next one should bundle this glossary fix plus whatever comes next, rather than cutting a release for one small change alone, unless Joey wants otherwise.
